@@ -9,11 +9,11 @@
 	public class QuadTreeCameraMovement : MonoBehaviour
 	{
 		[SerializeField]
-		[Range(1, 20)]
-		public float _panSpeed = 1.0f;
+		[Range(0, 20)]
+		public float _panSpeed = 0f;
 
 		[SerializeField]
-		float _zoomSpeed = 0.25f;
+		float _zoomSpeed = 0f;
 
 		[SerializeField]
 		public Camera _referenceCamera;
@@ -129,15 +129,15 @@
 
 		void PanMapUsingTouchOrMouse()
 		{
-			if (_useDegreeMethod)
-			{
-				UseDegreeConversion();
-			}
-			else
-			{
-				UseMeterConversion();
-			}
-		}
+            if (_useDegreeMethod)
+            {
+                UseDegreeConversion();
+            }
+            else
+            {
+                UseMeterConversion();
+            }
+        }
 
 		void UseMeterConversion()
 		{
@@ -163,12 +163,18 @@
 			if (_shouldDrag == true)
 			{
 				var changeFromPreviousPosition = _mousePositionPrevious - _mousePosition;
+
+                if(changeFromPreviousPosition.magnitude > 5)
+                {
+                    changeFromPreviousPosition = Vector3.zero;
+                }
+
 				if (Mathf.Abs(changeFromPreviousPosition.x) > 0.0f || Mathf.Abs(changeFromPreviousPosition.y) > 0.0f)
 				{
 					_mousePositionPrevious = _mousePosition;
 					var offset = _origin - _mousePosition;
 
-					if (Mathf.Abs(offset.x) > 0.0f || Mathf.Abs(offset.z) > 0.0f)
+                    /*if (Mathf.Abs(offset.x) > 0.0f || Mathf.Abs(offset.z) > 0.0f)
 					{
 						if (null != _dynamicZoomMap)
 						{
@@ -177,8 +183,30 @@
 							_quadTreeTileProvider.UpdateMapProperties(latlongDelta, _dynamicZoomMap.Zoom);
 						}
 					}
-					_origin = _mousePosition;
-				}
+					_origin = _mousePosition;*/
+
+                    float rot = 0;
+
+                    if(Input.mousePosition.y > Screen.height * 0.5)
+                    {
+                        rot += (changeFromPreviousPosition.x * 0.1f);
+                    }
+                    else
+                    {
+                        rot += (-changeFromPreviousPosition.x * 0.1f);
+                    }
+
+                    if (Input.mousePosition.x > Screen.width * 0.5)
+                    {
+                        rot += (-changeFromPreviousPosition.y * 0.1f);
+                    }
+                    else
+                    {
+                        rot += (changeFromPreviousPosition.y * 0.1f);
+                    }
+
+                    GameObject.FindGameObjectWithTag("CameraTarget").transform.Rotate(0, rot * 16f, 0);
+                }
 				else
 				{
 					_mousePositionPrevious = _mousePosition;
