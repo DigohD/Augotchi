@@ -44,9 +44,8 @@ public class GameControl : MonoBehaviour {
             {
                 GameObject map = GameObject.FindGameObjectWithTag("Map");
                 float scaleConversion = map.transform.localScale.x;
-                GameObject marker = Instantiate(P_Marker, player.transform.position + (dirs[i].normalized * Random.Range(40.0f * scaleConversion, 80.0f * scaleConversion)), Quaternion.identity);
+                GameObject marker = Instantiate(P_Marker, player.transform.position + (dirs[i].normalized * Random.Range(45.0f * scaleConversion, 120f * scaleConversion)), Quaternion.identity);
                 marker.transform.SetParent(augotchiMap.transform);
-
                 
                 marker.transform.localScale = new Vector3(1, 1, 1);
             }

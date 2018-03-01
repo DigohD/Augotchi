@@ -9,6 +9,14 @@ public class PetKeeper : MonoBehaviour {
     float timer = 0;
 
     void Start () {
+        if (GameObject.FindGameObjectsWithTag("PetKeeper").Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         pet = new PetGlobal();
         pet.Load();
 

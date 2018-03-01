@@ -10,6 +10,7 @@ TagManager:
   - NotMainCamera
   - CameraTarget
   - Map
+  - PetKeeper
   layers:
   - Default
   - TransparentFX
