@@ -15,6 +15,10 @@ public class PetGlobal {
     public float happiness;
     public float health;
 
+    public int candy;
+    public int food;
+    public int vegetables;
+
     long saveTimeStamp;
 
     public PetGlobal()
@@ -22,18 +26,26 @@ public class PetGlobal {
         
     }
 
-    public PetGlobal(float hunger, float happiness, float health)
+    public PetGlobal(float hunger, float happiness, float health, int candy, int food, int vegetables)
     {
         this.hunger = hunger;
         this.happiness = happiness;
         this.health = health;
+
+        this.candy = candy;
+        this.food = food;
+        this.vegetables = vegetables;
     }
 
-    public PetGlobal(float hunger, float happiness, float health, long saveTimeStamp)
+    public PetGlobal(float hunger, float happiness, float health, int candy, int food, int vegetables, long saveTimeStamp)
     {
         this.hunger = hunger;
         this.happiness = happiness;
         this.health = health;
+
+        this.candy = candy;
+        this.food = food;
+        this.vegetables = vegetables;
 
         this.saveTimeStamp = saveTimeStamp;
     }
@@ -121,6 +133,21 @@ public class PetGlobal {
             happiness += 0.005f;
         }
         happiness -= 0.01f;
+
+        if (health < 0)
+            health = 0;
+        if (health > 100)
+            health = 100;
+
+        if (hunger < 0)
+            hunger = 0;
+        if (hunger > 100)
+            hunger = 100;
+
+        if (happiness < 0)
+            happiness = 0;
+        if (happiness > 100)
+            happiness = 100;
     }
 
     private void degenerateHourly()
@@ -207,13 +234,38 @@ public class PetGlobal {
         happiness -= (0.01f * 360 * 24);
     }
 
+    public void feedCandy()
+    {
+        happiness += 10f;
+        health -= 10;
+        hunger += 1;
+
+        Save();
+    }
+
+    public void feedFood()
+    {
+        hunger += 5f;
+        health -= 3.5f;
+  
+        Save();
+    }
+
+    public void feedVegetables()
+    {
+        hunger += 3.5f;
+        happiness -= 5f;
+
+        Save();
+    }
+
     public void Save()
     {
         saveTimeStamp = System.DateTime.Now.Ticks;
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/AugotchiSave.gd");
-        bf.Serialize(file, new PetGlobal(hunger, happiness, health, saveTimeStamp));
+        bf.Serialize(file, new PetGlobal(hunger, happiness, health, candy, food, vegetables, saveTimeStamp));
         file.Close();
     }
 
@@ -231,6 +283,10 @@ public class PetGlobal {
             hunger = pg.hunger;
             happiness = pg.happiness;
             health = pg.health;
+
+            candy = pg.candy;
+            food = pg.food;
+            vegetables = pg.vegetables;
 
             saveTimeStamp = pg.saveTimeStamp;
 

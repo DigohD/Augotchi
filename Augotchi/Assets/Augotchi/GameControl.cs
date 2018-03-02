@@ -7,6 +7,7 @@ public class GameControl : MonoBehaviour {
     public static bool markerPicked = true;
 
     public GameObject P_Marker;
+    public GameObject P_RewardText;
 
     GameObject player;
 
@@ -28,6 +29,8 @@ public class GameControl : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
 
         augotchiMap = GameObject.FindGameObjectWithTag("AugotchiMap");
+
+        Application.targetFrameRate = 30;
     }
 	
 	void Update () {
@@ -48,7 +51,15 @@ public class GameControl : MonoBehaviour {
                 marker.transform.SetParent(augotchiMap.transform);
                 
                 marker.transform.localScale = new Vector3(1, 1, 1);
+
+                marker.GetComponent<Marker>().gc = this;
             }
         }
 	}
+
+    public void spawnRewardText(string message)
+    {
+        GameObject go = Instantiate(P_RewardText, player.transform.position, Quaternion.identity);
+        go.GetComponent<RewardMessage>().setMessage(message);
+    }
 }
