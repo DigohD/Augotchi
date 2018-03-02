@@ -8,6 +8,7 @@ public class GameControl : MonoBehaviour {
 
     public GameObject P_Marker;
     public GameObject P_RewardText;
+    public GameObject P_MarkerPoof;
 
     GameObject player;
 
@@ -40,6 +41,7 @@ public class GameControl : MonoBehaviour {
 
             foreach(GameObject marker in GameObject.FindGameObjectsWithTag("Marker"))
             {
+                Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
                 Destroy(marker);
             }
 
@@ -49,7 +51,8 @@ public class GameControl : MonoBehaviour {
                 float scaleConversion = map.transform.localScale.x;
                 GameObject marker = Instantiate(P_Marker, player.transform.position + (dirs[i].normalized * Random.Range(45.0f * scaleConversion, 120f * scaleConversion)), Quaternion.identity);
                 marker.transform.SetParent(augotchiMap.transform);
-                
+                Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
+
                 marker.transform.localScale = new Vector3(1, 1, 1);
 
                 marker.GetComponent<Marker>().gc = this;

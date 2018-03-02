@@ -9,7 +9,7 @@ public class FeedButton : MonoBehaviour {
 
     public FeedType feedType;
 
-    void Start()
+    void Update()
     {
         switch (feedType)
         {

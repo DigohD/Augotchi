@@ -236,25 +236,40 @@ public class PetGlobal {
 
     public void feedCandy()
     {
+        if (candy <= 0)
+            return;
+
         happiness += 10f;
         health -= 10;
         hunger += 1;
+
+        candy--;
 
         Save();
     }
 
     public void feedFood()
     {
+        if (food <= 0)
+            return;
+
         hunger += 5f;
         health -= 3.5f;
-  
+
+        food--;
+
         Save();
     }
 
     public void feedVegetables()
     {
+        if (vegetables <= 0)
+            return;
+
         hunger += 3.5f;
         happiness -= 5f;
+
+        vegetables--;
 
         Save();
     }
@@ -304,5 +319,18 @@ public class PetGlobal {
 
             Save();
         }
+    }
+
+    public void ResetPet()
+    {
+        hunger = 75;
+        happiness = 50;
+        health = 50;
+
+        candy = 0;
+        food = 0;
+        vegetables = 0;
+
+        Save();
     }
 }
