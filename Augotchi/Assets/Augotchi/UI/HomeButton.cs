@@ -7,6 +7,7 @@ public class HomeButton : MonoBehaviour {
 
 	public void onClick()
     {
+        GameState.mapZoom = GameObject.FindGameObjectWithTag("Map").transform.localScale.x;
         SceneManager.LoadScene("Home");
     }
 

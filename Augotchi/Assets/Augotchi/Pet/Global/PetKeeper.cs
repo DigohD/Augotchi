@@ -11,6 +11,8 @@ public class PetKeeper : MonoBehaviour {
 
     float timer = 0;
 
+    int steps = 0;
+
     void Start () {
         if (GameObject.FindGameObjectsWithTag("PetKeeper").Length > 1)
         {
@@ -36,7 +38,7 @@ public class PetKeeper : MonoBehaviour {
 
         if (timer > 10)
         {
-            timer = 0;
+            timer -= 10;
             pet.degenerateTick();
         }
     }
@@ -44,9 +46,15 @@ public class PetKeeper : MonoBehaviour {
     void OnStep(int steps, double distance)
     {
         // Display the values
-        PlayerScript.points = steps;
+        steps++;
         // Display distance in feet
         //distanceText.text = (distance * 3.28084).ToString("F2") + " ft";
+        if(steps >= 100)
+        {
+            steps -= 100;
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().spawnRewardText("Pet Health +1");
+        }
+        PlayerScript.steps = steps;
     }
 
 }

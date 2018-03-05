@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class GameState {
 
+    public static float mapZoom = 1;
+	
 }

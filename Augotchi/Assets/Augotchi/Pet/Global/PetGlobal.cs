@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -19,7 +20,18 @@ public class PetGlobal {
     public int food;
     public int vegetables;
 
+    public int currency;
+
     long saveTimeStamp;
+
+    long lastPettingTimeStamp;
+
+    public event EventHandler OnPetting;
+    public event EventHandler OnFeedCannedFood;
+    public event EventHandler OnFeedVegetables;
+    public event EventHandler OnFeedCandy;
+
+    public Marker.MarkerType[] markerSet;
 
     public PetGlobal()
     {
@@ -37,7 +49,7 @@ public class PetGlobal {
         this.vegetables = vegetables;
     }
 
-    public PetGlobal(float hunger, float happiness, float health, int candy, int food, int vegetables, long saveTimeStamp)
+    public PetGlobal(float hunger, float happiness, float health, int candy, int food, int vegetables, long saveTimeStamp, long lastPettingTimeStamp, int currency, Marker.MarkerType[] markerSet)
     {
         this.hunger = hunger;
         this.happiness = happiness;
@@ -47,7 +59,13 @@ public class PetGlobal {
         this.food = food;
         this.vegetables = vegetables;
 
+        this.currency = currency;
+
+        this.lastPettingTimeStamp = lastPettingTimeStamp;
+
         this.saveTimeStamp = saveTimeStamp;
+
+        this.markerSet = markerSet;
     }
 
     public void degenerateTick()
@@ -239,9 +257,12 @@ public class PetGlobal {
         if (candy <= 0)
             return;
 
-        happiness += 10f;
-        health -= 10;
-        hunger += 1;
+        if (OnFeedCandy != null)
+            OnFeedCandy(this, new EventArgs());
+
+        happiness += 15f;
+        health -= 10f;
+        hunger += 5f;
 
         candy--;
 
@@ -253,8 +274,11 @@ public class PetGlobal {
         if (food <= 0)
             return;
 
-        hunger += 5f;
-        health -= 3.5f;
+        if (OnFeedCannedFood != null)
+            OnFeedCannedFood(this, new EventArgs());
+
+        hunger += 20f;
+        health -= 7.5f;
 
         food--;
 
@@ -266,10 +290,84 @@ public class PetGlobal {
         if (vegetables <= 0)
             return;
 
-        hunger += 3.5f;
+        if (OnFeedVegetables != null)
+            OnFeedVegetables(this, new EventArgs());
+
+        hunger += 10f;
+        health += 2.5f;
         happiness -= 5f;
 
         vegetables--;
+
+        Save();
+    }
+
+    public void hundredSteps()
+    {
+        health += 1f;
+        hunger -= 0.5f;
+
+        Save();
+    }
+
+    public void giveCurrency(int amount)
+    {
+        currency += amount;
+
+        Save();
+    }
+
+    public void takeCurrency(int amount)
+    {
+        currency -= amount;
+
+        Save();
+    }
+
+    public void petPet()
+    {
+        long nowDT = System.DateTime.Now.Ticks;
+        long diff = nowDT - lastPettingTimeStamp;
+
+        System.TimeSpan ts = new System.TimeSpan(diff);
+
+        if(ts.Hours > 0 || ts.Days > 0)
+        {
+            if (OnPetting != null)
+                OnPetting(this, new EventArgs());
+
+            lastPettingTimeStamp = nowDT;
+
+            happiness += 5f;
+
+            Save();
+        }
+    }
+
+    public void addHunger(int amount)
+    {
+        hunger += amount;
+
+        Save();
+    }
+
+    public void addHappiness(int amount)
+    {
+        happiness += amount;
+
+        Save();
+    }
+
+    public void addHealth(int amount)
+    {
+        health += amount;
+
+        Save();
+    }
+
+    public void setMarkers(Marker.MarkerType[] markers)
+    {
+        this.markerSet = markers;
 
         Save();
     }
@@ -280,7 +378,7 @@ public class PetGlobal {
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/AugotchiSave.gd");
-        bf.Serialize(file, new PetGlobal(hunger, happiness, health, candy, food, vegetables, saveTimeStamp));
+        bf.Serialize(file, new PetGlobal(hunger, happiness, health, candy, food, vegetables, saveTimeStamp, lastPettingTimeStamp, currency, markerSet));
         file.Close();
     }
 
@@ -303,7 +401,13 @@ public class PetGlobal {
             food = pg.food;
             vegetables = pg.vegetables;
 
+            currency = pg.currency;
+
             saveTimeStamp = pg.saveTimeStamp;
+
+            lastPettingTimeStamp = pg.lastPettingTimeStamp;
+
+            markerSet = pg.markerSet;
 
             Debug.LogWarning("LastSaveTimeStamp: " + saveTimeStamp );
 
@@ -327,9 +431,13 @@ public class PetGlobal {
         happiness = 50;
         health = 50;
 
-        candy = 0;
-        food = 0;
-        vegetables = 0;
+        candy = 5;
+        food = 5;
+        vegetables = 5;
+
+        currency = 0;
+
+        lastPettingTimeStamp = 0;
 
         Save();
     }

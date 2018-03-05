@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
 
-    public static int points = 0;
+    public static int steps = 0;
 
     GameObject playerTarget;
 

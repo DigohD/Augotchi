@@ -11,6 +11,8 @@ TagManager:
   - CameraTarget
   - Map
   - PetKeeper
+  - HomePet
+  - Canvas
   layers:
   - Default
   - TransparentFX
