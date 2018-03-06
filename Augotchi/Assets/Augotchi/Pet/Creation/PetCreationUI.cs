@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PetCreationUI : MonoBehaviour {
@@ -30,10 +31,22 @@ public class PetCreationUI : MonoBehaviour {
 
         earPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.earsIndex + 1) + "/" + petFactory.ears.Length;
         eyePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+        tailPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.tailIndex + 1) + "/" + petFactory.tails.Length;
+        whiskersPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.whiskersIndex + 1) + "/" + petFactory.whiskers.Length;
+        nosePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.noseIndex + 1) + "/" + petFactory.noses.Length;
 
         stage = 0;
 
         petFactory.buildPet(pvd);
+    }
+
+    public void onWorldClick()
+    {
+        PetGlobal pg = new PetGlobal();
+        pg.SaveVisuals(pvd);
+
+        GameControl.markerPicked = true;
+        SceneManager.LoadScene("World");
     }
 
     public void onNextStage()
@@ -122,12 +135,28 @@ public class PetCreationUI : MonoBehaviour {
 
     public void onNextTail()
     {
+        pvd.tailIndex++;
+        if (pvd.tailIndex >= petFactory.tails.Length)
+        {
+            pvd.tailIndex = 0;
+        }
 
+        tailPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.tailIndex + 1) + "/" + petFactory.tails.Length;
+
+        petFactory.buildPet(pvd);
     }
 
     public void onPreviousTail()
     {
+        pvd.tailIndex--;
+        if (pvd.tailIndex < 0)
+        {
+            pvd.tailIndex = petFactory.tails.Length - 1;
+        }
 
+        tailPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.tailIndex + 1) + "/" + petFactory.tails.Length;
+
+        petFactory.buildPet(pvd);
     }
 
     public void onNextEars()
@@ -168,21 +197,53 @@ public class PetCreationUI : MonoBehaviour {
 
     public void onNextWhisker()
     {
+        pvd.whiskersIndex++;
+        if (pvd.whiskersIndex >= petFactory.whiskers.Length)
+        {
+            pvd.whiskersIndex = 0;
+        }
 
+        whiskersPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.whiskersIndex + 1) + "/" + petFactory.whiskers.Length;
+
+        petFactory.buildPet(pvd);
     }
 
     public void onPreviousWhisker()
     {
+        pvd.whiskersIndex--;
+        if (pvd.whiskersIndex < 0)
+        {
+            pvd.whiskersIndex = petFactory.whiskers.Length - 1;
+        }
 
+        whiskersPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.whiskersIndex + 1) + "/" + petFactory.whiskers.Length;
+
+        petFactory.buildPet(pvd);
     }
 
     public void onNextNose()
     {
+        pvd.noseIndex++;
+        if (pvd.noseIndex >= petFactory.noses.Length)
+        {
+            pvd.noseIndex = 0;
+        }
 
+        nosePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.noseIndex + 1) + "/" + petFactory.noses.Length;
+
+        petFactory.buildPet(pvd);
     }
 
     public void onPreviousNose()
     {
+        pvd.noseIndex--;
+        if (pvd.noseIndex < 0)
+        {
+            pvd.noseIndex = petFactory.noses.Length - 1;
+        }
 
+        nosePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.noseIndex + 1) + "/" + petFactory.noses.Length;
+
+        petFactory.buildPet(pvd);
     }
 }

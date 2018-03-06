@@ -187,6 +187,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 33119755}
+--- !u!137 &44475648 stripped
+SkinnedMeshRenderer:
+  m_PrefabParentObject: {fileID: 13700000, guid: 611241b859f28f442b97c21ef03e661e,
+    type: 3}
+  m_PrefabInternal: {fileID: 1301380536}
 --- !u!1 &70023919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,6 +1344,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 820300375}
+--- !u!137 &870382097 stripped
+SkinnedMeshRenderer:
+  m_PrefabParentObject: {fileID: 13700002, guid: 611241b859f28f442b97c21ef03e661e,
+    type: 3}
+  m_PrefabInternal: {fileID: 1301380536}
 --- !u!1 &888547109
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,6 +1417,44 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 888547109}
+--- !u!1 &955285016 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100024, guid: 611241b859f28f442b97c21ef03e661e, type: 3}
+  m_PrefabInternal: {fileID: 1301380536}
+--- !u!114 &955285017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 955285016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48acf59815861cb4391b46316932d18b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ears:
+  - {fileID: 4300004, guid: 9c6dc71aabda0fe43a2fa107adf10fb2, type: 3}
+  - {fileID: 4300012, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300004, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  tails:
+  - {fileID: 4300002, guid: 611241b859f28f442b97c21ef03e661e, type: 3}
+  - {fileID: 4300002, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  eyes:
+  - {fileID: 2100000, guid: 74512f1a4d8481948b96822d84ef9759, type: 2}
+  - {fileID: 2100000, guid: bdd65bba11c595547bc6cbd7b6bb9117, type: 2}
+  - {fileID: 2100000, guid: 44f81dde1a43f7a48ae0c1b2d6d89bfb, type: 2}
+  whiskers:
+  - {fileID: 2100000, guid: cb9d851424d37a847b69e094e3f8b043, type: 2}
+  - {fileID: 2100000, guid: 05babfd64b35ce045a072a8f0cd85edf, type: 2}
+  - {fileID: 2100000, guid: 988e9916b27de894d8433f84c20b0147, type: 2}
+  noses:
+  - {fileID: 2100000, guid: 4e124f0640231d64badc3fb7f4874232, type: 2}
+  - {fileID: 2100000, guid: 893c23c125888df479ad80ee3ad5f044, type: 2}
+  - {fileID: 2100000, guid: 3aeb7b3f739f4664a8fc78c2e6270e8e, type: 2}
+  baseRenderer: {fileID: 44475648}
+  earsRenderer: {fileID: 870382097}
+  tailRenderer: {fileID: 1587167994}
 --- !u!1 &1057168782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2362,6 +2410,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!137 &1587167994 stripped
+SkinnedMeshRenderer:
+  m_PrefabParentObject: {fileID: 13700004, guid: 611241b859f28f442b97c21ef03e661e,
+    type: 3}
+  m_PrefabInternal: {fileID: 1301380536}
 --- !u!4 &1645770240 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400024, guid: 611241b859f28f442b97c21ef03e661e, type: 3}

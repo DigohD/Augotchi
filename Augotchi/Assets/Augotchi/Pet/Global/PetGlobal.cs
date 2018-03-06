@@ -496,6 +496,8 @@ public class PetGlobal {
 
             this.petVisualData = petVisualData;
 
+            Debug.LogWarning(this.petVisualData.earsIndex);
+
             Save();
         }
         else
@@ -505,6 +507,8 @@ public class PetGlobal {
             health = 50;
 
             this.petVisualData = petVisualData;
+
+            Debug.LogWarning("Non existent");
 
             Save();
         }

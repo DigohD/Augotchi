@@ -4,21 +4,44 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
 
+    public Animator anim;
+
     public static int steps = 0;
 
     GameObject playerTarget;
 
     public Camera camera;
 
-
-
     void Start () {
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget");
 	}
 	
 	void Update () {
+        Vector3 prePos = transform.position;
         transform.position = Vector3.Lerp(transform.position, playerTarget.transform.position, 1f * Time.deltaTime);
-        transform.rotation = playerTarget.transform.rotation;
+        Vector3 diff = transform.position - prePos;
+        float dist = diff.magnitude;
+
+        if(dist > 0.3333f)
+        {
+            anim.speed = 4;
+        }
+        else
+        {
+            anim.speed = (dist * 3 * 3) + 1;
+        }
+
+        if(dist > 0.25f * Time.deltaTime)
+        {
+            anim.SetInteger("State", 1);
+        }
+        else
+        {
+            anim.SetInteger("State", 0);
+        }
+
+        if(!diff.normalized.Equals(Vector3.zero))
+            anim.transform.forward = diff.normalized;
 
         if (Input.GetMouseButtonDown(0))
         {
