@@ -46,7 +46,9 @@
 		{
 			if (null == _dynamicZoomMap) { return; }
 
-			if (Input.touchSupported && Input.touchCount > 0)
+            GameControl.isZooming = false;
+
+            if (Input.touchSupported && Input.touchCount > 0)
 			{
 				HandleTouch();
 			}
@@ -111,6 +113,7 @@
 
 		void ZoomMapUsingTouchOrMouse(float zoomFactor)
 		{
+            GameControl.isZooming = true;
 			_quadTreeTileProvider.UpdateMapProperties(_dynamicZoomMap.CenterLatitudeLongitude, Mathf.Max(0.0f, Mathf.Min(_dynamicZoomMap.Zoom + zoomFactor * _zoomSpeed, 21.0f)));
 		}
 

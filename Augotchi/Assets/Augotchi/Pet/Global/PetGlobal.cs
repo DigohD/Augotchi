@@ -8,6 +8,8 @@ using UnityEngine;
 [System.Serializable]
 public class PetGlobal {
 
+    public PetVisualData petVisualData;
+
     readonly float MIN_HUNGER = 0, MAX_HUNGER = 100;
     readonly float MIN_HAPPINESS = 0, MAX_HAPPINESS = 100;
     readonly float MIN_HEALTH = 0, MAX_HEALTH = 100;
@@ -49,7 +51,7 @@ public class PetGlobal {
         this.vegetables = vegetables;
     }
 
-    public PetGlobal(float hunger, float happiness, float health, int candy, int food, int vegetables, long saveTimeStamp, long lastPettingTimeStamp, int currency, Marker.MarkerType[] markerSet)
+    public PetGlobal(float hunger, float happiness, float health, int candy, int food, int vegetables, long saveTimeStamp, long lastPettingTimeStamp, int currency, Marker.MarkerType[] markerSet, PetVisualData petVisualData)
     {
         this.hunger = hunger;
         this.happiness = happiness;
@@ -66,6 +68,8 @@ public class PetGlobal {
         this.saveTimeStamp = saveTimeStamp;
 
         this.markerSet = markerSet;
+
+        this.petVisualData = petVisualData;
     }
 
     public void degenerateTick()
@@ -144,13 +148,13 @@ public class PetGlobal {
 
         if (hunger > 75)
         {
-            happiness += 0.005f;
+            happiness += 0.01f;
         }
         if (health > 75)
         {
-            happiness += 0.005f;
+            happiness += 0.01f;
         }
-        happiness -= 0.01f;
+        happiness -= 0.005f;
 
         if (health < 0)
             health = 0;
@@ -201,13 +205,13 @@ public class PetGlobal {
 
         if (hunger > 75)
         {
-            happiness += (0.005f * 360);
+            happiness += (0.01f * 360);
         }
         if (health > 75)
         {
-            happiness += (0.005f * 360);
+            happiness += (0.01f * 360);
         }
-        happiness -= (0.01f * 360);
+        happiness -= (0.005f * 360);
     }
 
     private void degenerateDaily()
@@ -243,13 +247,13 @@ public class PetGlobal {
 
         if (hunger > 75)
         {
-            happiness += (0.005f * 360 * 24);
+            happiness += (0.01f * 360 * 24);
         }
         if (health > 75)
         {
-            happiness += (0.005f * 360 * 24);
+            happiness += (0.01f * 360 * 24);
         }
-        happiness -= (0.01f * 360 * 24);
+        happiness -= (0.005f * 360 * 24);
     }
 
     public void feedCandy()
@@ -278,7 +282,7 @@ public class PetGlobal {
             OnFeedCannedFood(this, new EventArgs());
 
         hunger += 20f;
-        health -= 7.5f;
+        health -= 2.5f;
 
         food--;
 
@@ -294,7 +298,7 @@ public class PetGlobal {
             OnFeedVegetables(this, new EventArgs());
 
         hunger += 10f;
-        health += 2.5f;
+        health += 5f;
         happiness -= 5f;
 
         vegetables--;
@@ -304,7 +308,7 @@ public class PetGlobal {
 
     public void hundredSteps()
     {
-        health += 1f;
+        health += 2f;
         hunger -= 0.5f;
 
         Save();
@@ -378,13 +382,12 @@ public class PetGlobal {
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/AugotchiSave.gd");
-        bf.Serialize(file, new PetGlobal(hunger, happiness, health, candy, food, vegetables, saveTimeStamp, lastPettingTimeStamp, currency, markerSet));
+        bf.Serialize(file, new PetGlobal(hunger, happiness, health, candy, food, vegetables, saveTimeStamp, lastPettingTimeStamp, currency, markerSet, petVisualData));
         file.Close();
     }
 
     public void Load()
     {
-        
         if (File.Exists(Application.persistentDataPath + "/AugotchiSave.gd"))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -408,6 +411,8 @@ public class PetGlobal {
             lastPettingTimeStamp = pg.lastPettingTimeStamp;
 
             markerSet = pg.markerSet;
+
+            petVisualData = pg.petVisualData;
 
             Debug.LogWarning("LastSaveTimeStamp: " + saveTimeStamp );
 
@@ -440,5 +445,68 @@ public class PetGlobal {
         lastPettingTimeStamp = 0;
 
         Save();
+    }
+
+    public PetVisualData LoadVisuals()
+    {
+        if (File.Exists(Application.persistentDataPath + "/AugotchiSave.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/AugotchiSave.gd", FileMode.Open);
+            PetGlobal pg = (PetGlobal)bf.Deserialize(file);
+
+            file.Close();
+
+            if (pg.petVisualData != null)
+                return pg.petVisualData;
+            else
+                return new PetVisualData();
+        }
+        else
+        {
+            return new PetVisualData();
+        }
+    }
+
+    public void SaveVisuals(PetVisualData petVisualData)
+    {
+        if (File.Exists(Application.persistentDataPath + "/AugotchiSave.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/AugotchiSave.gd", FileMode.Open);
+            PetGlobal pg = (PetGlobal)bf.Deserialize(file);
+
+            hunger = pg.hunger;
+            happiness = pg.happiness;
+            health = pg.health;
+
+            candy = pg.candy;
+            food = pg.food;
+            vegetables = pg.vegetables;
+
+            currency = pg.currency;
+
+            saveTimeStamp = pg.saveTimeStamp;
+
+            lastPettingTimeStamp = pg.lastPettingTimeStamp;
+
+            markerSet = pg.markerSet;
+
+            file.Close();
+
+            this.petVisualData = petVisualData;
+
+            Save();
+        }
+        else
+        {
+            hunger = 75;
+            happiness = 50;
+            health = 50;
+
+            this.petVisualData = petVisualData;
+
+            Save();
+        }
     }
 }

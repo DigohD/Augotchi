@@ -46,15 +46,16 @@ public class PetKeeper : MonoBehaviour {
     void OnStep(int steps, double distance)
     {
         // Display the values
-        steps++;
+        this.steps++;
         // Display distance in feet
         //distanceText.text = (distance * 3.28084).ToString("F2") + " ft";
-        if(steps >= 100)
+        if(this.steps >= 100)
         {
-            steps -= 100;
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().spawnRewardText("Pet Health +1");
+            this.steps = 0;
+            PetKeeper.pet.hundredSteps();
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().spawnRewardText("Pet Health +2");
         }
-        PlayerScript.steps = steps;
+        PlayerScript.steps = this.steps;
     }
 
 }

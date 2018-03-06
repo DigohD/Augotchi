@@ -25,6 +25,9 @@ public class CameraTarget : MonoBehaviour {
 
         targetPos = player.transform.position;
 
-        transform.position = Vector3.Lerp(transform.position, targetPos, 1f * Time.deltaTime);
+        if (!GameControl.isZooming)
+            transform.position = Vector3.Lerp(transform.position, targetPos, 1f * Time.deltaTime);
+        else
+            transform.position = player.transform.position;
     }
 }

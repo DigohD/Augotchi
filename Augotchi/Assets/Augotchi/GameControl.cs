@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameControl : MonoBehaviour {
 
+    public static bool isZooming;
+
     public static bool markerPicked = true;
     public bool sceneLoaded = false;
 
