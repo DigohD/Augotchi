@@ -5,19 +5,16 @@ using UnityEngine;
 public class PetFactory : MonoBehaviour {
 
     public Mesh[] ears;
+    public Material[] eyes;
 
+    public SkinnedMeshRenderer baseRenderer;
     public SkinnedMeshRenderer earsRenderer;
-
-	void Start () {
-        
-	}
-	
-	void Update () {
-		
-	}
 
     public void buildPet(PetVisualData petVisualData)
     {
         earsRenderer.sharedMesh = ears[petVisualData.earsIndex];
+
+        Material[] mats = new Material[] { baseRenderer.sharedMaterials[0], baseRenderer.sharedMaterials[1], baseRenderer.sharedMaterials[2], eyes[petVisualData.eyesIndex] };
+        baseRenderer.materials = mats;
     }
 }

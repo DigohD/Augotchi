@@ -29,6 +29,7 @@ public class PetCreationUI : MonoBehaviour {
         Debug.LogWarning(pvd);
 
         earPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.earsIndex + 1) + "/" + petFactory.ears.Length;
+        eyePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
 
         stage = 0;
 
@@ -95,12 +96,28 @@ public class PetCreationUI : MonoBehaviour {
 
     public void onNextEye()
     {
+        pvd.eyesIndex++;
+        if (pvd.eyesIndex >= petFactory.eyes.Length)
+        {
+            pvd.eyesIndex = 0;
+        }
 
+        eyePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+
+        petFactory.buildPet(pvd);
     }
 
     public void onPreviousEye()
     {
+        pvd.eyesIndex--;
+        if (pvd.eyesIndex < 0)
+        {
+            pvd.eyesIndex = petFactory.eyes.Length - 1;
+        }
 
+        eyePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+
+        petFactory.buildPet(pvd);
     }
 
     public void onNextTail()
