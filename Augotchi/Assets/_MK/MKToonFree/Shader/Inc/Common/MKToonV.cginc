@@ -10,12 +10,19 @@
 
 	//Main
 	uniform fixed4 _Color;
+	uniform fixed4 _Color2;
+	uniform fixed4 _Color3;
 	uniform sampler2D _MainTex;
+	uniform sampler2D _OffTex;
+	uniform sampler2D _MiscTex;
+	uniform sampler2D _MapTex;
 	uniform float4 _MainTex_ST;
 	uniform half _Brightness;
 
 	//Normalmap
 	uniform sampler2D _BumpMap;
+	uniform sampler2D _BumpMap2;
+	uniform sampler2D _BumpMap3;
 
 	//Light
 	uniform fixed4 _LightColor0;

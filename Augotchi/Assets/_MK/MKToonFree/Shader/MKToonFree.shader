@@ -3,11 +3,19 @@
 	Properties
 	{
 		//Main
-		_Color ("Color", Color) = (1,1,1,1)
-		_MainTex ("Color (RGB)", 2D) = "white"{}
+		_Color ("Main Color", Color) = (1,1,1,1)
+		_Color2 ("Off Color", Color) = (1,1,1,1)
+		_Color3 ("Misc Color", Color) = (1,1,1,1)
+		_MainTex ("Texture (RGB)", 2D) = "white"{}
+		_OffTex ("Off Texture (RGB)", 2D) = "white"{}
+		_MiscTex ("Misc Texture (RGB)", 2D) = "white"{}
+
+		_MapTex ("Map Texture (RGB)", 2D) = "white"{}
 
 		//Normalmap
-		_BumpMap ("Normalmap", 2D) = "bump" {}
+		_BumpMap ("Main Normalmap", 2D) = "bump" {}
+		_BumpMap2 ("Off Normalmap", 2D) = "bump" {}
+		_BumpMap3 ("Misc Normalmap", 2D) = "bump" {}
 
 		//Light
 		_LightThreshold("LightThreshold", Range (0.01, 1)) = 0.3

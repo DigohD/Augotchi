@@ -15,9 +15,18 @@
 	//get surface color based on blendmode and color source
 	void SurfaceColor(out fixed3 albedo, out fixed alpha, float2 uv)
 	{
+		fixed4 output = tex2D(_MainTex, uv);
 		fixed4 c = tex2D(_MainTex, uv) * _Color;
-		albedo = c.rgb;
-		alpha = c.a;
+		fixed4 c1 = tex2D(_OffTex, uv) * _Color2;
+		fixed4 c2 = tex2D(_MiscTex, uv) * _Color3;
+		fixed4 c3 = tex2D(_MapTex, uv);
+
+		output = c3.r * c;
+		output += c3.g * c1;
+		output += c3.b * c2;
+
+		albedo = output.rgb;
+		alpha = output.a;
 	}
 
 	//only include initsurface when not meta pass
@@ -46,7 +55,7 @@
 			mkts.Color_Out.a = mkts.Alpha;
 
 			//basic normal input
-			mkts.Pcp.NormalDirection = WorldNormal(_BumpMap, o.uv_Main, o.tangentWorld, o.binormalWorld, o.normalWorld);
+			mkts.Pcp.NormalDirection = WorldNormalCustom(_BumpMap,_BumpMap2, _BumpMap3,o.uv_Main, o.tangentWorld, o.binormalWorld, o.normalWorld);
 
 			//view direction
 			mkts.Pcp.ViewDirection = normalize(_WorldSpaceCameraPos - o.posWorld).xyz;
