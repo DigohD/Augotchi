@@ -24,6 +24,36 @@
 		return normalize(n);
 	}
 
+
+
+	//world normal
+	inline half3 WorldNormalCustom(sampler2D normalMap,sampler2D normalMap2,sampler2D normalMap3,sampler2D normalMapMap, float2 uv, half3 tangent, half3 binormal, half3 normal)
+	{
+		half3 local = UnpackNormal (tex2D (normalMap, uv)).xyz;
+		half3 local2 = UnpackNormal (tex2D (normalMap2, uv)).xyz;
+		half3 local3 = UnpackNormal (tex2D (normalMap3, uv)).xyz;
+		half3 mapUnpacked = UnpackNormal (tex2D (normalMapMap, uv)).xyz;
+
+		half3 result;
+
+		result = mapUnpacked.x * local;
+		result += mapUnpacked.y * local2;
+		result += mapUnpacked.z * local3;
+
+		
+
+		half3 t0, t1, t2;
+		t0 = normalize(half3(tangent.x, binormal.x, normal.x));
+		t1 = normalize(half3(tangent.y, binormal.y, normal.y));
+		t2 = normalize(half3(tangent.z, binormal.z, normal.z));
+
+		half3 n = 0;
+		n.x = dot(t0, result.xyz);
+		n.y = dot(t1, result.xyz);
+		n.z = dot(t2, result.xyz);
+		return normalize(n);
+	}
+
 	//specular blinn phong
 	inline half GetSpecular(half ndhv, half shine, half ndl)
 	{
