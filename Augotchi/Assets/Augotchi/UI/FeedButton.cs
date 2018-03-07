@@ -14,13 +14,13 @@ public class FeedButton : MonoBehaviour {
         switch (feedType)
         {
             case FeedType.CANDY:
-                transform.GetChild(0).GetComponent<Text>().text = "" + PetKeeper.pet.candy;
+                transform.GetChild(4).GetComponent<Text>().text = "" + PetKeeper.pet.candy;
                 break;
             case FeedType.FOOD:
-                transform.GetChild(0).GetComponent<Text>().text = "" + PetKeeper.pet.food;
+                transform.GetChild(4).GetComponent<Text>().text = "" + PetKeeper.pet.food;
                 break;
             case FeedType.VEGETABLES:
-                transform.GetChild(0).GetComponent<Text>().text = "" + PetKeeper.pet.vegetables;
+                transform.GetChild(4).GetComponent<Text>().text = "" + PetKeeper.pet.vegetables;
                 break;
         }
 

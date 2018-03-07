@@ -16,6 +16,8 @@
 	uniform sampler2D _OffTex;
 	uniform sampler2D _MiscTex;
 	uniform sampler2D _MapTex;
+	uniform sampler2D _MapTex2;
+	uniform sampler2D _MapTex3;
 	uniform float4 _MainTex_ST;
 	uniform half _Brightness;
 

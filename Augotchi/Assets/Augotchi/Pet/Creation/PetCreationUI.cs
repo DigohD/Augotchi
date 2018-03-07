@@ -72,8 +72,6 @@ public class PetCreationUI : MonoBehaviour {
         whiskersPicker.SetActive(false);
         nosePicker.SetActive(false);
 
-        backStageButton.SetActive(true);
-        nextStageButton.SetActive(true);
 
         if (stage == 0)
         {
@@ -105,6 +103,13 @@ public class PetCreationUI : MonoBehaviour {
                 nosePicker.SetActive(true);
                 break;
         }
+    }
+
+    public void onSectionClick(int newStage)
+    {
+        stage = newStage;
+
+        updateUI();
     }
 
     public void onNextEye()

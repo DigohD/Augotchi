@@ -112,7 +112,7 @@ public class PetGlobal {
 
         Debug.Log("Happiness Post-tick: " + happiness);
 
-        Save();
+        Save(false);
     }
 
     public void degenerate()
@@ -270,7 +270,7 @@ public class PetGlobal {
 
         candy--;
 
-        Save();
+        Save(false);
     }
 
     public void feedFood()
@@ -286,7 +286,7 @@ public class PetGlobal {
 
         food--;
 
-        Save();
+        Save(false);
     }
 
     public void feedVegetables()
@@ -303,7 +303,7 @@ public class PetGlobal {
 
         vegetables--;
 
-        Save();
+        Save(false);
     }
 
     public void hundredSteps()
@@ -311,21 +311,21 @@ public class PetGlobal {
         health += 2f;
         hunger -= 0.5f;
 
-        Save();
+        Save(false);
     }
 
     public void giveCurrency(int amount)
     {
         currency += amount;
 
-        Save();
+        Save(false);
     }
 
     public void takeCurrency(int amount)
     {
         currency -= amount;
 
-        Save();
+        Save(false);
     }
 
     public void petPet()
@@ -344,7 +344,7 @@ public class PetGlobal {
 
             happiness += 5f;
 
-            Save();
+            Save(false);
         }
     }
 
@@ -352,33 +352,34 @@ public class PetGlobal {
     {
         hunger += amount;
 
-        Save();
+        Save(false);
     }
 
     public void addHappiness(int amount)
     {
         happiness += amount;
 
-        Save();
+        Save(false);
     }
 
     public void addHealth(int amount)
     {
         health += amount;
 
-        Save();
+        Save(false);
     }
 
     public void setMarkers(Marker.MarkerType[] markers)
     {
         this.markerSet = markers;
 
-        Save();
+        Save(false);
     }
 
-    public void Save()
+    public void Save(bool ignoreTime)
     {
-        saveTimeStamp = System.DateTime.Now.Ticks;
+        if(!ignoreTime)
+            saveTimeStamp = System.DateTime.Now.Ticks;
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/AugotchiSave.gd");
@@ -426,7 +427,7 @@ public class PetGlobal {
             happiness = 50;
             health = 50;
 
-            Save();
+            Save(false);
         }
     }
 
@@ -444,7 +445,7 @@ public class PetGlobal {
 
         lastPettingTimeStamp = 0;
 
-        Save();
+        Save(false);
     }
 
     public PetVisualData LoadVisuals()
@@ -496,9 +497,7 @@ public class PetGlobal {
 
             this.petVisualData = petVisualData;
 
-            Debug.LogWarning(this.petVisualData.earsIndex);
-
-            Save();
+            Save(true);
         }
         else
         {
@@ -508,9 +507,7 @@ public class PetGlobal {
 
             this.petVisualData = petVisualData;
 
-            Debug.LogWarning("Non existent");
-
-            Save();
+            Save(false);
         }
     }
 }

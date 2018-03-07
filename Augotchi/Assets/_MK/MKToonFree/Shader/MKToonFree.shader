@@ -11,6 +11,8 @@
 		_MiscTex ("Misc Texture (RGB)", 2D) = "white"{}
 
 		_MapTex ("Map Texture (RGB)", 2D) = "white"{}
+		_MapTex2 ("Map Texture (RGB)", 2D) = "white"{}
+		_MapTex3 ("Map Texture (RGB)", 2D) = "white"{}
 
 		//Normalmap
 		_BumpMap ("Main Normalmap", 2D) = "bump" {}

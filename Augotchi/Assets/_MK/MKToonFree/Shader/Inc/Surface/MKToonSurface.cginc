@@ -20,10 +20,12 @@
 		fixed4 c1 = tex2D(_OffTex, uv) * _Color2;
 		fixed4 c2 = tex2D(_MiscTex, uv) * _Color3;
 		fixed4 c3 = tex2D(_MapTex, uv);
+		fixed4 c4 = tex2D(_MapTex2, uv);
+		fixed4 c5 = tex2D(_MapTex3, uv);
 
-		output = c3.r * c;
-		output += c3.g * c1;
-		output += c3.b * c2;
+		output = c3.g * c;
+		output += c4.g * c1;
+		output += c5.g * c2;
 
 		albedo = output.rgb;
 		alpha = output.a;
@@ -55,7 +57,7 @@
 			mkts.Color_Out.a = mkts.Alpha;
 
 			//basic normal input
-			mkts.Pcp.NormalDirection = WorldNormalCustom(_BumpMap,_BumpMap2, _BumpMap3,o.uv_Main, o.tangentWorld, o.binormalWorld, o.normalWorld);
+			mkts.Pcp.NormalDirection = WorldNormal(_BumpMap, o.uv_Main, o.tangentWorld, o.binormalWorld, o.normalWorld);
 
 			//view direction
 			mkts.Pcp.ViewDirection = normalize(_WorldSpaceCameraPos - o.posWorld).xyz;
