@@ -2102,11 +2102,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ears:
-  - {fileID: 4300004, guid: 9c6dc71aabda0fe43a2fa107adf10fb2, type: 3}
+  - {fileID: 0}
   - {fileID: 4300012, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300004, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   tails:
-  - {fileID: 4300002, guid: 611241b859f28f442b97c21ef03e661e, type: 3}
+  - {fileID: 0}
   - {fileID: 4300002, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   eyes:
@@ -2124,6 +2124,12 @@ MonoBehaviour:
   baseRenderer: {fileID: 44475648}
   earsRenderer: {fileID: 870382097}
   tailRenderer: {fileID: 1587167994}
+  baseTextures: []
+  baseBlends: []
+  overLayTextures: []
+  overLayBlends: []
+  detailsTextures: []
+  detailsBlends: []
 --- !u!1 &1057168782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2356,6 +2362,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 611241b859f28f442b97c21ef03e661e, type: 3}
   m_IsPrefabParent: 0
+--- !u!4 &1301380537 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1301380536}
 --- !u!1 &1302567000
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,10 +3166,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1621930121}
---- !u!4 &1645770240 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400024, guid: 611241b859f28f442b97c21ef03e661e, type: 3}
-  m_PrefabInternal: {fileID: 1301380536}
 --- !u!1 &1666001298
 GameObject:
   m_ObjectHideFlags: 0
@@ -3324,7 +3330,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1645770240}
+  - {fileID: 1301380537}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
