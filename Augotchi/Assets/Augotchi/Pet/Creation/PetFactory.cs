@@ -54,5 +54,9 @@ public class PetFactory : MonoBehaviour {
 
         Material[] mats = new Material[] { baseMat, noses[petVisualData.noseIndex], whiskers[petVisualData.whiskersIndex], eyes[petVisualData.eyesIndex] };
         baseRenderer.materials = mats;
+
+        Material[] peripheryMats = new Material[] { baseMat };
+        earsRenderer.materials = peripheryMats;
+        tailRenderer.materials = peripheryMats;
     }
 }

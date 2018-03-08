@@ -606,6 +606,14 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 13700002, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 07086c8317a4f0b428de7a3fa919e2f2, type: 2}
+    - target: {fileID: 13700008, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 07086c8317a4f0b428de7a3fa919e2f2, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   m_IsPrefabParent: 0
@@ -2299,7 +2307,7 @@ MonoBehaviour:
   earsRenderer: {fileID: 1131168659}
   tailRenderer: {fileID: 2908826}
   baseTextures:
-  - {fileID: 2800000, guid: 1a7e8c44c480f4dc7abb2af0695e76a5, type: 3}
+  - {fileID: 2800000, guid: 53cf040d76d14cf4a90e7367b41fe0c7, type: 3}
   baseBlends:
   - {fileID: 2800000, guid: bc00bd15c6f03854c849c380e7f81978, type: 3}
   overLayTextures:
