@@ -3159,11 +3159,6 @@ SkinnedMeshRenderer:
   m_PrefabParentObject: {fileID: 13700000, guid: e445d7b8a80631643b2b9e96495d30fe,
     type: 3}
   m_PrefabInternal: {fileID: 1652639281}
---- !u!137 &1072274359 stripped
-SkinnedMeshRenderer:
-  m_PrefabParentObject: {fileID: 13700008, guid: e445d7b8a80631643b2b9e96495d30fe,
-    type: 3}
-  m_PrefabInternal: {fileID: 1652639281}
 --- !u!1 &1107023864
 GameObject:
   m_ObjectHideFlags: 0
@@ -4487,6 +4482,18 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 4e124f0640231d64badc3fb7f4874232, type: 2}
+    - target: {fileID: 100104, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_Name
+      value: Tail_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100100, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_Name
+      value: Tail_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100116, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_Name
+      value: Tail_1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   m_IsPrefabParent: 0
@@ -4628,11 +4635,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ears:
-  - {fileID: 4300010, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 0}
   - {fileID: 4300012, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300004, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   tails:
-  - {fileID: 4300008, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 0}
   - {fileID: 4300002, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   eyes:
@@ -4648,8 +4655,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 893c23c125888df479ad80ee3ad5f044, type: 2}
   - {fileID: 2100000, guid: 3aeb7b3f739f4664a8fc78c2e6270e8e, type: 2}
   baseRenderer: {fileID: 1054435384}
-  earsRenderer: {fileID: 1935959625}
-  tailRenderer: {fileID: 1072274359}
+  earsRenderer: {fileID: 0}
+  tailRenderer: {fileID: 0}
   baseTextures:
   - {fileID: 2800000, guid: 1a7e8c44c480f4dc7abb2af0695e76a5, type: 3}
   baseBlends:
@@ -5519,11 +5526,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1922594703}
---- !u!137 &1935959625 stripped
-SkinnedMeshRenderer:
-  m_PrefabParentObject: {fileID: 13700002, guid: e445d7b8a80631643b2b9e96495d30fe,
-    type: 3}
-  m_PrefabInternal: {fileID: 1652639281}
 --- !u!1 &1950664903
 GameObject:
   m_ObjectHideFlags: 0

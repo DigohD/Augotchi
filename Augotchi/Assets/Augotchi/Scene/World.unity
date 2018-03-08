@@ -1617,6 +1617,16 @@ Transform:
   m_Father: {fileID: 1003266407}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &596504659 stripped
+SkinnedMeshRenderer:
+  m_PrefabParentObject: {fileID: 13700016, guid: e445d7b8a80631643b2b9e96495d30fe,
+    type: 3}
+  m_PrefabInternal: {fileID: 916752919}
+--- !u!137 &619194697 stripped
+SkinnedMeshRenderer:
+  m_PrefabParentObject: {fileID: 13700014, guid: e445d7b8a80631643b2b9e96495d30fe,
+    type: 3}
+  m_PrefabInternal: {fileID: 916752919}
 --- !u!1 &620676243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,22 +2231,24 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 07086c8317a4f0b428de7a3fa919e2f2, type: 2}
+    - target: {fileID: 100100, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_Name
+      value: Tail_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100104, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_Name
+      value: Tail_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100116, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_Name
+      value: Tail_1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   m_IsPrefabParent: 0
 --- !u!4 &916752920 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400024, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
-  m_PrefabInternal: {fileID: 916752919}
---- !u!137 &916752921 stripped
-SkinnedMeshRenderer:
-  m_PrefabParentObject: {fileID: 13700008, guid: e445d7b8a80631643b2b9e96495d30fe,
-    type: 3}
-  m_PrefabInternal: {fileID: 916752919}
---- !u!137 &916752922 stripped
-SkinnedMeshRenderer:
-  m_PrefabParentObject: {fileID: 13700002, guid: e445d7b8a80631643b2b9e96495d30fe,
-    type: 3}
   m_PrefabInternal: {fileID: 916752919}
 --- !u!137 &916752923 stripped
 SkinnedMeshRenderer:
@@ -2264,11 +2276,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ears:
-  - {fileID: 4300010, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300016, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300012, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300004, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   tails:
-  - {fileID: 4300008, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300014, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300002, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   eyes:
@@ -2284,8 +2296,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 893c23c125888df479ad80ee3ad5f044, type: 2}
   - {fileID: 2100000, guid: 3aeb7b3f739f4664a8fc78c2e6270e8e, type: 2}
   baseRenderer: {fileID: 916752923}
-  earsRenderer: {fileID: 916752922}
-  tailRenderer: {fileID: 916752921}
+  earsRenderer: {fileID: 619194697}
+  tailRenderer: {fileID: 596504659}
   baseTextures:
   - {fileID: 2800000, guid: 1a7e8c44c480f4dc7abb2af0695e76a5, type: 3}
   baseBlends:
@@ -2759,7 +2771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ears:
-  - {fileID: 4300010, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 0}
   - {fileID: 4300012, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300004, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   tails:
