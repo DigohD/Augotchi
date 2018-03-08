@@ -24,7 +24,11 @@
 		fixed4 c5 = tex2D(_MapTex3, uv);
 
 		output = c3.g * c;
+		
+		output -= c4.g * output;
 		output += c4.g * c1;
+		
+		output -= c5.g * output;
 		output += c5.g * c2;
 
 		albedo = output.rgb;
