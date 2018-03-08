@@ -72,7 +72,6 @@ public class PetCreationUI : MonoBehaviour {
         whiskersPicker.SetActive(false);
         nosePicker.SetActive(false);
 
-
         if (stage == 0)
         {
             backStageButton.SetActive(false);

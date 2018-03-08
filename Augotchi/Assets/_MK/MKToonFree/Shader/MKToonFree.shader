@@ -6,6 +6,7 @@
 		_Color ("Main Color", Color) = (1,1,1,1)
 		_Color2 ("Off Color", Color) = (1,1,1,1)
 		_Color3 ("Misc Color", Color) = (1,1,1,1)
+
 		_MainTex ("Texture (RGB)", 2D) = "white"{}
 		_OffTex ("Off Texture (RGB)", 2D) = "white"{}
 		_MiscTex ("Misc Texture (RGB)", 2D) = "white"{}
