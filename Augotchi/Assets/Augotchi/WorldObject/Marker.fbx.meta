@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0c6d5409889b65f4daecb5f7b5fbc428
-timeCreated: 1520615305
+guid: 84a7b072775ac73479798a548708290d
+timeCreated: 1520617123
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -27,17 +27,16 @@ ModelImporter:
     400016: Object_end
     400018: Wings
     400020: Wings_end
-    2100000: No Name
+    2100000: Food_Material
     2100002: Currency_Material
-    2100004: base
-    2300000: Food
-    3300000: Food
+    2100004: Base_Material
     4300000: Food
     4300002: Currency
     4300004: Base
     9500000: //RootNode
     13700000: Base
     13700002: Currency
+    13700004: Food
   externalObjects: {}
   materials:
     importMaterials: 1
