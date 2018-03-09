@@ -8325,7 +8325,7 @@ Prefab:
     - target: {fileID: 13700000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 988e9916b27de894d8433f84c20b0147, type: 2}
+      objectReference: {fileID: 2100000, guid: cb9d851424d37a847b69e094e3f8b043, type: 2}
     - target: {fileID: 13700000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -8614,12 +8614,12 @@ MonoBehaviour:
   - {fileID: 4300000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   eyes:
   - {fileID: 2100000, guid: 74512f1a4d8481948b96822d84ef9759, type: 2}
-  - {fileID: 2100000, guid: bdd65bba11c595547bc6cbd7b6bb9117, type: 2}
-  - {fileID: 2100000, guid: 44f81dde1a43f7a48ae0c1b2d6d89bfb, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   whiskers:
   - {fileID: 2100000, guid: cb9d851424d37a847b69e094e3f8b043, type: 2}
-  - {fileID: 2100000, guid: 05babfd64b35ce045a072a8f0cd85edf, type: 2}
-  - {fileID: 2100000, guid: 988e9916b27de894d8433f84c20b0147, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   noses:
   - {fileID: 2100000, guid: 4e124f0640231d64badc3fb7f4874232, type: 2}
   - {fileID: 2100000, guid: 893c23c125888df479ad80ee3ad5f044, type: 2}
@@ -8637,7 +8637,7 @@ MonoBehaviour:
   baseBlends:
   - {fileID: 2800000, guid: bc00bd15c6f03854c849c380e7f81978, type: 3}
   overLayBlends:
-  - {fileID: 2800000, guid: 90998b0f19681e5428ece15d5b8fd712, type: 3}
+  - {fileID: 0}
   - {fileID: 2800000, guid: 84c4044686ff5024bab2306c2e04c003, type: 3}
   - {fileID: 2800000, guid: b8a54106634042b4784891f502473b8f, type: 3}
   detailsBlends:
