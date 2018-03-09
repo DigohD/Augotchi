@@ -16,6 +16,9 @@ public class PetVisualData {
     public int overlayTextureIndex;
     public int detailsTextureIndex;
 
+    public int overlayBlendIndex;
+    public int detailsBlendIndex;
+
     public int baseTint;
     public int overlayTint;
     public int DetailsTint;
