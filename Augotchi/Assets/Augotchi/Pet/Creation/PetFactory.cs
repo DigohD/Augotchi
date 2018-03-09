@@ -17,7 +17,7 @@ public class PetFactory : MonoBehaviour {
     
     public TextureList[] eyes;
 
-    public Material[] whiskers;
+    public Texture2D[] whiskers;
     public Texture2D[] noses;
 
     public SkinnedMeshRenderer baseRenderer;
@@ -66,7 +66,11 @@ public class PetFactory : MonoBehaviour {
         Material noseMat = baseRenderer.materials[1];
         noseMat.SetTexture("_MainTex", noses[petVisualData.noseIndex]);
 
-        Material[] mats = new Material[] { baseMat, noseMat, whiskers[petVisualData.whiskersIndex], eyesMat};
+        Material whiskerMat = baseRenderer.materials[2];
+        whiskerMat.SetTexture("_MainTex", whiskers[petVisualData.whiskersIndex]);
+        whiskerMat.SetColor("_Color", PetVisualData.palette[petVisualData.DetailsTint]);
+
+        Material[] mats = new Material[] { baseMat, noseMat, whiskerMat, eyesMat};
         baseRenderer.materials = mats;
 
         Material[] peripheryMats = new Material[] { baseMat };

@@ -64,6 +64,13 @@ ModelImporter:
     100112: UpperNeck
     100114: Ears_1
     100116: Tail_1 1
+    100118: Ears_4
+    100120: Ears_5
+    100122: Ears_6
+    100124: Ears_7
+    100126: Tail_4 1
+    100128: Tail_5 1
+    100130: Tail_6
     400000: Animal
     400002: Armature
     400004: BackLeg_Foot.L
@@ -123,6 +130,13 @@ ModelImporter:
     400112: UpperNeck
     400114: Ears_1
     400116: Tail_1 1
+    400118: Ears_4
+    400120: Ears_5
+    400122: Ears_6
+    400124: Ears_7
+    400126: Tail_4 1
+    400128: Tail_5 1
+    400130: Tail_6
     2100000: Tail
     2100002: Ears
     2100004: Body
@@ -138,6 +152,13 @@ ModelImporter:
     4300012: Ears_2
     4300014: Tail_1
     4300016: Ears_1
+    4300018: Ears_7
+    4300020: Ears_5
+    4300022: Ears_4
+    4300024: Tail_6
+    4300026: Tail_5
+    4300028: Tail_4
+    4300030: Ears_6
     9500000: //RootNode
     13700000: Animal
     13700002: Ears
@@ -148,6 +169,13 @@ ModelImporter:
     13700012: Tail_3
     13700014: Ears_1
     13700016: Tail_1
+    13700018: Ears_4
+    13700020: Ears_5
+    13700022: Ears_6
+    13700024: Ears_7
+    13700026: Tail_4
+    13700028: Tail_5
+    13700030: Tail_6
   externalObjects: {}
   materials:
     importMaterials: 1

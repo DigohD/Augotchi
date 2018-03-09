@@ -2317,7 +2317,35 @@ Prefab:
     - target: {fileID: 13700000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 988e9916b27de894d8433f84c20b0147, type: 2}
+      objectReference: {fileID: 2100000, guid: cb9d851424d37a847b69e094e3f8b043, type: 2}
+    - target: {fileID: 100124, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100120, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100118, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100122, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100130, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100108, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100106, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   m_IsPrefabParent: 0
@@ -2364,10 +2392,17 @@ MonoBehaviour:
   - {fileID: 4300016, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300012, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300004, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300022, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300020, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300030, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300018, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   tails:
   - {fileID: 4300014, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300002, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   - {fileID: 4300000, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300028, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300026, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
+  - {fileID: 4300024, guid: e445d7b8a80631643b2b9e96495d30fe, type: 3}
   eyes:
   - textures:
     - {fileID: 2800000, guid: 9ad5fe5e2019afb4da58c73ddafc13b5, type: 3}
@@ -2394,9 +2429,16 @@ MonoBehaviour:
     - {fileID: 2800000, guid: 2a821462e72920442950e41e683d04d5, type: 3}
     - {fileID: 2800000, guid: b1825e0b26fb1d54cac5bc682edf177a, type: 3}
   whiskers:
-  - {fileID: 2100000, guid: cb9d851424d37a847b69e094e3f8b043, type: 2}
-  - {fileID: 2100000, guid: 05babfd64b35ce045a072a8f0cd85edf, type: 2}
-  - {fileID: 2100000, guid: 988e9916b27de894d8433f84c20b0147, type: 2}
+  - {fileID: 2800000, guid: 7f630bba4b2b2c54aa29b404d731ff94, type: 3}
+  - {fileID: 2800000, guid: e12305d0ba57e644dbf704fc96a11f9c, type: 3}
+  - {fileID: 2800000, guid: 219db2eb10e90334faf8ca5141d4a449, type: 3}
+  - {fileID: 2800000, guid: 9ccdbad22416bee4081aafbe2a4dde32, type: 3}
+  - {fileID: 2800000, guid: 95876824081291d4e9a6930402b0523b, type: 3}
+  - {fileID: 2800000, guid: 177114dda9e3df342a3134377a204f8d, type: 3}
+  - {fileID: 2800000, guid: 42c36e6a2badb30478038ea4d475d8be, type: 3}
+  - {fileID: 2800000, guid: e649f1804b5257d46974414c6a48cd44, type: 3}
+  - {fileID: 2800000, guid: 14ba03359ca5ba1419a1c73b9233bbfe, type: 3}
+  - {fileID: 2800000, guid: ce462ab754e05464abe69984a6e3401b, type: 3}
   noses:
   - {fileID: 2800000, guid: d5712650059129846b9b788868dbc8fd, type: 3}
   - {fileID: 2800000, guid: 32e19a5c3a4b0484f9a9e9a9e453c930, type: 3}
@@ -2421,10 +2463,12 @@ MonoBehaviour:
   baseBlends:
   - {fileID: 2800000, guid: bc00bd15c6f03854c849c380e7f81978, type: 3}
   overLayBlends:
+  - {fileID: 2800000, guid: bffea97e497dc034081305422a395c04, type: 3}
   - {fileID: 2800000, guid: ffb8b897379041d418111e97548897bd, type: 3}
   - {fileID: 2800000, guid: 84c4044686ff5024bab2306c2e04c003, type: 3}
   - {fileID: 2800000, guid: b8a54106634042b4784891f502473b8f, type: 3}
   detailsBlends:
+  - {fileID: 2800000, guid: bffea97e497dc034081305422a395c04, type: 3}
   - {fileID: 2800000, guid: a2f854ab580a6dd4e825f0acd6b9b096, type: 3}
   - {fileID: 2800000, guid: b381e3bbeb195354589d85795eefbaa2, type: 3}
   - {fileID: 2800000, guid: cc32f0af54c77794ab1ba3b78c4f4202, type: 3}
@@ -2971,9 +3015,9 @@ MonoBehaviour:
   - textures: []
   - textures: []
   whiskers:
-  - {fileID: 2100000, guid: cb9d851424d37a847b69e094e3f8b043, type: 2}
-  - {fileID: 2100000, guid: 05babfd64b35ce045a072a8f0cd85edf, type: 2}
-  - {fileID: 2100000, guid: 988e9916b27de894d8433f84c20b0147, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   noses:
   - {fileID: 0}
   - {fileID: 0}
@@ -3657,7 +3701,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1303244752}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.08, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 8.131567, y: 8.131588, z: 8.131588}
   m_Children:
   - {fileID: 1836182121}

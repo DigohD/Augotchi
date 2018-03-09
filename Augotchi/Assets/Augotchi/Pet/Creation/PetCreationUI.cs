@@ -67,6 +67,49 @@ public class PetCreationUI : MonoBehaviour {
         }
     }
 
+    public void randomize()
+    {
+        pvd.earsIndex = Random.Range(0, petFactory.ears.Length);
+        earPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.earsIndex + 1) + "/" + petFactory.ears.Length;
+
+        pvd.eyesIndex = Random.Range(0, petFactory.eyes.Length);
+        eyePicker.transform.GetChild(3).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+
+        pvd.eyesSizeIndex = Random.Range(0, petFactory.eyes[pvd.eyesIndex].textures.Length);
+        eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
+
+        pvd.tailIndex = Random.Range(0, petFactory.tails.Length);
+        tailPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.tailIndex + 1) + "/" + petFactory.tails.Length;
+        pvd.whiskersIndex = Random.Range(0, petFactory.whiskers.Length);
+        whiskersPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.whiskersIndex + 1) + "/" + petFactory.whiskers.Length;
+        pvd.noseIndex = Random.Range(0, petFactory.noses.Length);
+        nosePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.noseIndex + 1) + "/" + petFactory.noses.Length;
+
+        pvd.baseTextureIndex = Random.Range(0, petFactory.baseTextures.Length);
+        basePicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.baseTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
+        pvd.baseTint = Random.Range(0, PetVisualData.palette.Length);
+        basePicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.baseTint + 1) + "/" + PetVisualData.palette.Length;
+        basePicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.baseTint];
+
+        pvd.overlayBlendIndex = Random.Range(0, petFactory.overLayBlends.Length);
+        overlayPicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.overlayBlendIndex + 1) + "/" + petFactory.overLayBlends.Length;
+        pvd.overlayTint = Random.Range(0, PetVisualData.palette.Length);
+        overlayPicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.overlayTint + 1) + "/" + PetVisualData.palette.Length;
+        overlayPicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.overlayTint];
+        pvd.overlayTextureIndex = Random.Range(0, petFactory.baseTextures.Length);
+        overlayPicker.transform.GetChild(10).GetComponent<Text>().text = (pvd.overlayTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
+
+        pvd.detailsBlendIndex = Random.Range(0, petFactory.detailsBlends.Length);
+        detailsPicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.detailsBlendIndex + 1) + "/" + petFactory.detailsBlends.Length;
+        pvd.DetailsTint = Random.Range(0, PetVisualData.palette.Length);
+        detailsPicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.DetailsTint + 1) + "/" + PetVisualData.palette.Length;
+        detailsPicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.DetailsTint];
+        pvd.detailsTextureIndex = Random.Range(0, petFactory.baseTextures.Length);
+        detailsPicker.transform.GetChild(9).GetComponent<Text>().text = (pvd.detailsTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
+
+        petFactory.buildPet(pvd);
+    }
+
     public void onWorldClick()
     {
         PetGlobal pg = new PetGlobal();
