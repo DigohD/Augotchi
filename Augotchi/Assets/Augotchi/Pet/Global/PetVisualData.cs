@@ -8,7 +8,10 @@ public class PetVisualData {
     public int earsIndex;
     public int tailIndex;
     public int colorIndex;
+
     public int eyesIndex;
+    public int eyesSizeIndex;
+
     public int whiskersIndex;
     public int noseIndex;
 

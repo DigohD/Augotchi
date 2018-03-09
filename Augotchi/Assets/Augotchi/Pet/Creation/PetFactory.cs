@@ -1,14 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PetFactory : MonoBehaviour {
 
+    [Serializable]
+    public class TextureList
+    {
+        public Texture2D[] textures;
+    }
+
     public Mesh[] ears;
     public Mesh[] tails;
-    public Material[] eyes;
+
+    
+    public TextureList[] eyes;
+
     public Material[] whiskers;
-    public Material[] noses;
+    public Texture2D[] noses;
 
     public SkinnedMeshRenderer baseRenderer;
     public SkinnedMeshRenderer earsRenderer;
@@ -50,7 +60,13 @@ public class PetFactory : MonoBehaviour {
         baseMat.SetColor("_Color2", PetVisualData.palette[7]);
         baseMat.SetColor("_Color3", PetVisualData.palette[14]);*/
 
-        Material[] mats = new Material[] { baseMat, noses[petVisualData.noseIndex], whiskers[petVisualData.whiskersIndex], eyes[petVisualData.eyesIndex] };
+        Material eyesMat = baseRenderer.materials[3];
+        eyesMat.SetTexture("_MainTex", eyes[petVisualData.eyesIndex].textures[petVisualData.eyesSizeIndex]);
+
+        Material noseMat = baseRenderer.materials[1];
+        noseMat.SetTexture("_MainTex", noses[petVisualData.noseIndex]);
+
+        Material[] mats = new Material[] { baseMat, noseMat, whiskers[petVisualData.whiskersIndex], eyesMat};
         baseRenderer.materials = mats;
 
         Material[] peripheryMats = new Material[] { baseMat };

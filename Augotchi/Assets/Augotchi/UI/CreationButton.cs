@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HomeButton : MonoBehaviour {
+public class CreationButton : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             onClick();
         }
@@ -16,7 +16,6 @@ public class HomeButton : MonoBehaviour {
     public void onClick()
     {
         GameState.mapZoom = GameObject.FindGameObjectWithTag("Map").transform.localScale.x;
-        SceneManager.LoadScene("Home");
+        SceneManager.LoadScene("Creation");
     }
-
 }

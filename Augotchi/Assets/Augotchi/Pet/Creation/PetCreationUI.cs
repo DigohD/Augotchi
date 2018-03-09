@@ -32,7 +32,10 @@ public class PetCreationUI : MonoBehaviour {
         Debug.LogWarning(pvd);
 
         earPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.earsIndex + 1) + "/" + petFactory.ears.Length;
-        eyePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+
+        eyePicker.transform.GetChild(3).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+        eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
+
         tailPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.tailIndex + 1) + "/" + petFactory.tails.Length;
         whiskersPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.whiskersIndex + 1) + "/" + petFactory.whiskers.Length;
         nosePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.noseIndex + 1) + "/" + petFactory.noses.Length;
@@ -49,11 +52,19 @@ public class PetCreationUI : MonoBehaviour {
         detailsPicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.detailsBlendIndex + 1) + "/" + petFactory.detailsBlends.Length;
         detailsPicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.DetailsTint + 1) + "/" + PetVisualData.palette.Length;
         detailsPicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.DetailsTint];
-        detailsPicker.transform.GetChild(10).GetComponent<Text>().text = (pvd.detailsTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
+        detailsPicker.transform.GetChild(9).GetComponent<Text>().text = (pvd.detailsTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
 
         stage = 0;
 
         petFactory.buildPet(pvd);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            onWorldClick();
+        }
     }
 
     public void onWorldClick()
@@ -143,7 +154,12 @@ public class PetCreationUI : MonoBehaviour {
             pvd.eyesIndex = 0;
         }
 
-        eyePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+        pvd.eyesSizeIndex = 0;
+
+        eyePicker.transform.GetChild(3).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+        eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
+
+        
 
         petFactory.buildPet(pvd);
     }
@@ -156,7 +172,38 @@ public class PetCreationUI : MonoBehaviour {
             pvd.eyesIndex = petFactory.eyes.Length - 1;
         }
 
-        eyePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+        pvd.eyesSizeIndex = 0;
+
+        eyePicker.transform.GetChild(3).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
+        eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
+
+        
+
+        petFactory.buildPet(pvd);
+    }
+
+    public void onNextEyeSize()
+    {
+        pvd.eyesSizeIndex++;
+        if (pvd.eyesSizeIndex >= petFactory.eyes[pvd.eyesIndex].textures.Length)
+        {
+            pvd.eyesSizeIndex = 0;
+        }
+
+        eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
+
+        petFactory.buildPet(pvd);
+    }
+
+    public void onPreviousEyeSize()
+    {
+        pvd.eyesSizeIndex--;
+        if (pvd.eyesSizeIndex < 0)
+        {
+            pvd.eyesSizeIndex = petFactory.eyes[pvd.eyesIndex].textures.Length - 1;
+        }
+
+        eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
 
         petFactory.buildPet(pvd);
     }
@@ -445,7 +492,7 @@ public class PetCreationUI : MonoBehaviour {
             pvd.detailsTextureIndex = 0;
         }
 
-        detailsPicker.transform.GetChild(10).GetComponent<Text>().text = (pvd.detailsTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
+        detailsPicker.transform.GetChild(9).GetComponent<Text>().text = (pvd.detailsTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
 
         petFactory.buildPet(pvd);
     }
@@ -458,7 +505,7 @@ public class PetCreationUI : MonoBehaviour {
             pvd.detailsTextureIndex = petFactory.baseTextures.Length - 1;
         }
 
-        detailsPicker.transform.GetChild(10).GetComponent<Text>().text = (pvd.detailsTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
+        detailsPicker.transform.GetChild(9).GetComponent<Text>().text = (pvd.detailsTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
 
         petFactory.buildPet(pvd);
     }
