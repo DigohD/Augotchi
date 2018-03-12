@@ -8,17 +8,18 @@ public class RewardMessage : MonoBehaviour {
 
     void Start()
     {
-        transform.Translate(0, 5, 0);
+        transform.position = transform.position + (Vector3.up * 5);
 
         transform.SetParent(GameObject.FindGameObjectWithTag("MainCamera").transform);
     }
 
     void Update()
     {
-        transform.Translate(0, 4 * Time.deltaTime, 0);
+        transform.position = transform.position + (Vector3.up * 4 * Time.deltaTime);
 
         GetComponent<TextMesh>().color = new Color(0.15f, 0.15f, 0.15f, opacity);
-        transform.GetChild(0).GetComponent<TextMesh>().color = new Color(1f, 1f, 1f, opacity);
+        Color oldColor = transform.GetChild(0).GetComponent<TextMesh>().color;
+        transform.GetChild(0).GetComponent<TextMesh>().color = new Color(oldColor.r, oldColor.g, oldColor.b, opacity);
 
         opacity -= (0.3f * Time.deltaTime);
 
@@ -26,9 +27,12 @@ public class RewardMessage : MonoBehaviour {
             Destroy(gameObject);
     }
 
-    public void setMessage(string message)
+    public void setMessage(Reward reward)
     {
-        GetComponent<TextMesh>().text = message;
-        transform.GetChild(0).GetComponent<TextMesh>().text = message;
+        Debug.LogWarning(reward.color.ToString());
+
+        GetComponent<TextMesh>().text = reward.message;
+        transform.GetChild(0).GetComponent<TextMesh>().text = reward.message;
+        transform.GetChild(0).GetComponent<TextMesh>().color = reward.color;
     }
 }

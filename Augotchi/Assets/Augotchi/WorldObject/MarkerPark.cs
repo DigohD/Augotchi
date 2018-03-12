@@ -110,24 +110,25 @@ public class MarkerPark : MarkerPopup {
             case ParkType.GATHER:
                 amount = Random.Range(10, 15) * 10;
                 PetKeeper.pet.giveCurrency(amount);
-                gc.spawnRewardText("Coins: +" + amount);
+                gc.queueRewardText("Coins: +" + amount, new Color(1, 0.85f, 0.2f));
                 break;
             case ParkType.PICNIC:
                 amount = Random.Range(15, 30);
                 PetKeeper.pet.addHunger(amount);
-                gc.spawnRewardText("Pet Fullness: +" + amount);
+                gc.queueRewardText("Pet Fullness: +" + amount, new Color(0.35f, 1f, 0.45f));
                 break;
             case ParkType.RELAX:
                 amount = Random.Range(15, 30);
                 PetKeeper.pet.addHappiness(amount);
-                gc.spawnRewardText("Pet Happiness: +" + amount);
+                gc.queueRewardText("Pet Happiness: +" + amount, new Color(0.35f, 1f, 0.45f));
                 break;
             case ParkType.STICK:
                 amount = Random.Range(15, 30);
                 PetKeeper.pet.addHealth(amount);
-                gc.spawnRewardText("Pet Health: +" + amount);
+                gc.queueRewardText("Pet Health: +" + amount, new Color(0.35f, 1f, 0.45f));
                 break;
         }
+        PetKeeper.pet.grantXP(250);
     }
 
     private static string typeToString(ParkType pt)

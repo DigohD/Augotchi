@@ -7,6 +7,7 @@ public class MarkerCurrency : Marker {
     {
         int amount = Random.Range(1, 5) * 10;
         PetKeeper.pet.giveCurrency(amount);
-        gc.spawnRewardText("Coins: +" + amount);
+        gc.queueRewardText("Coins: +" + amount, new Color(1, 0.85f, 0.2f));
+        PetKeeper.pet.grantXP(100);
     }
 }

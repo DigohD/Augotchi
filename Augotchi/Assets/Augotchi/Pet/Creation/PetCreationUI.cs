@@ -10,6 +10,9 @@ public class PetCreationUI : MonoBehaviour {
 
     public PetVisualData pvd;
 
+    public AudioClip A_arrowClick;
+    public AudioClip A_menuClick;
+
     public GameObject earPicker;
     public GameObject tailPicker;
     public GameObject basePicker;
@@ -26,10 +29,17 @@ public class PetCreationUI : MonoBehaviour {
 
     private void Start()
     {
-        PetGlobal pg = new PetGlobal();
-        pvd = pg.LoadVisuals();
-
-        Debug.LogWarning(pvd);
+        PetGlobal pg;
+        GameObject petKeeper = GameObject.FindGameObjectWithTag("PetKeeper");
+        if (petKeeper == null)
+        {
+            pg = new PetGlobal();
+            pvd = pg.LoadVisuals();
+        }
+        else
+        {
+            pvd = PetKeeper.pet.LoadVisuals();
+        }
 
         earPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.earsIndex + 1) + "/" + petFactory.ears.Length;
 
@@ -112,8 +122,17 @@ public class PetCreationUI : MonoBehaviour {
 
     public void onWorldClick()
     {
-        PetGlobal pg = new PetGlobal();
-        pg.SaveVisuals(pvd);
+        PetGlobal pg;
+        GameObject petKeeper = GameObject.FindGameObjectWithTag("PetKeeper");
+        if (petKeeper == null)
+        {
+            pg = new PetGlobal();
+            pg.SaveVisuals(pvd);
+        }
+        else
+        {
+            PetKeeper.pet.SaveVisuals(pvd);
+        }
 
         GameControl.markerPicked = true;
         SceneManager.LoadScene("World");
@@ -186,6 +205,8 @@ public class PetCreationUI : MonoBehaviour {
     {
         stage = newStage;
 
+        GetComponent<AudioSource>().PlayOneShot(A_menuClick);
+
         updateUI();
     }
 
@@ -202,7 +223,7 @@ public class PetCreationUI : MonoBehaviour {
         eyePicker.transform.GetChild(3).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
         eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
 
-        
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -220,7 +241,7 @@ public class PetCreationUI : MonoBehaviour {
         eyePicker.transform.GetChild(3).GetComponent<Text>().text = (pvd.eyesIndex + 1) + "/" + petFactory.eyes.Length;
         eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
 
-        
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -235,6 +256,8 @@ public class PetCreationUI : MonoBehaviour {
 
         eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -247,6 +270,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         eyePicker.transform.GetChild(7).GetComponent<Text>().text = (pvd.eyesSizeIndex + 1) + "/" + petFactory.eyes[pvd.eyesIndex].textures.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -261,6 +286,8 @@ public class PetCreationUI : MonoBehaviour {
 
         tailPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.tailIndex + 1) + "/" + petFactory.tails.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -273,6 +300,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         tailPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.tailIndex + 1) + "/" + petFactory.tails.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -287,6 +316,8 @@ public class PetCreationUI : MonoBehaviour {
 
         earPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.earsIndex + 1) + "/" + petFactory.ears.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -299,6 +330,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         earPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.earsIndex + 1) + "/" + petFactory.ears.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -323,6 +356,8 @@ public class PetCreationUI : MonoBehaviour {
 
         whiskersPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.whiskersIndex + 1) + "/" + petFactory.whiskers.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -335,6 +370,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         whiskersPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.whiskersIndex + 1) + "/" + petFactory.whiskers.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -349,6 +386,8 @@ public class PetCreationUI : MonoBehaviour {
 
         nosePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.noseIndex + 1) + "/" + petFactory.noses.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -361,6 +400,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         nosePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.noseIndex + 1) + "/" + petFactory.noses.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -375,6 +416,8 @@ public class PetCreationUI : MonoBehaviour {
 
         basePicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.baseTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -387,6 +430,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         basePicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.baseTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -401,6 +446,8 @@ public class PetCreationUI : MonoBehaviour {
 
         overlayPicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.overlayBlendIndex + 1) + "/" + petFactory.overLayBlends.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -413,6 +460,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         overlayPicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.overlayBlendIndex + 1) + "/" + petFactory.overLayBlends.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -427,6 +476,8 @@ public class PetCreationUI : MonoBehaviour {
 
         detailsPicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.detailsBlendIndex + 1) + "/" + petFactory.detailsBlends.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -439,6 +490,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         detailsPicker.transform.GetChild(2).GetComponent<Text>().text = (pvd.detailsBlendIndex + 1) + "/" + petFactory.detailsBlends.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -454,6 +507,8 @@ public class PetCreationUI : MonoBehaviour {
         basePicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.baseTint + 1) + "/" + PetVisualData.palette.Length;
         basePicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.baseTint];
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -467,6 +522,8 @@ public class PetCreationUI : MonoBehaviour {
 
         basePicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.baseTint + 1) + "/" + PetVisualData.palette.Length;
         basePicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.baseTint];
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -482,6 +539,8 @@ public class PetCreationUI : MonoBehaviour {
         overlayPicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.overlayTint + 1) + "/" + PetVisualData.palette.Length;
         overlayPicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.overlayTint];
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -495,6 +554,8 @@ public class PetCreationUI : MonoBehaviour {
 
         overlayPicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.overlayTint + 1) + "/" + PetVisualData.palette.Length;
         overlayPicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.overlayTint];
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -510,6 +571,8 @@ public class PetCreationUI : MonoBehaviour {
         detailsPicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.DetailsTint + 1) + "/" + PetVisualData.palette.Length;
         detailsPicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.DetailsTint];
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -524,6 +587,8 @@ public class PetCreationUI : MonoBehaviour {
         detailsPicker.transform.GetChild(5).GetComponent<Text>().text = (pvd.DetailsTint + 1) + "/" + PetVisualData.palette.Length;
         detailsPicker.transform.GetChild(8).GetComponent<Image>().color = PetVisualData.palette[pvd.DetailsTint];
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -536,6 +601,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         detailsPicker.transform.GetChild(9).GetComponent<Text>().text = (pvd.detailsTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }
@@ -550,6 +617,8 @@ public class PetCreationUI : MonoBehaviour {
 
         detailsPicker.transform.GetChild(9).GetComponent<Text>().text = (pvd.detailsTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -563,6 +632,8 @@ public class PetCreationUI : MonoBehaviour {
 
         overlayPicker.transform.GetChild(10).GetComponent<Text>().text = (pvd.overlayTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
 
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
+
         petFactory.buildPet(pvd);
     }
 
@@ -575,6 +646,8 @@ public class PetCreationUI : MonoBehaviour {
         }
 
         overlayPicker.transform.GetChild(10).GetComponent<Text>().text = (pvd.overlayTextureIndex + 1) + "/" + petFactory.baseTextures.Length;
+
+        GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 
         petFactory.buildPet(pvd);
     }

@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class GameControl : MonoBehaviour {
 
+    public static Color XPColor = new Color(0.6f, 0.8f, 0.8f);
+    public static Color LevelUpColor = new Color(1f, 1f, 0.5f);
+
     public static bool isZooming;
 
     public static bool markerPicked = true;
     public bool sceneLoaded = false;
 
+    public AudioClip A_RewardPop;
+
     public GameObject P_MarkerFood;
     public GameObject P_MarkerCurrency;
     public GameObject P_MarkerPark;
+    public GameObject P_MarkerRevive;
+
     public GameObject P_RewardText;
     public GameObject P_MarkerPoof;
 
     GameObject player;
 
     GameObject augotchiMap;
+
+    private static ArrayList rewardStack = new ArrayList();
+
+    private float rewardTimer;
 
     Vector3[] dirs = new Vector3[8]
     {
@@ -50,48 +61,90 @@ public class GameControl : MonoBehaviour {
                 Destroy(marker);
             }
 
-            if(sceneLoaded || PetKeeper.pet.markerSet == null)
+            if((sceneLoaded || PetKeeper.pet.markerSet == null) && !PetKeeper.pet.isDead)
                 generateNewMarkers();
 
             sceneLoaded = true;
 
-            for(int i = 0; i < dirs.Length; i++)
+            if (!PetKeeper.pet.isDead)
             {
-                GameObject toSpawn = null;
-
-                switch (PetKeeper.pet.markerSet[i])
+                for (int i = 0; i < dirs.Length; i++)
                 {
-                    case Marker.MarkerType.CURRENCY:
-                        toSpawn = P_MarkerCurrency;
-                        break;
-                    case Marker.MarkerType.FOOD:
-                        toSpawn = P_MarkerFood;
-                        break;
-                    case Marker.MarkerType.PARK:
-                        toSpawn = P_MarkerPark;
-                        break;
+                    GameObject toSpawn = null;
+
+                    switch (PetKeeper.pet.markerSet[i])
+                    {
+                        case Marker.MarkerType.CURRENCY:
+                            toSpawn = P_MarkerCurrency;
+                            break;
+                        case Marker.MarkerType.FOOD:
+                            toSpawn = P_MarkerFood;
+                            break;
+                        case Marker.MarkerType.PARK:
+                            toSpawn = P_MarkerPark;
+                            break;
+                    }
+
+                    GameObject map = GameObject.FindGameObjectWithTag("Map");
+                    float scaleConversion = map.transform.localScale.x;
+                    GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(45.0f * scaleConversion, 120f * scaleConversion)), Quaternion.identity);
+                    //GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(4.0f * scaleConversion, 12f * scaleConversion)), Quaternion.identity);
+
+                    marker.transform.SetParent(augotchiMap.transform);
+                    Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
+
+                    marker.transform.localScale = new Vector3(1, 1, 1);
+
+                    marker.GetComponent<Marker>().gc = this;
                 }
-
-                GameObject map = GameObject.FindGameObjectWithTag("Map");
-                float scaleConversion = map.transform.localScale.x;
-                GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(45.0f * scaleConversion, 120f * scaleConversion)), Quaternion.identity);
-                //GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(4.0f * scaleConversion, 12f * scaleConversion)), Quaternion.identity);
-
-                marker.transform.SetParent(augotchiMap.transform);
-                Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
-
-                marker.transform.localScale = new Vector3(1, 1, 1);
-
-                marker.GetComponent<Marker>().gc = this;
             }
+            else
+            {
+                for (int i = 0; i < dirs.Length; i++)
+                {
+                    GameObject toSpawn = P_MarkerRevive;
+
+                    GameObject map = GameObject.FindGameObjectWithTag("Map");
+                    float scaleConversion = map.transform.localScale.x;
+                    GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(45.0f * scaleConversion, 120f * scaleConversion)), Quaternion.identity);
+                    //GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(4.0f * scaleConversion, 12f * scaleConversion)), Quaternion.identity);
+
+                    marker.transform.SetParent(augotchiMap.transform);
+                    Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
+
+                    marker.transform.localScale = new Vector3(1, 1, 1);
+
+                    marker.GetComponent<Marker>().gc = this;
+                }
+            }
+            
+        }
+
+        rewardTimer += Time.deltaTime;
+        if(rewardStack.Count > 0 && rewardTimer > 1f)
+        {
+            rewardTimer = 0;
+            spawnRewardText((Reward) rewardStack[0]);
+            rewardStack.RemoveAt(0);
         }
 	}
 
-    public void spawnRewardText(string message)
+    public void queueRewardText(string message, Color c)
     {
-        Quaternion rot = GameObject.FindGameObjectWithTag("CameraTarget").transform.localRotation;
-        GameObject go = Instantiate(P_RewardText, player.transform.position, rot);
-        go.GetComponent<RewardMessage>().setMessage(message);
+        Reward reward = new Reward();
+        reward.message = message;
+        reward.color = c;
+        rewardStack.Add(reward);
+    }
+
+    private void spawnRewardText(Reward reward)
+    {
+        float rot = GameObject.FindGameObjectWithTag("CameraTarget").transform.localRotation.eulerAngles.y;
+        GameObject go = Instantiate(P_RewardText, player.transform.position, Quaternion.Euler(30, rot, 0));
+
+        GetComponent<AudioSource>().PlayOneShot(A_RewardPop);
+
+        go.GetComponent<RewardMessage>().setMessage(reward);
     }
 
     private void generateNewMarkers()

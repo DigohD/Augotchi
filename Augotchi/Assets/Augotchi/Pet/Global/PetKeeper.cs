@@ -25,10 +25,6 @@ public class PetKeeper : MonoBehaviour {
         pet = new PetGlobal();
         pet.Load();
 
-        Debug.LogWarning("Hunger: " + pet.hunger);
-        Debug.LogWarning("Happiness: " + pet.happiness);
-        Debug.LogWarning("HEalth: " + pet.health);
-
         pedometer = new Pedometer(this.OnStep);
     }
 
@@ -45,6 +41,9 @@ public class PetKeeper : MonoBehaviour {
 
     void OnStep(int steps, double distance)
     {
+        if (pet.isDead)
+            return;
+
         // Display the values
         this.steps++;
         // Display distance in feet
@@ -53,8 +52,10 @@ public class PetKeeper : MonoBehaviour {
         {
             this.steps = 0;
             PetKeeper.pet.hundredSteps();
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().spawnRewardText("Pet Health +2");
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().queueRewardText("Pet Health +2", new Color(0.35f, 1f, 0.45f));
+            PetKeeper.pet.grantXP(25);
         }
+
         PlayerScript.steps = this.steps;
     }
 

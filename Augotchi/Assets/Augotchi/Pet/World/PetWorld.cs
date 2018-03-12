@@ -23,6 +23,14 @@ public class PetWorld : MonoBehaviour {
 	}
 	
 	void Update () {
+        if (PetKeeper.pet.isDead)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        gameObject.SetActive(true);
+
         switch (pws)
         {
             case PetWorldState.IDLE_SIT:

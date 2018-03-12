@@ -103,6 +103,15 @@
 
 						// Find the difference in the distances between each frame.
 						zoomFactor = 0.01f * (touchDeltaMag - prevTouchDeltaMag);
+
+                        if (zoomFactor > 0f && gameObject.transform.localScale.x > 2.25f)
+                        {
+                            return;
+                        }
+                        else if (zoomFactor < 0f && gameObject.transform.localScale.x < 0.5f)
+                        {
+                            return;
+                        }
 					}
 					ZoomMapUsingTouchOrMouse(zoomFactor);
 					break;

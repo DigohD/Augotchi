@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189672191405206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.27, y: -0.15, z: -0.13}
+  m_LocalPosition: {x: -1.2, y: 1.1, z: -0.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4224633122179608}
@@ -66,8 +66,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052254352882838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -20.074684, y: 23.5, z: -14.91115}
+  m_LocalScale: {x: 0.3353482, y: 0.3353482, z: 0.3353482}
   m_Children:
   - {fileID: 4145525783293422}
   m_Father: {fileID: 0}
@@ -87,7 +87,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7dfc2e1472ac84e1bb749a8a9f934483, type: 3}
+  - {fileID: 2100000, guid: c37fb889bc6dc084c89608b40050d810, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,7 +121,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7dfc2e1472ac84e1bb749a8a9f934483, type: 3}
+  - {fileID: 2100000, guid: c37fb889bc6dc084c89608b40050d810, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,10 +155,10 @@ TextMesh:
   m_Anchor: 7
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 40
+  m_FontSize: 120
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 7dfc2e1472ac84e1bb749a8a9f934483, type: 3}
+  m_Font: {fileID: 12800000, guid: c37fb889bc6dc084c89608b40050d810, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4280690214
@@ -176,10 +176,10 @@ TextMesh:
   m_Anchor: 7
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 40
+  m_FontSize: 120
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 7dfc2e1472ac84e1bb749a8a9f934483, type: 3}
+  m_Font: {fileID: 12800000, guid: c37fb889bc6dc084c89608b40050d810, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295

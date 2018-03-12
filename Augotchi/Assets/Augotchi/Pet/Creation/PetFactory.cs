@@ -31,6 +31,8 @@ public class PetFactory : MonoBehaviour {
 
     public Texture2D[] detailsBlends;
 
+    public Texture2D deadEyes;
+
     private void Start()
     {
         PetGlobal pg = new PetGlobal();
@@ -76,5 +78,15 @@ public class PetFactory : MonoBehaviour {
         Material[] peripheryMats = new Material[] { baseMat };
         earsRenderer.materials = peripheryMats;
         tailRenderer.materials = peripheryMats;
+    }
+
+    public void setDeadEyes()
+    {
+        Material eyesMat = baseRenderer.materials[3];
+        eyesMat.SetTexture("_MainTex", deadEyes);
+
+        Material[] mats = new Material[] { baseRenderer.materials[0], baseRenderer.materials[1], baseRenderer.materials[2], eyesMat };
+
+        baseRenderer.materials = mats;
     }
 }

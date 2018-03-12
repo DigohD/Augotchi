@@ -35,6 +35,12 @@ public class PetGlobal {
 
     public Marker.MarkerType[] markerSet;
 
+    public bool isDead;
+    public int reviveProgress;
+
+    public int xp;
+    public int level = 1;
+
     public PetGlobal()
     {
         
@@ -51,7 +57,23 @@ public class PetGlobal {
         this.vegetables = vegetables;
     }
 
-    public PetGlobal(float hunger, float happiness, float health, int candy, int food, int vegetables, long saveTimeStamp, long lastPettingTimeStamp, int currency, Marker.MarkerType[] markerSet, PetVisualData petVisualData)
+    public PetGlobal(
+        float hunger, 
+        float happiness, 
+        float health, 
+        int candy, 
+        int food, 
+        int vegetables, 
+        long saveTimeStamp, 
+        long lastPettingTimeStamp, 
+        int currency, 
+        Marker.MarkerType[] markerSet, 
+        PetVisualData petVisualData, 
+        bool isDead, 
+        int reviveProgress,
+        int xp,
+        int level
+        )
     {
         this.hunger = hunger;
         this.happiness = happiness;
@@ -70,11 +92,19 @@ public class PetGlobal {
         this.markerSet = markerSet;
 
         this.petVisualData = petVisualData;
+
+        this.isDead = isDead;
+        this.reviveProgress = reviveProgress;
+
+        this.xp = xp;
+        this.level = level;
     }
 
     public void degenerateTick()
     {
-        Debug.Log("Happiness Pre-tick: " + happiness);
+
+        if (isDead)
+            return;
 
         long nowDT = System.DateTime.Now.Ticks;
         long diff = nowDT - saveTimeStamp;
@@ -83,36 +113,95 @@ public class PetGlobal {
 
         Debug.LogWarning(ts.ToString());
 
+        int xpToReceive = 0;
+
         for (int i = 0; i < ts.Days; i++)
         {
             degenerateDaily();
-            Debug.LogWarning("DayTick");
+
+            if(happiness > 75)
+            {
+                xpToReceive += 1 * 6 * 60 * 24;
+            }
         }
 
         for (int i = 0; i < ts.Hours; i++)
         {
             degenerateHourly();
-            Debug.LogWarning("HourTick");
+
+            if (happiness > 75)
+            {
+                xpToReceive += 1 * 6 * 60;
+            }
         }
 
         for (int i = 0; i < ts.Minutes; i++)
         {
             for (int j = 0; j < 6; j++)
                 degenerate();
-            Debug.LogWarning("MinuteTick");
+
+            if (happiness > 75)
+            {
+                xpToReceive += 1 * 6;
+            }
         }
 
         for(int i = 0; i < (ts.Seconds / 10) - 1; i++)
         {
             degenerate();
-            Debug.LogWarning("Tick");
+
+            if (happiness > 75)
+            {
+                xpToReceive += 1;
+            }
         }
 
         degenerate();
 
-        Debug.Log("Happiness Post-tick: " + happiness);
+        if (happiness > 75)
+        {
+            xpToReceive += 1;
+        }
+
+        grantXP(xpToReceive);
+
+        if (health < 0 || hunger < 0 || happiness < 0)
+        {
+            die();
+        }
 
         Save(false);
+    }
+
+    public void die()
+    {
+        isDead = true;
+        reviveProgress = 0;
+
+        hunger = 0;
+        happiness = 0;
+        health = 0;
+
+        Save(false);
+    }
+
+    public void addReviveProgress()
+    {
+        reviveProgress++;
+        if (reviveProgress >= 10)
+        {
+            revive();
+        }
+    }
+
+    private void revive()
+    {
+        isDead = false;
+        reviveProgress = 0;
+
+        hunger = 25;
+        happiness = 25;
+        health = 25;
     }
 
     public void degenerate()
@@ -170,6 +259,11 @@ public class PetGlobal {
             happiness = 0;
         if (happiness > 100)
             happiness = 100;
+
+        if(happiness >= 75)
+        {
+            
+        }
     }
 
     private void degenerateHourly()
@@ -265,7 +359,7 @@ public class PetGlobal {
             OnFeedCandy(this, new EventArgs());
 
         happiness += 15f;
-        health -= 10f;
+        health -= 7.5f;
         hunger += 5f;
 
         candy--;
@@ -281,8 +375,7 @@ public class PetGlobal {
         if (OnFeedCannedFood != null)
             OnFeedCannedFood(this, new EventArgs());
 
-        hunger += 20f;
-        health -= 2.5f;
+        hunger += 25f;
 
         food--;
 
@@ -298,18 +391,25 @@ public class PetGlobal {
             OnFeedVegetables(this, new EventArgs());
 
         hunger += 10f;
-        health += 5f;
-        happiness -= 5f;
+        health += 10f;
+        happiness -= 2.5f;
 
         vegetables--;
 
         Save(false);
     }
 
+    public void clearFeedingListeners()
+    {
+        OnFeedCandy = null;
+        OnFeedVegetables = null;
+        OnFeedCannedFood = null;
+        OnPetting = null;
+    }
+
     public void hundredSteps()
     {
         health += 2f;
-        hunger -= 0.5f;
 
         Save(false);
     }
@@ -369,6 +469,24 @@ public class PetGlobal {
         Save(false);
     }
 
+    public void grantXP(int amount)
+    {
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().queueRewardText("XP: +" + amount, GameControl.XPColor);
+        xp += amount;
+
+        int nextLevel = level + 1;
+        int nextLevelXP = xpToNextLevel(level);
+        while(xp >= nextLevelXP)
+        {
+            xp -= nextLevelXP;
+            level++;
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().queueRewardText("Level Up!", GameControl.LevelUpColor);
+            nextLevelXP = xpToNextLevel(level);
+        }
+
+        Save(false);
+    }
+
     public void setMarkers(Marker.MarkerType[] markers)
     {
         this.markerSet = markers;
@@ -383,7 +501,23 @@ public class PetGlobal {
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/AugotchiSave.gd");
-        bf.Serialize(file, new PetGlobal(hunger, happiness, health, candy, food, vegetables, saveTimeStamp, lastPettingTimeStamp, currency, markerSet, petVisualData));
+        bf.Serialize(file, 
+            new PetGlobal(
+                hunger, 
+                happiness, 
+                health, 
+                candy, 
+                food, 
+                vegetables, 
+                saveTimeStamp, 
+                lastPettingTimeStamp, 
+                currency, 
+                markerSet, 
+                petVisualData, 
+                isDead, 
+                reviveProgress,
+                xp,
+                level));
         file.Close();
     }
 
@@ -415,6 +549,15 @@ public class PetGlobal {
 
             petVisualData = pg.petVisualData;
 
+            isDead = pg.isDead;
+            reviveProgress = pg.reviveProgress;
+
+            xp = pg.xp;
+            level = pg.level;
+
+            if (level == 0)
+                level = 1;
+
             Debug.LogWarning("LastSaveTimeStamp: " + saveTimeStamp );
 
             file.Close();
@@ -426,6 +569,8 @@ public class PetGlobal {
             hunger = 75;
             happiness = 50;
             health = 50;
+
+            level = 1;
 
             Save(false);
         }
@@ -444,6 +589,9 @@ public class PetGlobal {
         currency = 0;
 
         lastPettingTimeStamp = 0;
+
+        isDead = false;
+        reviveProgress = 0;
 
         Save(false);
     }
@@ -493,6 +641,12 @@ public class PetGlobal {
 
             markerSet = pg.markerSet;
 
+            isDead = pg.isDead;
+            reviveProgress = pg.reviveProgress;
+
+            xp = pg.xp;
+            level = pg.level;
+
             file.Close();
 
             this.petVisualData = petVisualData;
@@ -509,5 +663,31 @@ public class PetGlobal {
 
             Save(false);
         }
+    }
+
+    public float getXpRatio()
+    {
+        float xp = (float) this.xp;
+        float xpToNext = xpToNextLevel(level);
+        return xp / xpToNext;
+    }
+
+    public int xpToNextLevel(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                return 100;
+            case 2:
+                return 200;
+            case 3:
+                return 300;
+            case 4:
+                return 400;
+        }
+
+        int xpRequired = (int) (level * level / 0.05f);
+        int xpReuired = xpRequired + (xpRequired % 100);
+        return xpRequired;
     }
 }
