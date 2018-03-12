@@ -17,6 +17,9 @@ ModelImporter:
     100018: Park
     100020: Wings
     100022: Wings_end
+    100024: Chest
+    100026: Crate
+    100028: Ress
     400000: Armature
     400002: Base
     400004: Base 1
@@ -29,19 +32,31 @@ ModelImporter:
     400018: Park
     400020: Wings
     400022: Wings_end
+    400024: Chest
+    400026: Crate
+    400028: Ress
     2100000: Park_Material
     2100002: Food_Material
     2100004: Currency_Material
     2100006: Base_Material
+    2100008: Ress
+    2100010: Chest
+    2100012: Crate
     4300000: Park
     4300002: Food
     4300004: Currency
     4300006: Base
+    4300008: Ress
+    4300010: Chest
+    4300012: Crate
     9500000: //RootNode
     13700000: Base
     13700002: Currency
     13700004: Food
     13700006: Park
+    13700008: Chest
+    13700010: Crate
+    13700012: Ress
   externalObjects: {}
   materials:
     importMaterials: 1
