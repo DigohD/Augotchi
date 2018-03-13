@@ -42,6 +42,9 @@ public class PetFactory : MonoBehaviour {
     public Transform hatParent;
     public GameObjectList[] hats;
 
+    public Transform faceParent;
+    public GameObjectList[] faces;
+
     private void Start()
     {
         PetGlobal pg = new PetGlobal();
@@ -93,6 +96,12 @@ public class PetFactory : MonoBehaviour {
 
         GameObject hat = (GameObject) Instantiate(hats[petVisualData.hatIndex].gameObjects[petVisualData.hatVariation]);
         hat.transform.SetParent(hatParent, false);
+
+        foreach (Transform t in faceParent)
+            Destroy(t.gameObject);
+
+        GameObject face = (GameObject)Instantiate(faces[petVisualData.faceIndex].gameObjects[petVisualData.faceVariations]);
+        face.transform.SetParent(faceParent, false);
     }
 
     public void setDeadEyes()

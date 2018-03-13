@@ -163,7 +163,8 @@ public class PetGlobal {
             xpToReceive += 1;
         }
 
-        grantXP(xpToReceive);
+        if(xpToReceive > 0)
+            grantXP(xpToReceive);
 
         if (health < 0 || hunger < 0 || happiness < 0)
         {
