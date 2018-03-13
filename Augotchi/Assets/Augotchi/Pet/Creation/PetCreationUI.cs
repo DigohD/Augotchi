@@ -27,6 +27,8 @@ public class PetCreationUI : MonoBehaviour {
 
     private int stage;
 
+    public ApparelUI apparelUI;
+
     private void Start()
     {
         PetGlobal pg;
@@ -40,6 +42,8 @@ public class PetCreationUI : MonoBehaviour {
         {
             pvd = PetKeeper.pet.LoadVisuals();
         }
+
+        apparelUI.pvd = pvd;
 
         earPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.earsIndex + 1) + "/" + petFactory.ears.Length;
 

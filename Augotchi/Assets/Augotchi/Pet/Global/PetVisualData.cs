@@ -26,6 +26,11 @@ public class PetVisualData {
     public int overlayTint;
     public int DetailsTint;
 
+    // APPAREL
+
+    public int hatIndex;
+    public int hatVariation;
+
     public static Color[] palette = new Color[28] {
         new Color(1f, 0.45f, 0.35f, 1),
         new Color(0.5f, 0.25f, 0.15f, 1),

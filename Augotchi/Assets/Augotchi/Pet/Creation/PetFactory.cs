@@ -11,6 +11,12 @@ public class PetFactory : MonoBehaviour {
         public Texture2D[] textures;
     }
 
+    [Serializable]
+    public class GameObjectList
+    {
+        public GameObject[] gameObjects;
+    }
+
     public Mesh[] ears;
     public Mesh[] tails;
 
@@ -32,6 +38,9 @@ public class PetFactory : MonoBehaviour {
     public Texture2D[] detailsBlends;
 
     public Texture2D deadEyes;
+
+    public Transform hatParent;
+    public GameObjectList[] hats;
 
     private void Start()
     {
@@ -78,6 +87,12 @@ public class PetFactory : MonoBehaviour {
         Material[] peripheryMats = new Material[] { baseMat };
         earsRenderer.materials = peripheryMats;
         tailRenderer.materials = peripheryMats;
+
+        foreach (Transform t in hatParent)
+            Destroy(t.gameObject);
+
+        GameObject hat = (GameObject) Instantiate(hats[petVisualData.hatIndex].gameObjects[petVisualData.hatVariation]);
+        hat.transform.SetParent(hatParent, false);
     }
 
     public void setDeadEyes()
