@@ -1,0 +1,231 @@
+fileFormatVersion: 2
+guid: ef7feb4f9f6f9eb498edc451f6db7393
+timeCreated: 1520953960
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Animal Head
+    100002: //RootNode
+    100004: FD_1
+    100006: FD_10
+    100008: FD_11
+    100010: FD_12
+    100012: FD_13
+    100014: FD_2
+    100016: FD_3
+    100018: FD_4
+    100020: FD_5
+    100022: FD_6
+    100024: FD_7
+    100026: FD_8
+    100028: FD_9
+    400000: Animal Head
+    400002: //RootNode
+    400004: FD_1
+    400006: FD_10
+    400008: FD_11
+    400010: FD_12
+    400012: FD_13
+    400014: FD_2
+    400016: FD_3
+    400018: FD_4
+    400020: FD_5
+    400022: FD_6
+    400024: FD_7
+    400026: FD_8
+    400028: FD_9
+    2100000: FD_13
+    2100002: FD_4
+    2100004: FD_2
+    2100006: FD_10
+    2100008: FD_9
+    2100010: FD_8
+    2100012: FD_7
+    2100014: FD_6
+    2100016: FD_5
+    2100018: FD_3
+    2100020: FD_1
+    2100022: No Name
+    2300000: Animal Head
+    2300002: FD_1
+    2300004: FD_10
+    2300006: FD_11
+    2300008: FD_12
+    2300010: FD_13
+    2300012: FD_2
+    2300014: FD_3
+    2300016: FD_4
+    2300018: FD_5
+    2300020: FD_6
+    2300022: FD_7
+    2300024: FD_8
+    2300026: FD_9
+    3300000: Animal Head
+    3300002: FD_1
+    3300004: FD_10
+    3300006: FD_11
+    3300008: FD_12
+    3300010: FD_13
+    3300012: FD_2
+    3300014: FD_3
+    3300016: FD_4
+    3300018: FD_5
+    3300020: FD_6
+    3300022: FD_7
+    3300024: FD_8
+    3300026: FD_9
+    4300000: FD_13
+    4300002: FD_12
+    4300004: FD_11
+    4300006: FD_10
+    4300008: FD_9
+    4300010: FD_8
+    4300012: FD_7
+    4300014: FD_6
+    4300016: FD_5
+    4300018: FD_3
+    4300020: FD_2
+    4300022: FD_1
+    4300024: Animal Head
+    4300026: FD_4
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_1
+    second: {fileID: 2100000, guid: d8881b61f7726ec469a124a1afb94bac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_10
+    second: {fileID: 2100000, guid: 1d5db346e462aed4ebdff0d45029abd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_13
+    second: {fileID: 2100000, guid: faa87b80bb239154f907fda976ff74d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_2
+    second: {fileID: 2100000, guid: 4effafcd79f16db4597215f746800bdb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_3
+    second: {fileID: 2100000, guid: 5e33aa00494fe63449751aa473241e4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_4
+    second: {fileID: 2100000, guid: 47f43c87e8f884146b840a9d9f5bc0d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_5
+    second: {fileID: 2100000, guid: ebea57849b3b3944988cad31ab9288f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_6
+    second: {fileID: 2100000, guid: 2c32e839191325440a79107dc4d53cda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_7
+    second: {fileID: 2100000, guid: 20eac03d7c23eea45b7018a824b0e866, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_8
+    second: {fileID: 2100000, guid: 5a4214bbdfa0c0047aba38bb0832916b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FD_9
+    second: {fileID: 2100000, guid: cad544983f4bc2c41870e31159aec941, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 203bdd0eb92b65e409e2031f0b94f75f, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
