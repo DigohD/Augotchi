@@ -12,6 +12,12 @@ ModelImporter:
     100008: Hatt_2
     100010: Hatt_3
     100012: Hatt_4
+    100014: Hatt_10
+    100016: Hatt_5
+    100018: Hatt_6
+    100020: Hatt_7
+    100022: Hatt_8
+    100024: Hatt_9
     400000: Animal Head
     400002: Cylinder
     400004: //RootNode
@@ -19,6 +25,12 @@ ModelImporter:
     400008: Hatt_2
     400010: Hatt_3
     400012: Hatt_4
+    400014: Hatt_10
+    400016: Hatt_5
+    400018: Hatt_6
+    400020: Hatt_7
+    400022: Hatt_8
+    400024: Hatt_9
     2100000: No Name
     2100002: Material.006
     2100004: Material.005
@@ -27,24 +39,51 @@ ModelImporter:
     2100010: Material.001
     2100012: Material
     2100014: Material.004
+    2100016: Material.015
+    2100018: Material.014
+    2100020: Material.010
+    2100022: Material.011
+    2100024: Material.013
+    2100026: Material.012
+    2100028: Material.007
+    2100030: Material.008
+    2100032: Chest
     2300000: Animal Head
     2300002: Cylinder
     2300004: Hatt_1
     2300006: Hatt_2
     2300008: Hatt_3
     2300010: Hatt_4
+    2300012: Hatt_10
+    2300014: Hatt_5
+    2300016: Hatt_6
+    2300018: Hatt_7
+    2300020: Hatt_8
+    2300022: Hatt_9
     3300000: Animal Head
     3300002: Cylinder
     3300004: Hatt_1
     3300006: Hatt_2
     3300008: Hatt_3
     3300010: Hatt_4
+    3300012: Hatt_10
+    3300014: Hatt_5
+    3300016: Hatt_6
+    3300018: Hatt_7
+    3300020: Hatt_8
+    3300022: Hatt_9
     4300000: Cylinder
     4300002: Hatt_4
     4300004: Hatt_3
     4300006: Hatt_2
     4300008: Hatt_1
     4300010: Animal Head
+    4300012: Hatt_10
+    4300014: Hatt_9
+    4300016: Hatt_7
+    4300018: Hatt_6
+    4300020: Hatt_5
+    4300022: Hatt_8
   externalObjects: {}
   materials:
     importMaterials: 1
