@@ -8,7 +8,7 @@ public abstract class Marker : MonoBehaviour {
 
     public GameControl gc;
 
-    public enum MarkerType { FOOD, CURRENCY, PARK }
+    public enum MarkerType { FOOD, CURRENCY, PARK, CRATE }
 
 	public virtual void picked()
     {

@@ -18,6 +18,7 @@ public class GameControl : MonoBehaviour {
     public GameObject P_MarkerCurrency;
     public GameObject P_MarkerPark;
     public GameObject P_MarkerRevive;
+    public GameObject P_MarkerCrate;
 
     public GameObject P_RewardText;
     public GameObject P_MarkerPoof;
@@ -82,6 +83,9 @@ public class GameControl : MonoBehaviour {
                             break;
                         case Marker.MarkerType.PARK:
                             toSpawn = P_MarkerPark;
+                            break;
+                        case Marker.MarkerType.CRATE:
+                            toSpawn = P_MarkerCrate;
                             break;
                     }
 
@@ -158,13 +162,13 @@ public class GameControl : MonoBehaviour {
             {
                 newMarkers[i] = Marker.MarkerType.CURRENCY;
             }
-            else if(rnd < 950)
+            else if(rnd < 925)
             {
                 newMarkers[i] = Marker.MarkerType.FOOD;
             }
             else
             {
-                newMarkers[i] = Marker.MarkerType.PARK;
+                newMarkers[i] = Marker.MarkerType.CRATE;
             }
         }
 

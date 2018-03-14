@@ -9,6 +9,7 @@ using UnityEngine;
 public class PetGlobal {
 
     public PetVisualData petVisualData;
+    public PetUnlocksData petUnlocksData;
 
     readonly float MIN_HUNGER = 0, MAX_HUNGER = 100;
     readonly float MIN_HAPPINESS = 0, MAX_HAPPINESS = 100;
@@ -41,6 +42,8 @@ public class PetGlobal {
     public int xp;
     public int level = 1;
 
+
+
     public PetGlobal()
     {
         
@@ -69,6 +72,7 @@ public class PetGlobal {
         int currency, 
         Marker.MarkerType[] markerSet, 
         PetVisualData petVisualData, 
+        PetUnlocksData petUnlocksData,
         bool isDead, 
         int reviveProgress,
         int xp,
@@ -92,6 +96,7 @@ public class PetGlobal {
         this.markerSet = markerSet;
 
         this.petVisualData = petVisualData;
+        this.petUnlocksData = petUnlocksData;
 
         this.isDead = isDead;
         this.reviveProgress = reviveProgress;
@@ -102,7 +107,6 @@ public class PetGlobal {
 
     public void degenerateTick()
     {
-
         if (isDead)
             return;
 
@@ -110,8 +114,6 @@ public class PetGlobal {
         long diff = nowDT - saveTimeStamp;
 
         System.TimeSpan ts = new System.TimeSpan(diff);
-
-        Debug.LogWarning(ts.ToString());
 
         int xpToReceive = 0;
 
@@ -166,7 +168,7 @@ public class PetGlobal {
         if(xpToReceive > 0)
             grantXP(xpToReceive);
 
-        if (health < 0 || hunger < 0 || happiness < 0)
+        if (health <= 0 || hunger <= 0 || happiness <= 0)
         {
             die();
         }
@@ -500,6 +502,9 @@ public class PetGlobal {
         if(!ignoreTime)
             saveTimeStamp = System.DateTime.Now.Ticks;
 
+        if (petUnlocksData == null)
+            petUnlocksData = new PetUnlocksData();
+
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/AugotchiSave.gd");
         bf.Serialize(file, 
@@ -515,6 +520,7 @@ public class PetGlobal {
                 currency, 
                 markerSet, 
                 petVisualData, 
+                petUnlocksData,
                 isDead, 
                 reviveProgress,
                 xp,
@@ -529,8 +535,6 @@ public class PetGlobal {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/AugotchiSave.gd", FileMode.Open);
             PetGlobal pg = (PetGlobal) bf.Deserialize(file);
-
-            Debug.LogWarning("Happiness on load: " + pg.happiness);
 
             hunger = pg.hunger;
             happiness = pg.happiness;
@@ -550,6 +554,27 @@ public class PetGlobal {
 
             petVisualData = pg.petVisualData;
 
+            petUnlocksData = pg.petUnlocksData;
+            if(petUnlocksData.unlockedHats.Length < PetUnlocksData.hatCounts.Length)
+            {
+                int[] expandedArray = new int[PetUnlocksData.hatCounts.Length];
+                for(int i = 0; i < petUnlocksData.unlockedHats.Length; i++)
+                {
+                    expandedArray[i] = petUnlocksData.unlockedHats[i];
+                }
+                petUnlocksData.unlockedHats = expandedArray;
+            }
+
+            if (petUnlocksData.unlockedFaces.Length < PetUnlocksData.faceCounts.Length)
+            {
+                int[] expandedArray = new int[PetUnlocksData.faceCounts.Length];
+                for (int i = 0; i < petUnlocksData.unlockedFaces.Length; i++)
+                {
+                    expandedArray[i] = petUnlocksData.unlockedFaces[i];
+                }
+                petUnlocksData.unlockedFaces = expandedArray;
+            }
+
             isDead = pg.isDead;
             reviveProgress = pg.reviveProgress;
 
@@ -558,8 +583,6 @@ public class PetGlobal {
 
             if (level == 0)
                 level = 1;
-
-            Debug.LogWarning("LastSaveTimeStamp: " + saveTimeStamp );
 
             file.Close();
 
@@ -618,6 +641,51 @@ public class PetGlobal {
         }
     }
 
+    public PetUnlocksData LoadUnlocks()
+    {
+        if (File.Exists(Application.persistentDataPath + "/AugotchiSave.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/AugotchiSave.gd", FileMode.Open);
+            PetGlobal pg = (PetGlobal)bf.Deserialize(file);
+
+            file.Close();
+
+
+
+            if (pg.petUnlocksData != null)
+            {
+                if (pg.petUnlocksData.unlockedHats.Length < PetUnlocksData.hatCounts.Length)
+                {
+                    int[] expandedArray = new int[PetUnlocksData.hatCounts.Length];
+                    for (int i = 0; i < pg.petUnlocksData.unlockedHats.Length; i++)
+                    {
+                        expandedArray[i] = pg.petUnlocksData.unlockedHats[i];
+                    }
+                    pg.petUnlocksData.unlockedHats = expandedArray;
+                }
+
+                if (pg.petUnlocksData.unlockedFaces.Length < PetUnlocksData.faceCounts.Length)
+                {
+                    int[] expandedArray = new int[PetUnlocksData.faceCounts.Length];
+                    for (int i = 0; i < pg.petUnlocksData.unlockedFaces.Length; i++)
+                    {
+                        expandedArray[i] = pg.petUnlocksData.unlockedFaces[i];
+                    }
+                    pg.petUnlocksData.unlockedFaces = expandedArray;
+                }
+
+                return pg.petUnlocksData;
+            }
+            else
+                return new PetUnlocksData();
+        }
+        else
+        {
+            return new PetUnlocksData();
+        }
+    }
+
     public void SaveVisuals(PetVisualData petVisualData)
     {
         if (File.Exists(Application.persistentDataPath + "/AugotchiSave.gd"))
@@ -641,6 +709,8 @@ public class PetGlobal {
             lastPettingTimeStamp = pg.lastPettingTimeStamp;
 
             markerSet = pg.markerSet;
+
+            petUnlocksData = pg.petUnlocksData;
 
             isDead = pg.isDead;
             reviveProgress = pg.reviveProgress;
@@ -690,5 +760,37 @@ public class PetGlobal {
         int xpRequired = (int) (level * level / 0.05f);
         int xpReuired = xpRequired + (xpRequired % 100);
         return xpRequired;
+    }
+
+    public bool unlockHat(int hatIndex, int hatVariation)
+    {
+        bool categoryHadEntries = petUnlocksData.hatCategoryHasUnlocks(hatIndex);
+        int currentEquippedIndex = petUnlocksData.currentEquippedHatAbsoluteIndex(petVisualData.hatIndex);
+        bool isNewHat = petUnlocksData.unlockHat(hatIndex, hatVariation);
+        if (isNewHat)
+        {
+            if(hatIndex < currentEquippedIndex && !categoryHadEntries)
+            {
+                petVisualData.hatIndex++;
+            }
+        }
+
+        return isNewHat;
+    }
+
+    public bool unlockFace(int faceIndex, int faceVariation)
+    {
+        bool categoryHadEntries = petUnlocksData.faceCategoryHasUnlocks(faceIndex);
+        int currentEquippedIndex = petUnlocksData.currentEquippedFaceAbsoluteIndex(petVisualData.faceIndex);
+        bool isNewFace = petUnlocksData.unlockFace(faceIndex, faceVariation);
+        if (isNewFace)
+        {
+            if (faceIndex < currentEquippedIndex && !categoryHadEntries)
+            {
+                petVisualData.faceIndex++;
+            }
+        }
+
+        return isNewFace;
     }
 }

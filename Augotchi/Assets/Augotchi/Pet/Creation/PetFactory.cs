@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PetFactory : MonoBehaviour {
 
@@ -19,7 +20,6 @@ public class PetFactory : MonoBehaviour {
 
     public Mesh[] ears;
     public Mesh[] tails;
-
     
     public TextureList[] eyes;
 
@@ -49,6 +49,7 @@ public class PetFactory : MonoBehaviour {
     {
         PetGlobal pg = new PetGlobal();
 
+        filterUnlocks(pg.LoadUnlocks());
         buildPet(pg.LoadVisuals());
     }
 
@@ -94,14 +95,30 @@ public class PetFactory : MonoBehaviour {
         foreach (Transform t in hatParent)
             Destroy(t.gameObject);
 
-        GameObject hat = (GameObject) Instantiate(hats[petVisualData.hatIndex].gameObjects[petVisualData.hatVariation]);
-        hat.transform.SetParent(hatParent, false);
+        try
+        {
+            GameObject hat = (GameObject)Instantiate(hats[petVisualData.hatIndex].gameObjects[petVisualData.hatVariation]);
+            hat.transform.SetParent(hatParent, false);
+        }
+        catch (IndexOutOfRangeException e)
+        {
+            petVisualData.hatIndex = 0;
+            petVisualData.hatVariation = 0;
+        }
 
         foreach (Transform t in faceParent)
             Destroy(t.gameObject);
 
-        GameObject face = (GameObject)Instantiate(faces[petVisualData.faceIndex].gameObjects[petVisualData.faceVariations]);
-        face.transform.SetParent(faceParent, false);
+        try
+        {
+            GameObject face = (GameObject)Instantiate(faces[petVisualData.faceIndex].gameObjects[petVisualData.faceVariations]);
+            face.transform.SetParent(faceParent, false);
+        }catch(IndexOutOfRangeException e)
+        {
+            petVisualData.faceIndex = 0;
+            petVisualData.faceVariations = 0;
+        }
+        
     }
 
     public void setDeadEyes()
@@ -112,5 +129,75 @@ public class PetFactory : MonoBehaviour {
         Material[] mats = new Material[] { baseRenderer.materials[0], baseRenderer.materials[1], baseRenderer.materials[2], eyesMat };
 
         baseRenderer.materials = mats;
+    }
+
+    private void filterUnlocks(PetUnlocksData pud)
+    {
+        filterUnlockedHats(pud);
+        filterUnlockedFaces(pud);
+    }
+
+    private void filterUnlockedHats(PetUnlocksData pud)
+    {
+        GameObjectList[] unlockedHats = new GameObjectList[hats.Length];
+        ArrayList extractedHats = new ArrayList();
+
+        unlockedHats[0] = hats[0];
+
+        for (int i = 1; i < hats.Length; i++)
+        {
+            unlockedHats[i] = new GameObjectList();
+            extractedHats.Clear();
+
+            for (int j = 0; j < hats[i].gameObjects.Length; j++)
+            {
+                if (pud.isHatUnlocked(i, j))
+                {
+                    extractedHats.Add(hats[i].gameObjects[j]);
+                }
+            }
+
+            unlockedHats[i].gameObjects = new GameObject[extractedHats.Count];
+            for (int k = 0; k < extractedHats.Count; k++)
+            {
+                unlockedHats[i].gameObjects[k] = (GameObject)extractedHats[k];
+            }
+        }
+
+        unlockedHats = unlockedHats.Where(hl => hl.gameObjects.Length > 0).ToArray();
+
+        hats = unlockedHats;
+    }
+
+    private void filterUnlockedFaces(PetUnlocksData pud)
+    {
+        GameObjectList[] unlockedFaces = new GameObjectList[faces.Length];
+        ArrayList extractedFaces = new ArrayList();
+
+        unlockedFaces[0] = faces[0];
+
+        for (int i = 1; i < faces.Length; i++)
+        {
+            unlockedFaces[i] = new GameObjectList();
+            extractedFaces.Clear();
+
+            for (int j = 0; j < faces[i].gameObjects.Length; j++)
+            {
+                if (pud.isFaceUnlocked(i, j))
+                {
+                    extractedFaces.Add(faces[i].gameObjects[j]);
+                }
+            }
+
+            unlockedFaces[i].gameObjects = new GameObject[extractedFaces.Count];
+            for (int k = 0; k < extractedFaces.Count; k++)
+            {
+                unlockedFaces[i].gameObjects[k] = (GameObject) extractedFaces[k];
+            }
+        }
+
+        unlockedFaces = unlockedFaces.Where(fl => fl.gameObjects.Length > 0).ToArray();
+
+        faces = unlockedFaces;
     }
 }

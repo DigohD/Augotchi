@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,11 +22,34 @@ public class ApparelUI : MonoBehaviour {
     void Start () {
         GameObject petKeeper = GameObject.FindGameObjectWithTag("PetKeeper");
 
-        hatPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.hatIndex + 1) + "/" + petFactory.hats.Length;
-        hatPicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.hatVariation + 1) + "/" + petFactory.hats[pvd.hatIndex].gameObjects.Length;
+        try
+        {
+            hatPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.hatIndex + 1) + "/" + petFactory.hats.Length;
+            hatPicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.hatVariation + 1) + "/" + petFactory.hats[pvd.hatIndex].gameObjects.Length;
+        }
+        catch (IndexOutOfRangeException e)
+        {
+            pvd.hatIndex = 0;
+            pvd.hatVariation = 0;
 
-        facePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.faceIndex + 1) + "/" + petFactory.faces.Length;
-        facePicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.faceVariations + 1) + "/" + petFactory.faces[pvd.faceIndex].gameObjects.Length;
+            hatPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.hatIndex + 1) + "/" + petFactory.hats.Length;
+            hatPicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.hatVariation + 1) + "/" + petFactory.hats[pvd.hatIndex].gameObjects.Length;
+        }
+
+        try
+        {
+            facePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.faceIndex + 1) + "/" + petFactory.faces.Length;
+            facePicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.faceVariations + 1) + "/" + petFactory.faces[pvd.faceIndex].gameObjects.Length;
+        }
+        catch (IndexOutOfRangeException e)
+        {
+            pvd.faceIndex = 0;
+            pvd.faceVariations = 0;
+
+            facePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.faceIndex + 1) + "/" + petFactory.faces.Length;
+            facePicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.faceVariations + 1) + "/" + petFactory.faces[pvd.faceIndex].gameObjects.Length;
+        }
+        
 
         stage = 0;
     }
@@ -43,6 +67,13 @@ public class ApparelUI : MonoBehaviour {
     {
         hatPicker.SetActive(false);
         facePicker.SetActive(false);
+
+        hatPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.hatIndex + 1) + "/" + petFactory.hats.Length;
+        hatPicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.hatVariation + 1) + "/" + petFactory.hats[pvd.hatIndex].gameObjects.Length;
+
+        facePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.faceIndex + 1) + "/" + petFactory.faces.Length;
+        facePicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.faceVariations + 1) + "/" + petFactory.faces[pvd.faceIndex].gameObjects.Length;
+
 
         switch (stage)
         {
@@ -149,8 +180,8 @@ public class ApparelUI : MonoBehaviour {
 
         pvd.faceVariations = 0;
 
-        hatPicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.faceIndex + 1) + "/" + petFactory.faces.Length;
-        hatPicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.faceVariations + 1) + "/" + petFactory.faces[pvd.faceIndex].gameObjects.Length;
+        facePicker.transform.GetChild(1).GetComponent<Text>().text = (pvd.faceIndex + 1) + "/" + petFactory.faces.Length;
+        facePicker.transform.GetChild(6).GetComponent<Text>().text = (pvd.faceVariations + 1) + "/" + petFactory.faces[pvd.faceIndex].gameObjects.Length;
 
         GetComponent<AudioSource>().PlayOneShot(A_arrowClick);
 

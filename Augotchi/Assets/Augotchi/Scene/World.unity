@@ -3291,6 +3291,23 @@ MonoBehaviour:
     - {fileID: 1108917119837992, guid: 411f50ec86185be47bc3da9e83beec0d, type: 2}
     - {fileID: 1084443920759714, guid: f41d4d21b59227f49befbd4076f22fa4, type: 2}
     - {fileID: 1101127432843356, guid: 0ecc9de3df70e264090005219e1944c6, type: 2}
+  - gameObjects:
+    - {fileID: 1960567434065960, guid: 1a22e7736efb59e48af8cb713425dd01, type: 2}
+    - {fileID: 1878967127031852, guid: cda2c1028cd3170439d3147eb56c476a, type: 2}
+    - {fileID: 1839872925918186, guid: 19d31978d6d76854cab3b1f3e4233b6a, type: 2}
+    - {fileID: 1291824505601386, guid: 144e18e5ab532dd40909437ea4828723, type: 2}
+    - {fileID: 1890063839648262, guid: 06116b5971197894294878ab78cdef09, type: 2}
+    - {fileID: 1723997522193028, guid: cb522259dab6e8343a92df0f43ae8290, type: 2}
+  - gameObjects:
+    - {fileID: 1524614831122020, guid: a0292458fdd10404f85b0bcbaa94ed00, type: 2}
+    - {fileID: 1383966017515124, guid: 660a8a3acfb5c1840aa9658a9341fc3e, type: 2}
+    - {fileID: 1017023116589650, guid: 93dad794dc91d874ba87c1b758e227aa, type: 2}
+    - {fileID: 1253104981051550, guid: dffcbe80b451b2b4fa56562c3cb75e46, type: 2}
+  - gameObjects:
+    - {fileID: 1052488740632106, guid: 8d2f2d79d4608f64895be34f18012ca4, type: 2}
+    - {fileID: 1219847081974688, guid: f73f7826e9c40b34da00ecf227a481d7, type: 2}
+    - {fileID: 1189344763961732, guid: 46125a39438057941ab583ba4be66816, type: 2}
+    - {fileID: 1203598619101816, guid: f6da2487692791d48a11c6e96a3dc67b, type: 2}
   faceParent: {fileID: 906924421}
   faces:
   - gameObjects:
@@ -7313,6 +7330,8 @@ MonoBehaviour:
   P_MarkerPark: {fileID: 1227752901290604, guid: 15e4fa416de6ed24b91ae08253bcd7b0,
     type: 2}
   P_MarkerRevive: {fileID: 1719196024077404, guid: 27071ef9b43713f4a930c0267fbe2578,
+    type: 2}
+  P_MarkerCrate: {fileID: 1840416088500616, guid: 584c8539b7c4d8d479075c6fa428080a,
     type: 2}
   P_RewardText: {fileID: 1052254352882838, guid: 3a2de493f2dd67e428d726e7d793f9c8,
     type: 2}
