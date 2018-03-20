@@ -26,6 +26,7 @@ public class TestPetToDatabase : MonoBehaviour {
     // Use this for initialization
     void Start () {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://augotchi.firebaseio.com/");
+        
 
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         Debug.Log("Unique ID");
