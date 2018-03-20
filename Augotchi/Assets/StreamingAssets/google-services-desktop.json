@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1002462392139",
+    "firebase_url": "https://augotchi.firebaseio.com",
+    "project_id": "augotchi",
+    "storage_bucket": "augotchi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002462392139:android:6ef598a69b9ff9c3",
+        "android_client_info": {
+          "package_name": "com.eliasson.simon.augotchi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002462392139-al00bo75u93pgv2gr5efh78leqk123u6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9i5Cx5q8K3xjaOMZv0q65QQIQx6OvziY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

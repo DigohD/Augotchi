@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Firebase.Analytics;
 
 public class PetKeeper : MonoBehaviour {
 
@@ -57,6 +58,8 @@ public class PetKeeper : MonoBehaviour {
         }
 
         PlayerScript.steps = this.steps;
+
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("Steplogger","Step", 1);
     }
 
 }
