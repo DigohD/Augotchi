@@ -29,7 +29,7 @@ public class PetCreationUI : MonoBehaviour {
 
     public ApparelUI apparelUI;
 
-    private void Start()
+    public void Start()
     {
         PetGlobal pg;
         GameObject petKeeper = GameObject.FindGameObjectWithTag("PetKeeper");

@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Test/Vuforia Test.unity
     guid: f9dcde31d618bd447ad4bd1f55a571fb
   - enabled: 1
-    path: Assets/Augotchi/Scene/Creation.unity
-    guid: bb642a8bbf4a2a647962a23484781df3
-  - enabled: 1
     path: Assets/Augotchi/Scene/World.unity
     guid: a629b378a27065147b2d06891b6d79cb
+  - enabled: 1
+    path: Assets/Augotchi/Scene/Creation.unity
+    guid: bb642a8bbf4a2a647962a23484781df3
   - enabled: 1
     path: Assets/Augotchi/Scene/Home.unity
     guid: 777f5275e8a74a64dbd988eafdca99fc

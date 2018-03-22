@@ -6,7 +6,7 @@ public class KillPetButton : MonoBehaviour {
 
     public void onClick()
     {
-        PetKeeper.pet.die();
+        PetKeeper.pet.addReviveProgress();
         
     }
 }

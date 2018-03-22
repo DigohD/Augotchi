@@ -11,6 +11,8 @@ public class MarkerFood : Marker {
 
     protected override void executeEffect()
     {
+        PetKeeper.pet.markersFood++;
+
         int amount = Random.Range(3, 6);
         for(int i = 0; i < amount; i++)
         {

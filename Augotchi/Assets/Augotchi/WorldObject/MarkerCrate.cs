@@ -6,6 +6,8 @@ public class MarkerCrate : Marker {
 
     protected override void executeEffect()
     {
+        PetKeeper.pet.markersCrate++;
+
         switch (Random.Range(0, 2))
         {
             case 0:

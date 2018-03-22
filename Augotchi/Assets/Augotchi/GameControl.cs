@@ -9,6 +9,8 @@ public class GameControl : MonoBehaviour {
 
     public static bool isZooming;
 
+    public static bool firstStartup = false;
+
     public static bool markerPicked = true;
     public bool sceneLoaded = false;
 
@@ -22,6 +24,8 @@ public class GameControl : MonoBehaviour {
 
     public GameObject P_RewardText;
     public GameObject P_MarkerPoof;
+
+    public GameObject Introduction;
 
     GameObject player;
 
@@ -49,6 +53,12 @@ public class GameControl : MonoBehaviour {
         augotchiMap = GameObject.FindGameObjectWithTag("AugotchiMap");
 
         Application.targetFrameRate = 30;
+
+        if (firstStartup)
+        {
+            Introduction.SetActive(true);
+            firstStartup = false;
+        }
     }
 	
 	void Update () {

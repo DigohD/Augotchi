@@ -16,6 +16,8 @@ public class CreationButton : MonoBehaviour {
     public void onClick()
     {
         GameState.mapZoom = GameObject.FindGameObjectWithTag("Map").transform.localScale.x;
+        EditModeUI.isClothingMode = true;
+
         SceneManager.LoadScene("Creation");
     }
 }

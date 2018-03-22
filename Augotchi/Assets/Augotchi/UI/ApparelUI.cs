@@ -19,7 +19,7 @@ public class ApparelUI : MonoBehaviour {
     public GameObject facePicker;
 
     // Use this for initialization
-    void Start () {
+    public void Start () {
         GameObject petKeeper = GameObject.FindGameObjectWithTag("PetKeeper");
 
         try

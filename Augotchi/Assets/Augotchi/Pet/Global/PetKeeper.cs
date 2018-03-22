@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Analytics;
+using UnityEngine.SceneManagement;
 
 public class PetKeeper : MonoBehaviour {
 
@@ -23,10 +24,21 @@ public class PetKeeper : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-        pet = new PetGlobal();
-        pet.Load();
+        Debug.LogWarning("Init PetKeeper");
 
         pedometer = new Pedometer(this.OnStep);
+
+        pet = new PetGlobal();
+
+        if (!pet.Load() || pet.petVisualData == null)
+        {
+            SceneManager.LoadScene("Creation");
+        }
+        else
+        {
+            pet.startAppCount++;
+            pet.Save(false);
+        }
     }
 
     void Update()
@@ -53,11 +65,15 @@ public class PetKeeper : MonoBehaviour {
         {
             this.steps = 0;
             PetKeeper.pet.hundredSteps();
+            
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().queueRewardText("Pet Health +2", new Color(0.35f, 1f, 0.45f));
             PetKeeper.pet.grantXP(25);
         }
 
         PlayerScript.steps = this.steps;
+
+        PetKeeper.pet.stepCounter++;
+        PetKeeper.pet.Save(false);
 
         Firebase.Analytics.FirebaseAnalytics.LogEvent("Steplogger","Step", 1);
     }

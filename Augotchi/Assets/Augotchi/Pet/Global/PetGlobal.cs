@@ -19,9 +19,23 @@ public class PetGlobal {
     public float happiness;
     public float health;
 
+    public int markersCurrency;
+    public int markersFood;
+    public int markersCrate;
+    public int markersRevive;
+
+    public int petDeathCount;
+    public int petRevivalCount;
+
+    public int pettingCount;
+
     public int candy;
     public int food;
     public int vegetables;
+
+    public int candyFed;
+    public int foodFed;
+    public int vegetableFed;
 
     public int currency;
 
@@ -42,7 +56,14 @@ public class PetGlobal {
     public int xp;
     public int level = 1;
 
+    public int stepCounter;
+    public int activeTicks;
+    public int inactiveTicks;
 
+    public int startAppCount;
+
+    public int currentAliveTicks;
+    public int longestAliveTicks;
 
     public PetGlobal()
     {
@@ -76,7 +97,23 @@ public class PetGlobal {
         bool isDead, 
         int reviveProgress,
         int xp,
-        int level
+        int level,
+        int markersCurrency,
+        int markersFood,
+        int markersCrate,
+        int markersRevive,
+        int petDeathCount,
+        int pettingCount,
+        int candyFed,
+        int foodFed,
+        int vegetableFed,
+        int startAppCount,
+        int stepCounter,
+        int activeTicks,
+        int inactiveTicks,
+        int petRevivalCount,
+        int currentAliveTicks,
+        int longestAliveTicks
         )
     {
         this.hunger = hunger;
@@ -103,12 +140,39 @@ public class PetGlobal {
 
         this.xp = xp;
         this.level = level;
+
+        this.markersCurrency = markersCurrency;
+        this.markersFood = markersFood;
+        this.markersCrate = markersCrate;
+        this.markersRevive = markersRevive;
+
+        this.petDeathCount = petDeathCount;
+
+        this.pettingCount = pettingCount;
+
+        this.candyFed = candyFed;
+        this.foodFed = foodFed;
+        this.vegetableFed = vegetableFed;
+
+        this.startAppCount = startAppCount;
+
+        this.stepCounter = stepCounter;
+        this.activeTicks = activeTicks;
+        this.inactiveTicks = inactiveTicks;
+
+        this.petRevivalCount = petRevivalCount;
+
+        this.currentAliveTicks = currentAliveTicks;
+        this.longestAliveTicks = longestAliveTicks;
     }
 
     public void degenerateTick()
     {
         if (isDead)
+        {
+            Save(false);
             return;
+        }
 
         long nowDT = System.DateTime.Now.Ticks;
         long diff = nowDT - saveTimeStamp;
@@ -120,8 +184,10 @@ public class PetGlobal {
         for (int i = 0; i < ts.Days; i++)
         {
             degenerateDaily();
+            inactiveTicks += (6*60*24);
+            currentAliveTicks += (6 * 60 * 24);
 
-            if(happiness > 75)
+            if (happiness > 75)
             {
                 xpToReceive += 1 * 6 * 60 * 24;
             }
@@ -130,6 +196,8 @@ public class PetGlobal {
         for (int i = 0; i < ts.Hours; i++)
         {
             degenerateHourly();
+            inactiveTicks += (6 * 60);
+            currentAliveTicks += (6 * 60);
 
             if (happiness > 75)
             {
@@ -142,6 +210,9 @@ public class PetGlobal {
             for (int j = 0; j < 6; j++)
                 degenerate();
 
+            inactiveTicks += 6;
+            currentAliveTicks += 6;
+
             if (happiness > 75)
             {
                 xpToReceive += 1 * 6;
@@ -151,6 +222,9 @@ public class PetGlobal {
         for(int i = 0; i < (ts.Seconds / 10) - 1; i++)
         {
             degenerate();
+
+            inactiveTicks++;
+            currentAliveTicks++;
 
             if (happiness > 75)
             {
@@ -173,6 +247,14 @@ public class PetGlobal {
             die();
         }
 
+        activeTicks++;
+        currentAliveTicks++;
+
+        if(currentAliveTicks > longestAliveTicks)
+        {
+            longestAliveTicks = currentAliveTicks;
+        }
+
         Save(false);
     }
 
@@ -180,6 +262,10 @@ public class PetGlobal {
     {
         isDead = true;
         reviveProgress = 0;
+
+        petDeathCount++;
+
+        currentAliveTicks = 0;
 
         hunger = 0;
         happiness = 0;
@@ -195,12 +281,16 @@ public class PetGlobal {
         {
             revive();
         }
+
+        Save(false);
     }
 
     private void revive()
     {
         isDead = false;
         reviveProgress = 0;
+
+        petRevivalCount++;
 
         hunger = 25;
         happiness = 25;
@@ -366,6 +456,7 @@ public class PetGlobal {
         hunger += 5f;
 
         candy--;
+        candyFed++;
 
         Save(false);
     }
@@ -381,6 +472,7 @@ public class PetGlobal {
         hunger += 25f;
 
         food--;
+        foodFed++;
 
         Save(false);
     }
@@ -398,6 +490,7 @@ public class PetGlobal {
         happiness -= 2.5f;
 
         vegetables--;
+        vegetableFed++;
 
         Save(false);
     }
@@ -446,6 +539,8 @@ public class PetGlobal {
             lastPettingTimeStamp = nowDT;
 
             happiness += 5f;
+
+            pettingCount++;
 
             Save(false);
         }
@@ -524,11 +619,30 @@ public class PetGlobal {
                 isDead, 
                 reviveProgress,
                 xp,
-                level));
+                level,
+                markersCurrency,
+                markersFood,
+                markersCrate,
+                markersRevive,
+                petDeathCount,
+                pettingCount,
+                candyFed,
+                foodFed,
+                vegetableFed,
+                startAppCount,
+                stepCounter,
+                activeTicks,
+                inactiveTicks,
+                petRevivalCount,
+                currentAliveTicks,
+                longestAliveTicks
+            ));
         file.Close();
+
+        TestPetToDatabase.postData = true;
     }
 
-    public void Load()
+    public bool Load()
     {
         if (File.Exists(Application.persistentDataPath + "/AugotchiSave.gd"))
         {
@@ -584,19 +698,48 @@ public class PetGlobal {
             if (level == 0)
                 level = 1;
 
+            markersCurrency = pg.markersCurrency;
+            markersFood = pg.markersFood;
+            markersCrate = pg.markersCrate;
+            markersRevive = pg.markersRevive;
+
+            petDeathCount = pg.petDeathCount;
+            petRevivalCount = pg.petRevivalCount;
+
+            pettingCount = pg.pettingCount;
+            candyFed = pg.candyFed;
+            foodFed = pg.foodFed;
+            vegetableFed = pg.vegetableFed;
+
+            startAppCount = pg.startAppCount;
+
+            stepCounter = pg.stepCounter;
+
+            activeTicks = pg.activeTicks;
+            inactiveTicks = pg.inactiveTicks;
+
+            currentAliveTicks = pg.currentAliveTicks;
+            longestAliveTicks = pg.longestAliveTicks;
+
             file.Close();
 
+            TestPetToDatabase.postData = true;
+
             degenerateTick();
+
+            return true;
         }
         else
         {
             hunger = 75;
-            happiness = 50;
-            health = 50;
+            health = 75;
+            happiness = 75;
 
             level = 1;
 
             Save(false);
+
+            return false;
         }
     }
 
@@ -718,6 +861,29 @@ public class PetGlobal {
             xp = pg.xp;
             level = pg.level;
 
+            markersCurrency = pg.markersCurrency;
+            markersFood = pg.markersFood;
+            markersCrate = pg.markersCrate;
+            markersRevive = pg.markersRevive;
+
+            petDeathCount = pg.petDeathCount;
+            petRevivalCount = pg.petRevivalCount;
+
+            pettingCount = pg.pettingCount;
+            candyFed = pg.candyFed;
+            foodFed = pg.foodFed;
+            vegetableFed = pg.vegetableFed;
+
+            startAppCount = pg.startAppCount;
+
+            stepCounter = pg.stepCounter;
+
+            activeTicks = pg.activeTicks;
+            inactiveTicks = pg.inactiveTicks;
+
+            currentAliveTicks = pg.currentAliveTicks;
+            longestAliveTicks = pg.longestAliveTicks;
+
             file.Close();
 
             this.petVisualData = petVisualData;
@@ -729,6 +895,8 @@ public class PetGlobal {
             hunger = 75;
             happiness = 50;
             health = 50;
+
+            level = 1;
 
             this.petVisualData = petVisualData;
 
@@ -757,8 +925,8 @@ public class PetGlobal {
                 return 400;
         }
 
-        int xpRequired = (int) (level * level / 0.05f);
-        int xpReuired = xpRequired + (xpRequired % 100);
+        int xpRequired = (int) (level * level * 20);
+        xpRequired = xpRequired + (100 - (xpRequired % 100));
         return xpRequired;
     }
 
