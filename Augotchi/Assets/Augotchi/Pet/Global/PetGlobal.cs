@@ -65,6 +65,8 @@ public class PetGlobal {
     public int currentAliveTicks;
     public int longestAliveTicks;
 
+    public string name;
+
     public PetGlobal()
     {
         
@@ -113,7 +115,8 @@ public class PetGlobal {
         int inactiveTicks,
         int petRevivalCount,
         int currentAliveTicks,
-        int longestAliveTicks
+        int longestAliveTicks,
+        string name
         )
     {
         this.hunger = hunger;
@@ -164,6 +167,8 @@ public class PetGlobal {
 
         this.currentAliveTicks = currentAliveTicks;
         this.longestAliveTicks = longestAliveTicks;
+
+        this.name = name;
     }
 
     public void degenerateTick()
@@ -637,7 +642,8 @@ public class PetGlobal {
                 inactiveTicks,
                 petRevivalCount,
                 currentAliveTicks,
-                longestAliveTicks
+                longestAliveTicks,
+                name
             ));
         file.Close();
 
@@ -722,6 +728,10 @@ public class PetGlobal {
 
             currentAliveTicks = pg.currentAliveTicks;
             longestAliveTicks = pg.longestAliveTicks;
+
+            name = pg.name;
+
+            Debug.LogWarning(name);
 
             file.Close();
 
@@ -885,6 +895,8 @@ public class PetGlobal {
 
             currentAliveTicks = pg.currentAliveTicks;
             longestAliveTicks = pg.longestAliveTicks;
+
+            name = pg.name;
 
             file.Close();
 

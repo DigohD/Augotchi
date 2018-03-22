@@ -30,7 +30,7 @@ public class PetKeeper : MonoBehaviour {
 
         pet = new PetGlobal();
 
-        if (!pet.Load() || pet.petVisualData == null)
+        if (!pet.Load() || pet.petVisualData == null || pet.name == null || pet.name.Equals(""))
         {
             SceneManager.LoadScene("Creation");
         }

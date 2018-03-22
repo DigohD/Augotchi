@@ -20,11 +20,11 @@ public class StatsOverviewUI : MonoBehaviour {
     void FixedUpdate () {
         int aliveSeconds = PetKeeper.pet.currentAliveTicks * 10;
         TimeSpan ts = new TimeSpan(aliveSeconds * TimeSpan.TicksPerSecond);
-        timeAlive.text = ts.Days + "d " + ts.Hours + "h " + ts.Seconds + "s";
+        timeAlive.text = ts.Days + "d " + ts.Hours + "h " + ts.Minutes + "m " + ts.Seconds + "s";
 
         int streakSeconds = PetKeeper.pet.longestAliveTicks * 10;
         ts = new TimeSpan(streakSeconds * TimeSpan.TicksPerSecond);
-        longestStreak.text = ts.Days + "d " + ts.Hours + "h " + ts.Seconds + "s";
+        longestStreak.text = ts.Days + "d " + ts.Hours + "h " + ts.Minutes + "m " + ts.Seconds + "s";
 
         passOutCount.text = "" + PetKeeper.pet.petDeathCount;
 
