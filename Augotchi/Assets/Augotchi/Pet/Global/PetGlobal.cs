@@ -580,6 +580,8 @@ public class PetGlobal {
             level++;
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().queueRewardText("Level Up!", GameControl.LevelUpColor);
             nextLevelXP = xpToNextLevel(level);
+
+            addRandomLootItem();
         }
 
         Save(false);
@@ -960,5 +962,59 @@ public class PetGlobal {
         }
 
         return isNewFace;
+    }
+
+    public void addRandomLootItem()
+    {
+        GameObject gControl = GameObject.FindGameObjectWithTag("GameController");
+        GameControl gc = null;
+        if (gControl)
+        {
+            gc = gControl.GetComponent<GameControl>();
+        }
+
+        switch (UnityEngine.Random.Range(0, 2))
+        {
+            case 0:
+                int hatIndex = UnityEngine.Random.Range(1, petUnlocksData.unlockedHats.Length);
+                int hatsVariationIndex = UnityEngine.Random.Range(0, PetUnlocksData.hatCounts[hatIndex]);
+                bool isNewHat = unlockHat(hatIndex, hatsVariationIndex);
+                if (isNewHat)
+                {
+                    if(gc != null)
+                        gc.queueRewardText("New Hat!", new Color(0, 0.8f, 0.7f));
+                }
+                else
+                {
+                    int money = (UnityEngine.Random.Range(5, 10) * 10);
+                    giveCurrency(money);
+                    if (gc != null)
+                    {
+                        gc.queueRewardText("Duplicate Hat...", new Color(0, 0.8f, 0.7f));
+                        gc.queueRewardText("Coins: +" + money, new Color(1, 0.85f, 0.2f));
+                    }
+                }
+                break;
+            case 1:
+                int faceIndex = UnityEngine.Random.Range(1, petUnlocksData.unlockedFaces.Length);
+                int faceVariationIndex = UnityEngine.Random.Range(0, PetUnlocksData.faceCounts[faceIndex]);
+                bool isNewFace = unlockFace(faceIndex, faceVariationIndex);
+                if (isNewFace)
+                {
+                    if(gc != null)
+                        gc.queueRewardText("New Facial\nFeature!", new Color(0, 0.8f, 0.7f));
+                }
+                else
+                {
+                    int money = (UnityEngine.Random.Range(5, 10) * 10);
+                    PetKeeper.pet.giveCurrency(money);
+                    if (gc != null)
+                    {
+                        gc.queueRewardText("Duplicate Facial\nfeature...", new Color(0, 0.8f, 0.7f));
+                        gc.queueRewardText("Coins: +" + money, new Color(1, 0.85f, 0.2f));
+                    }
+                }
+                break;
+        }
     }
 }

@@ -164,23 +164,61 @@ public class GameControl : MonoBehaviour {
     private void generateNewMarkers()
     {
         Marker.MarkerType[] newMarkers = new Marker.MarkerType[8];
-        for (int i = 0; i < 8; i++)
-        {
-            int rnd = Random.Range(0, 1000);
 
-            if(rnd < 600)
+        if (PetKeeper.pet.happiness < 25)
+        {
+            for (int i = 0; i < 8; i++)
             {
-                newMarkers[i] = Marker.MarkerType.CURRENCY;
-            }
-            else if(rnd < 925)
-            {
-                newMarkers[i] = Marker.MarkerType.FOOD;
-            }
-            else
-            {
-                newMarkers[i] = Marker.MarkerType.CRATE;
+                int rnd = Random.Range(0, 1000);
+                if (rnd < 350)
+                {
+                    newMarkers[i] = Marker.MarkerType.CURRENCY;
+                }
+                else
+                {
+                    newMarkers[i] = Marker.MarkerType.FOOD;
+                }
             }
         }
+        else if(PetKeeper.pet.happiness < 75)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                int rnd = Random.Range(0, 1000);
+                if (rnd < 450)
+                {
+                    newMarkers[i] = Marker.MarkerType.CURRENCY;
+                }
+                else if (rnd < 925)
+                {
+                    newMarkers[i] = Marker.MarkerType.FOOD;
+                }
+                else
+                {
+                    newMarkers[i] = Marker.MarkerType.CRATE;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                int rnd = Random.Range(0, 1000);
+                if (rnd < 450)
+                {
+                    newMarkers[i] = Marker.MarkerType.CURRENCY;
+                }
+                else if (rnd < 850)
+                {
+                    newMarkers[i] = Marker.MarkerType.FOOD;
+                }
+                else
+                {
+                    newMarkers[i] = Marker.MarkerType.CRATE;
+                }
+            }
+        }
+        
 
         PetKeeper.pet.setMarkers(newMarkers);
     }
