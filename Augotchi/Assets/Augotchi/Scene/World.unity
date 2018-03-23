@@ -2469,8 +2469,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Currency markers grants you an ammount of Augotchi coins (    ), while
-    not doing anything at the moment, they will be valuable in the future! \n\nAdditionally,
+  m_Text: "Currency markers grants you an amount of Augotchi coins (    ), while not
+    doing anything at the moment, they will be valuable in the future! \n\nAdditionally,
     the marker grants you 100 experience.\n"
 --- !u!222 &169965330
 CanvasRenderer:
@@ -5455,7 +5455,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '
 
-    Increases hunger by a lot.'
+    Greatly improves hunger.'
 --- !u!222 &516827502
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7884,7 +7884,7 @@ MonoBehaviour:
     (xp). Keeping the pet happy will passively grant experience, so make sure it is
     taken care of!\n\nExperience in turn grants levels. And every time you level up
     you will unlock a cosmetic item for your pet! \n\nCosmetic items can be equipped
-    and  changed in the wardrobe(     ).\n\n"
+    and  changed in the wardrobe (     ).\n\n"
 --- !u!222 &782605558
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8432,7 +8432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 970, y: 2037.308}
+  m_AnchoredPosition: {x: 781, y: 2037.308}
   m_SizeDelta: {x: 50, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &823543449
@@ -8639,7 +8639,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '
 
-    Increases hunger, increases health but reduces happiness.'
+    Improves hunger, increases health but reduces happiness.'
 --- !u!222 &833637098
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10684,7 +10684,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '
 
-    Increases hunger, increases happiness but reduces health.'
+    Improves hunger, increases happiness but reduces health.'
 --- !u!222 &1084124881
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12395,7 +12395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 501.5, y: 73.7}
+  m_AnchoredPosition: {x: 503.5, y: 73.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348688134
