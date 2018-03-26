@@ -32,6 +32,8 @@
 		private Vector3 _mousePositionPrevious;
 		private bool _shouldDrag;
 
+        private bool isInitialized = false;
+
 		void Start()
 		{
 			if (null == _referenceCamera)
@@ -39,7 +41,9 @@
 				_referenceCamera = GetComponent<Camera>();
 				if (null == _referenceCamera) { Debug.LogErrorFormat("{0}: reference camera not set", this.GetType().Name); }
 			}
-		}
+
+            
+        }
 
 
 		private void LateUpdate()
@@ -56,6 +60,17 @@
 			{
 				HandleMouseAndKeyBoard();
 			}
+
+            // VARNING! FULHAX
+            if (!isInitialized)
+            {
+                _quadTreeTileProvider.UpdateMapProperties(_dynamicZoomMap.CenterLatitudeLongitude, GameControl.zoomValue);
+
+                foreach (GameObject go in GameObject.FindGameObjectsWithTag("Poof"))
+                    go.transform.localScale = transform.localScale * 2;
+
+                isInitialized = true;
+            }
 		}
 
 		void HandleMouseAndKeyBoard()
@@ -123,7 +138,11 @@
 		void ZoomMapUsingTouchOrMouse(float zoomFactor)
 		{
             GameControl.isZooming = true;
-			_quadTreeTileProvider.UpdateMapProperties(_dynamicZoomMap.CenterLatitudeLongitude, Mathf.Max(0.0f, Mathf.Min(_dynamicZoomMap.Zoom + zoomFactor * _zoomSpeed, 21.0f)));
+            float newZoom = Mathf.Max(0.0f, Mathf.Min(_dynamicZoomMap.Zoom + zoomFactor * _zoomSpeed, 21.0f));
+            if(isInitialized)
+                GameControl.zoomValue = newZoom;
+
+            _quadTreeTileProvider.UpdateMapProperties(_dynamicZoomMap.CenterLatitudeLongitude, newZoom);
 		}
 
 		void PanMapUsingKeyBoard(float xMove, float zMove)

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114415309961993426}
   m_Layer: 0
   m_Name: MarkerPoof
-  m_TagString: Untagged
+  m_TagString: Poof
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

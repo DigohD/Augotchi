@@ -49,6 +49,7 @@ public class PetGlobal {
     public event EventHandler OnFeedCandy;
 
     public Marker.MarkerType[] markerSet;
+    public float[] markerRelativeDistances;
 
     public bool isDead;
     public int reviveProgress;
@@ -134,6 +135,7 @@ public class PetGlobal {
         this.saveTimeStamp = saveTimeStamp;
 
         this.markerSet = markerSet;
+        this.markerRelativeDistances = markerRelativeDistances;
 
         this.petVisualData = petVisualData;
         this.petUnlocksData = petUnlocksData;
@@ -247,18 +249,20 @@ public class PetGlobal {
         if(xpToReceive > 0)
             grantXP(xpToReceive);
 
+        currentAliveTicks++;
+
+        if (currentAliveTicks > longestAliveTicks)
+        {
+            longestAliveTicks = currentAliveTicks;
+        }
+
         if (health <= 0 || hunger <= 0 || happiness <= 0)
         {
             die();
         }
 
         activeTicks++;
-        currentAliveTicks++;
-
-        if(currentAliveTicks > longestAliveTicks)
-        {
-            longestAliveTicks = currentAliveTicks;
-        }
+        
 
         Save(false);
     }
@@ -620,7 +624,7 @@ public class PetGlobal {
                 saveTimeStamp, 
                 lastPettingTimeStamp, 
                 currency, 
-                markerSet, 
+                markerSet,
                 petVisualData, 
                 petUnlocksData,
                 isDead, 

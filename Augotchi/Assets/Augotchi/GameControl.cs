@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameControl : MonoBehaviour {
 
+    public static float[] markerRelativeDistances = new float[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+
+    public static float zoomValue = 17f;
+
     public static Color XPColor = new Color(0.6f, 0.8f, 0.8f);
     public static Color LevelUpColor = new Color(1f, 1f, 0.5f);
 
@@ -27,6 +31,8 @@ public class GameControl : MonoBehaviour {
 
     public GameObject Introduction;
 
+    public GameObject[] markerRefs = new GameObject[8];
+
     GameObject player;
 
     GameObject augotchiMap;
@@ -34,6 +40,8 @@ public class GameControl : MonoBehaviour {
     private static ArrayList rewardStack = new ArrayList();
 
     private float rewardTimer;
+
+    private bool markersOutOfRange = false;
 
     Vector3[] dirs = new Vector3[8]
     {
@@ -60,8 +68,39 @@ public class GameControl : MonoBehaviour {
             firstStartup = false;
         }
     }
-	
-	void Update () {
+
+    private void FixedUpdate()
+    {
+        if (markerRefs[0] == null)
+            return; 
+        float shortestDistance = float.MaxValue;
+        float totalDistance = 0;
+
+        GameObject map = GameObject.FindGameObjectWithTag("Map");
+        float scaleConversion = map.transform.localScale.x;
+
+        foreach (GameObject go in markerRefs)
+        {
+            if ((player.transform.position - go.transform.position).magnitude < shortestDistance)
+            {
+                shortestDistance = (player.transform.position - go.transform.position).magnitude;
+            }
+            totalDistance += (player.transform.position - go.transform.position).magnitude;
+        }
+
+        float avarageDistance = totalDistance / 8f;
+
+        float threshold = 50f * scaleConversion;
+        float avarageThreshold = 145f * scaleConversion;
+
+        if (shortestDistance > threshold && avarageDistance > avarageThreshold)
+        {
+            markersOutOfRange = true;
+            markerPicked = true;
+        }
+    }
+
+    void Update () {
         if (markerPicked)
         {
             markerPicked = false;
@@ -72,8 +111,15 @@ public class GameControl : MonoBehaviour {
                 Destroy(marker);
             }
 
-            if((sceneLoaded || PetKeeper.pet.markerSet == null) && !PetKeeper.pet.isDead)
+            if (!markersOutOfRange && (sceneLoaded || PetKeeper.pet.markerSet == null) && !PetKeeper.pet.isDead)
+            {
                 generateNewMarkers();
+                markerRelativeDistances = new float[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+            }else if (markersOutOfRange)
+            {
+                markerRelativeDistances = new float[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+                markersOutOfRange = false;
+            }
 
             sceneLoaded = true;
 
@@ -101,11 +147,22 @@ public class GameControl : MonoBehaviour {
 
                     GameObject map = GameObject.FindGameObjectWithTag("Map");
                     float scaleConversion = map.transform.localScale.x;
-                    GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(45.0f * scaleConversion, 120f * scaleConversion)), Quaternion.identity);
+
+                    float distance = markerRelativeDistances[i];
+                    if(distance == 0)
+                    {
+                        distance = Random.Range(45.0f * scaleConversion, 120f * scaleConversion);
+                        markerRelativeDistances[i] = distance;
+                    }
+
+                    GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * distance), Quaternion.identity);
                     //GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(4.0f * scaleConversion, 12f * scaleConversion)), Quaternion.identity);
 
+                    markerRefs[i] = marker;
+
                     marker.transform.SetParent(augotchiMap.transform);
-                    Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
+                    GameObject poof = (GameObject) Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
+                    poof.transform.SetParent(marker.transform);
 
                     marker.transform.localScale = new Vector3(1, 1, 1);
 
@@ -120,8 +177,18 @@ public class GameControl : MonoBehaviour {
 
                     GameObject map = GameObject.FindGameObjectWithTag("Map");
                     float scaleConversion = map.transform.localScale.x;
-                    GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(45.0f * scaleConversion, 120f * scaleConversion)), Quaternion.identity);
+
+                    float distance = markerRelativeDistances[i];
+                    if (distance == 0)
+                    {
+                        distance = Random.Range(45.0f * scaleConversion, 120f * scaleConversion);
+                        markerRelativeDistances[i] = distance;
+                    }
+
+                    GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * distance), Quaternion.identity);
                     //GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(4.0f * scaleConversion, 12f * scaleConversion)), Quaternion.identity);
+
+                    markerRefs[i] = marker;
 
                     marker.transform.SetParent(augotchiMap.transform);
                     Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
@@ -131,11 +198,20 @@ public class GameControl : MonoBehaviour {
                     marker.GetComponent<Marker>().gc = this;
                 }
             }
-            
+        }
+        else
+        {
+            for (int i = 0; i < dirs.Length; i++)
+            {
+                GameObject map = GameObject.FindGameObjectWithTag("Map");
+                float scaleConversion = map.transform.localScale.x;
+
+                markerRelativeDistances[i] = (markerRefs[i].transform.position - player.transform.position).magnitude / scaleConversion;
+            }
         }
 
         rewardTimer += Time.deltaTime;
-        if(rewardStack.Count > 0 && rewardTimer > 1f)
+        if(rewardStack.Count > 0 && rewardTimer > 2f)
         {
             rewardTimer = 0;
             spawnRewardText((Reward) rewardStack[0]);

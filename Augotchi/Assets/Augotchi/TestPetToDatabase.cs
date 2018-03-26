@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Firebase.Database;
 using System.Net.NetworkInformation;
 using System;
+using System.IO;
 
 public class TestPetToDatabase : MonoBehaviour {
 
@@ -25,6 +26,13 @@ public class TestPetToDatabase : MonoBehaviour {
 
     public IEnumerator PostPetGlobal ()
     {
+        Debug.LogWarning("SerializeField PVD");
+
+        PetVisualData pvd = PetKeeper.pet.LoadVisuals();
+        string pvdString = JsonUtility.ToJson(pvd);
+
+        pvdString = pvdString.Replace('\"', '¤');
+
         string post_url =  UpdatePetGlobalDbURL + 
                            "id=" + SystemInfo.deviceUniqueIdentifier + 
                            "&hunger=" + PetKeeper.pet.hunger +
@@ -33,6 +41,7 @@ public class TestPetToDatabase : MonoBehaviour {
                            "&markers_currency=" + PetKeeper.pet.markersCurrency +
                            "&markers_food=" + PetKeeper.pet.markersFood +
                            "&markers_crate=" + PetKeeper.pet.markersCrate +
+                           "&markers_park=" + 0 +
                            "&markers_revive=" + PetKeeper.pet.markersRevive +
                            "&pet_death_count=" + PetKeeper.pet.petDeathCount +
                            "&petting_count=" + PetKeeper.pet.pettingCount +
@@ -47,7 +56,10 @@ public class TestPetToDatabase : MonoBehaviour {
                            "&inactive_ticks=" + PetKeeper.pet.inactiveTicks +
                            "&pet_revival_count=" + PetKeeper.pet.petRevivalCount +
                            "&current_alive_ticks=" + PetKeeper.pet.currentAliveTicks +
-                           "&longest_alive_ticks=" + PetKeeper.pet.longestAliveTicks;
+                           "&longest_alive_ticks=" + PetKeeper.pet.longestAliveTicks +
+                           "&pet_name=" + PetKeeper.pet.name +
+                           "&pet_visual_data=" + pvdString
+                           ;
 
         // Post the URL to the site and create a download object to get the result.
         WWW pg_post = new WWW(post_url);
