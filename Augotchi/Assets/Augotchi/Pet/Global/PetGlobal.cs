@@ -652,6 +652,8 @@ public class PetGlobal {
         file.Close();
 
         TestPetToDatabase.postData = true;
+        
+        
     }
 
     public bool Load()

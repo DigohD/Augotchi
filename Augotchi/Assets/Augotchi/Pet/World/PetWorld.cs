@@ -18,6 +18,8 @@ public class PetWorld : MonoBehaviour {
     private float speed = 5f;
     private float maxRot = 2f;
 
+    public GameObject P_MarkerPoop;
+
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
 	}
@@ -49,6 +51,20 @@ public class PetWorld : MonoBehaviour {
     {
         if ((pws == PetWorldState.IDLE_SIT || pws == PetWorldState.IDLE_STAND) && Random.Range(0, 1000) < 3)
         {
+            if(pws == PetWorldState.IDLE_SIT && Random.Range(0, 3) == 0)
+            {
+                GameControl gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>();
+                gc.queueRewardText(PetKeeper.pet.name + "\nPooped!", new Color(0.39f, 0.21f, 0.1f));
+
+                GameObject map = GameObject.FindGameObjectWithTag("Map");
+                float scaleConversion = map.transform.localScale.x;
+
+                GameObject newPoop = Instantiate(P_MarkerPoop, transform.position, Quaternion.identity);
+                newPoop.transform.SetParent(map.transform);
+                newPoop.transform.localScale = new Vector3(1, 1, 1);
+                newPoop.GetComponentInChildren<ParticleSystem>().transform.localScale = Vector3.one * 4f;
+            }
+                
             goToTarget();
         }
 

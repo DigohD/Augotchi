@@ -10,6 +10,8 @@ public abstract class Marker : MonoBehaviour {
 
     public enum MarkerType { FOOD, CURRENCY, PARK, CRATE }
 
+    public bool isIndividual = false;
+
 	public virtual void picked()
     {
         bool rangeHit;
@@ -18,11 +20,15 @@ public abstract class Marker : MonoBehaviour {
 
         if (rangeHit)
         {
-            GameControl.markerPicked = true;
+            if(!isIndividual)
+                GameControl.markerPicked = true;
 
             Instantiate(P_MarkerPoof, transform.position, Quaternion.identity);
 
             executeEffect();
+
+            if (isIndividual)
+                Destroy(gameObject);
         }
     }
 

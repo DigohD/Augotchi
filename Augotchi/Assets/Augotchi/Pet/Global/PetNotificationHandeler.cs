@@ -3,66 +3,65 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PetNotificationHandeler : MonoBehaviour { 
+public class PetNotificationHandeler {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public static void PlanNotification(PetGlobal pg)
+    public static void PlanNotification(PetGlobal pet)
     {
         
-
     }
-    public static TimeSpan CalculateHungerTime(float hungerValue)
+
+    private static TimeSpan degenerationPrediction(PetGlobal pet)
     {
-        long ticksRemaining = 0;
+        long ticks = 0;
 
-        if (hungerValue > 75)
+        float hunger = pet.hunger;
+        float happiness = pet.happiness;
+        float health = pet.health;
+
+        while(hunger > 25f && health > 25f && happiness > 35f)
         {
-            //-0.015
-        }
-        else
-        {
-            //-0.01
+            if (hunger > 75)
+            {
+                hunger -= (0.005f * 360);
+            }
+            if (hunger < 25)
+            {
+                hunger += (0.005f * 360);
+            }
+            hunger -= (0.01f * 360);
+
+            if (hunger > 75)
+            {
+                health -= (0.01f * 360);
+            }
+            if (hunger < 25)
+            {
+                health -= (0.01f * 360);
+            }
+            health -= (0.003f * 360);
+
+            if (hunger < 25)
+            {
+                happiness -= (0.02f * 360);
+            }
+            if (health < 25)
+            {
+                happiness -= (0.02f * 360);
+            }
+
+            if (hunger > 75)
+            {
+                happiness += (0.01f * 360);
+            }
+            if (health > 75)
+            {
+                happiness += (0.01f * 360);
+            }
+            happiness -= (0.005f * 360);
+
+            ticks += 360;
         }
 
-        return new TimeSpan(ticksRemaining);
-    }
-    public static TimeSpan CalculateHappinessTime(float happinessValue, float hungerValue, float healthValue)
-    {
-        long ticksRemaining = 0;
-
-        if (hungerValue > 75)
-        {
-            //-0.015
-        }
-        else
-        {
-            //-0.01
-        }
-
-        return new TimeSpan(ticksRemaining);
-    }
-    public static TimeSpan CalculateHealthTime(float healthValue)
-    {
-        long ticksRemaining = 0;
-
-        if (healthValue > 75)
-        {
-            //-0.013
-        }
-        else
-        {
-            //-0.003
-        }
-
-        return new TimeSpan(ticksRemaining);
+        return new TimeSpan(ticks * TimeSpan.TicksPerSecond * 10);
     }
 }
