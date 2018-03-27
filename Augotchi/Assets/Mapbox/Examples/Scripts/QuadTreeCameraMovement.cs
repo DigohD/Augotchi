@@ -237,6 +237,7 @@
                     }
 
                     GameObject.FindGameObjectWithTag("CameraTarget").transform.Rotate(0, rot * 16f, 0);
+                    GameControl.rotation = GameObject.FindGameObjectWithTag("CameraTarget").transform.rotation;
                 }
 				else
 				{

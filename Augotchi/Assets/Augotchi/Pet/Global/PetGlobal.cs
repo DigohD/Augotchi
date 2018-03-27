@@ -652,8 +652,8 @@ public class PetGlobal {
         file.Close();
 
         TestPetToDatabase.postData = true;
-        
-        
+
+        PetNotificationHandeler.PlanNotification(this);
     }
 
     public bool Load()
@@ -982,6 +982,24 @@ public class PetGlobal {
         return isNewFace;
     }
 
+    public void unlockUniqueHat(int hatIndex, int hatVariation)
+    {
+        GameObject gControl = GameObject.FindGameObjectWithTag("GameController");
+        GameControl gc = null;
+        if (gControl)
+        {
+            gc = gControl.GetComponent<GameControl>();
+        }
+
+        int hatsVariationIndex = UnityEngine.Random.Range(0, PetUnlocksData.hatCounts[hatIndex]);
+        bool isNewHat = unlockHat(hatIndex, hatsVariationIndex);
+        if (isNewHat)
+        {
+            if (gc != null)
+                gc.queueRewardText("Unique Hat!", new Color(1, 0.3f, 1f));
+        }
+    }
+
     public void addRandomLootItem()
     {
         GameObject gControl = GameObject.FindGameObjectWithTag("GameController");
@@ -994,7 +1012,14 @@ public class PetGlobal {
         switch (UnityEngine.Random.Range(0, 2))
         {
             case 0:
-                int hatIndex = UnityEngine.Random.Range(1, petUnlocksData.unlockedHats.Length);
+                int hatIndex = 0;
+
+                // Do until it's not poohat
+                do
+                {
+                    hatIndex = UnityEngine.Random.Range(1, petUnlocksData.unlockedHats.Length);
+                } while (hatIndex == 14);
+
                 int hatsVariationIndex = UnityEngine.Random.Range(0, PetUnlocksData.hatCounts[hatIndex]);
                 bool isNewHat = unlockHat(hatIndex, hatsVariationIndex);
                 if (isNewHat)

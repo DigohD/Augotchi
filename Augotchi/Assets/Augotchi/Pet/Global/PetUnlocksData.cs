@@ -20,7 +20,7 @@ public class PetUnlocksData {
 
     // Hat Numbers
 
-    public readonly static int[] hatCounts = new int[14]
+    public readonly static int[] hatCounts = new int[15]
     {
         1,
         6,
@@ -35,12 +35,13 @@ public class PetUnlocksData {
         6,
         6,
         4,
-        4
+        4,
+        1
     };
 
     // HAT Unlock Bitmasks
 
-    public int[] unlockedHats = new int[14];
+    public int[] unlockedHats = new int[15];
 
     // Faces Unlock Bitmasks
 

@@ -62,7 +62,7 @@ public class PetWorld : MonoBehaviour {
                 GameObject newPoop = Instantiate(P_MarkerPoop, transform.position, Quaternion.identity);
                 newPoop.transform.SetParent(map.transform);
                 newPoop.transform.localScale = new Vector3(1, 1, 1);
-                newPoop.GetComponentInChildren<ParticleSystem>().transform.localScale = Vector3.one * 4f;
+                newPoop.GetComponentInChildren<ParticleSystem>().transform.localScale = Vector3.one;
             }
                 
             goToTarget();

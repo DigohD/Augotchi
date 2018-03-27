@@ -10,16 +10,13 @@ public class PetNotificationHandeler {
 
     public static void PlanNotification(PetGlobal pet)
     {
-        NotificationManager.CancelAll();
-
-        if (pet.hunger <= 25 || pet.health <= 25 || pet.happiness <= 25)
-            return;
-
         TimeSpan smallestTimespan = degenerationPrediction(pet);
 
         Debug.LogWarning("Crisis message in: " + smallestTimespan.ToString());
 
         // Determined what notification to send, following is sending the notification:
+
+        NotificationManager.CancelAll();
 
         if (messageType == 1)
         {

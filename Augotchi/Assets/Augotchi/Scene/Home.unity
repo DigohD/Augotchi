@@ -3465,6 +3465,8 @@ MonoBehaviour:
     - {fileID: 1219847081974688, guid: f73f7826e9c40b34da00ecf227a481d7, type: 2}
     - {fileID: 1189344763961732, guid: 46125a39438057941ab583ba4be66816, type: 2}
     - {fileID: 1203598619101816, guid: f6da2487692791d48a11c6e96a3dc67b, type: 2}
+  - gameObjects:
+    - {fileID: 1160000380000180, guid: d2a21789ad45d7042b6906b16c469a9a, type: 2}
   faceParent: {fileID: 857314151}
   faces:
   - gameObjects:
@@ -4785,6 +4787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customizationUI: {fileID: 0}
   isCreation: 0
+  DoneButton: {fileID: 0}
 --- !u!114 &1494927442
 MonoBehaviour:
   m_ObjectHideFlags: 0

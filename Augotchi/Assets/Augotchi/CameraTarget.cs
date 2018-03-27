@@ -14,6 +14,8 @@ public class CameraTarget : MonoBehaviour {
 
         transform.GetChild(0).GetComponent<Camera>().enabled = false;
         transform.GetChild(0).GetComponent<Camera>().enabled = true;
+
+        transform.rotation = GameControl.rotation;
     }
 
     void Update()
@@ -21,6 +23,7 @@ public class CameraTarget : MonoBehaviour {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Rotate(0, 90 * Time.deltaTime, 0);
+            GameControl.rotation = transform.rotation;
         }
 
         targetPos = player.transform.position;

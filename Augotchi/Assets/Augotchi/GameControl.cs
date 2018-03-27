@@ -7,6 +7,8 @@ public class GameControl : MonoBehaviour {
     public static float[] markerRelativeDistances = new float[] { 0, 0, 0, 0, 0, 0, 0, 0 };
 
     public static float zoomValue = 17f;
+    public static Quaternion rotation = Quaternion.identity;
+
 
     public static Color XPColor = new Color(0.6f, 0.8f, 0.8f);
     public static Color LevelUpColor = new Color(1f, 1f, 0.5f);
