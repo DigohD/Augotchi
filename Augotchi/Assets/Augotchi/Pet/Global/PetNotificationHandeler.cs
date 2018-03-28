@@ -12,8 +12,20 @@ public class PetNotificationHandeler {
     {
         NotificationManager.CancelAll();
 
-        if (pet.hunger <= 25 || pet.health <= 25 || pet.happiness <= 25)
+        TimeSpan deathTimespan;
+
+        if (pet.isDead)
+        {
+            NotificationManager.SendWithAppIcon(new TimeSpan(23, 0, 0), pet.name + " has passed out!", "Revive by taking a walk!", new Color(1f, 0f, 0f), NotificationIcon.Clock);
             return;
+        }
+
+        if (pet.hunger <= 25 || pet.health <= 25 || pet.happiness <= 25)
+        {
+            NotificationManager.SendWithAppIcon(new TimeSpan(12, 0, 0), pet.name + " is in critical condition!", "Oh no, that is not good...", new Color(1f, 0f, 0f), NotificationIcon.Clock);
+            return;
+        }
+            
 
         TimeSpan smallestTimespan = degenerationPrediction(pet);
 
@@ -23,20 +35,22 @@ public class PetNotificationHandeler {
 
         if (messageType == 1)
         {
-            NotificationManager.SendWithAppIcon(smallestTimespan, "Augotchi hunger", "Your pet is literalyy starving rn", new Color(1f,0f,0f), NotificationIcon.Clock);
+            NotificationManager.SendWithAppIcon(smallestTimespan, pet.name + " is hungry!", "Feed " + pet.name + " some food!", new Color(1f,0f,0f), NotificationIcon.Clock);
         }
         else if (messageType == 2)
         {
-            NotificationManager.SendWithAppIcon(smallestTimespan, "Augotchi happiness", "Your pet is literally suicidal rn", new Color(1f, 0f, 0f), NotificationIcon.Clock);
+            NotificationManager.SendWithAppIcon(smallestTimespan, pet.name + " is sad!", "Pet " + pet.name + " or use some candy!", new Color(1f, 0f, 0f), NotificationIcon.Clock);
         }
         else if (messageType == 3)
         {
-            NotificationManager.SendWithAppIcon(smallestTimespan, "Augotchi health", "Your pet is literally drowning in fat rn", new Color(1f, 0f, 0f), NotificationIcon.Clock);
+            NotificationManager.SendWithAppIcon(smallestTimespan, pet.name + " needs exercise!", "Take " + pet.name + " for a walk and improve both of your health!", new Color(1f, 0f, 0f), NotificationIcon.Clock);
         }
         else
         {
             Debug.LogWarning("Something went horribly wrong with sending a notification! Could not determine smallest!");
         }
+
+        NotificationManager.SendWithAppIcon(new TimeSpan(12, 0, 0), pet.name + " is in critical condition!", "Oh no, that is not good...", new Color(1f, 0f, 0f), NotificationIcon.Clock);
     }
 
     private static TimeSpan degenerationPrediction(PetGlobal pet)

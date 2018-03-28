@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Analytics;
 using UnityEngine.SceneManagement;
+using Assets.SimpleAndroidNotifications;
+using System;
 
 public class PetKeeper : MonoBehaviour {
 
