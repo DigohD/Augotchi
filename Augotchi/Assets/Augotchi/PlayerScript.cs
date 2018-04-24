@@ -48,10 +48,11 @@ public class PlayerScript : NetworkBehaviour {
         if(!diff.normalized.Equals(Vector3.zero))
             anim.transform.forward = diff.normalized;
 
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit))
             {
@@ -60,6 +61,24 @@ public class PlayerScript : NetworkBehaviour {
                 if(objectHit.tag.Equals("Marker"))
                 {
                     objectHit.GetComponent<Marker>().picked();
+                    return;
+                }
+            }
+
+            int layerMask = 1 << LayerMask.NameToLayer("PlantRange");
+
+            if (Physics.Raycast(ray, out hit, layerMask))
+            {
+                Transform objectHit = hit.transform;
+                Vector3 hitPoint = hit.point;
+
+                bool rangeHit;
+                layerMask = 1 << LayerMask.NameToLayer("GardenCircle");
+                rangeHit = Physics.Raycast(hitPoint + new Vector3(0, 5, 0), Vector3.down, 100, layerMask);
+
+                if (rangeHit)
+                {
+                    GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().tryPlantSeed(hitPoint);
                 }
             }
         }

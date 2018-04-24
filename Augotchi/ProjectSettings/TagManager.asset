@@ -15,6 +15,7 @@ TagManager:
   - Canvas
   - Poof
   - IndividualMarker
+  - Base
   layers:
   - Default
   - TransparentFX
@@ -25,10 +26,10 @@ TagManager:
   - 
   - 
   - RangeCircle
-  - 
-  - 
-  - 
-  - 
+  - GardenCircle
+  - PlantRange
+  - House
+  - FarmPlot
   - 
   - 
   - 

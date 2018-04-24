@@ -10,6 +10,8 @@ public class PetGlobal {
 
     public PetVisualData petVisualData;
     public PetUnlocksData petUnlocksData;
+    public Inventory inventory;
+    public Base Base;
 
     readonly float MIN_HUNGER = 0, MAX_HUNGER = 100;
     readonly float MIN_HAPPINESS = 0, MAX_HAPPINESS = 100;
@@ -38,6 +40,7 @@ public class PetGlobal {
     public int vegetableFed;
 
     public int currency;
+    public int puffles = 100;
 
     long saveTimeStamp;
 
@@ -117,7 +120,9 @@ public class PetGlobal {
         int petRevivalCount,
         int currentAliveTicks,
         int longestAliveTicks,
-        string name
+        string name,
+        Inventory inventory,
+        Base Base
         )
     {
         this.hunger = hunger;
@@ -171,6 +176,9 @@ public class PetGlobal {
         this.longestAliveTicks = longestAliveTicks;
 
         this.name = name;
+
+        this.inventory = inventory;
+        this.Base = Base;
     }
 
     public void degenerateTick()
@@ -611,6 +619,12 @@ public class PetGlobal {
         if (petUnlocksData == null)
             petUnlocksData = new PetUnlocksData();
 
+        if (Base == null)
+            Base = new Base();
+
+        if (inventory == null)
+            inventory = new Inventory();
+
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/AugotchiSave.gd");
         bf.Serialize(file, 
@@ -647,7 +661,9 @@ public class PetGlobal {
                 petRevivalCount,
                 currentAliveTicks,
                 longestAliveTicks,
-                name
+                name,
+                inventory,
+                Base
             ));
         file.Close();
 
@@ -736,6 +752,9 @@ public class PetGlobal {
             longestAliveTicks = pg.longestAliveTicks;
 
             name = pg.name;
+
+            this.inventory = pg.inventory;
+            this.Base = pg.Base;
 
             Debug.LogWarning(name);
 
