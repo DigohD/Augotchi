@@ -756,8 +756,6 @@ public class PetGlobal {
             this.inventory = pg.inventory;
             this.Base = pg.Base;
 
-            Debug.LogWarning(name);
-
             file.Close();
 
             TestPetToDatabase.postData = true;

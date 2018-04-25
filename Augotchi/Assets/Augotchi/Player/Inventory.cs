@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class Inventory {
@@ -17,7 +18,12 @@ public class Inventory {
         GOOSEBERRY = 2
     }
 
-    public int[] seedCounts = new int[3] { 5, 0, 5 };
+    public int[] seedCounts;
+
+    public Inventory()
+    {
+        seedCounts = new int[3] { 3, 3, 3 };
+    }
 
     public static Seed getSeedTypeInfo(SeedType type)
     {
@@ -27,22 +33,25 @@ public class Inventory {
                 return new Seed(
                     "Carrot Seed",
                     10,
-                    "Augotchi/Image/whiskers",
-                    SeedType.CARROT_SEED
+                    "Augotchi/Image/UISeed/Carrot",
+                    SeedType.CARROT_SEED,
+                    30
                 );
             case SeedType.MEATBALL_SEED:
                 return new Seed(
                     "Meatball Seed",
                     10,
-                    "Augotchi/Image/whiskers",
-                    SeedType.MEATBALL_SEED
+                    "Augotchi/Image/UISeed/Meatball",
+                    SeedType.MEATBALL_SEED,
+                    120
                 );
             case SeedType.GOOSEBERRY_SEED:
                 return new Seed(
                     "Gooseberry Seed",
                     10,
-                    "Augotchi/Image/whiskers",
-                    SeedType.GOOSEBERRY_SEED
+                    "Augotchi/Image/UISeed/Gooseberry",
+                    SeedType.GOOSEBERRY_SEED,
+                    60
                 );
         }
 

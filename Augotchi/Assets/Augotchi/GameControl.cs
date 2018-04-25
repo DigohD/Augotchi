@@ -38,6 +38,8 @@ public class GameControl : MonoBehaviour {
     public GameObject P_Base;
     public GameObject P_FarmPlot;
 
+    public GameObject[] P_FarmPlots;
+
     public GameObject Introduction;
 
     public GameObject[] markerRefs = new GameObject[8];
@@ -116,9 +118,11 @@ public class GameControl : MonoBehaviour {
                 Map.GetComponent<BasicMap>().WorldRelativeScale
             );
 
-            GameObject newPlot = (GameObject) Instantiate(P_FarmPlot, fromLongLat, Quaternion.identity);
+            GameObject newPlot = (GameObject) Instantiate(P_FarmPlots[(int) crop.seedType], fromLongLat + (Vector3.up * 0.2f), Quaternion.identity);
             newPlot.transform.SetParent(Map.transform, false);
             newPlot.transform.localScale = Vector3.one;
+
+            newPlot.GetComponent<FarmPlot>().init(Inventory.getSeedTypeInfo(crop.seedType), crop);
         }
     }
 
@@ -444,10 +448,10 @@ public class GameControl : MonoBehaviour {
 
         queueRewardText("Planted seed!", new Color(0.8f, 0.5f, 0.5f));
 
-        GameObject farmPlot = Instantiate(P_FarmPlot, plantPosLocal, Quaternion.identity);
+        GameObject farmPlot = Instantiate(P_FarmPlots[(int) seedToPlant.seedType], plantPosLocal + (Vector3.up * 0.2f), Quaternion.identity);
         farmPlot.transform.SetParent(Map.transform, false);
         farmPlot.transform.localScale = Vector3.one;
-
+        
         string longLat = VectorExtensions.GetGeoPosition(
             farmPlot.transform.position,
             Map.GetComponent<BasicMap>().CenterMercator,
@@ -457,10 +461,16 @@ public class GameControl : MonoBehaviour {
         GardenCrop newCrop = new GardenCrop(seedToPlant.seedType, DateTime.Now.Ticks, longLat);
         PetKeeper.pet.Base.gardenCrops.Add(newCrop);
 
-        isPlantingSeed = false;
-        seedToPlant = null;
+        farmPlot.GetComponent<FarmPlot>().init(seedToPlant, newCrop);
+
+        PetKeeper.pet.inventory.seedCounts[(int) seedToPlant.seedType] -= 1;
+
+        InventoryUI.reRender = true;
 
         PetKeeper.pet.Save(false);
+
+        isPlantingSeed = false;
+        seedToPlant = null;
     }
 
     public void moveHouse()

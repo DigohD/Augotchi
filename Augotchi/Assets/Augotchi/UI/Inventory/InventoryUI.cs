@@ -62,7 +62,7 @@ public class InventoryUI : MonoBehaviour {
         int currentSeed = 0;
 
         T_SeedList.localPosition = Vector3.zero;
-        ((RectTransform)T_SeedList).sizeDelta = new Vector2(0, (SeedCount / 3) * 267);
+        ((RectTransform)T_SeedList).sizeDelta = new Vector2(0, (SeedCount / 3) * 257);
 
         int j = 0;
         while (currentSeed < SeedCount)
@@ -74,7 +74,7 @@ public class InventoryUI : MonoBehaviour {
 
                 GameObject newItem = Instantiate(P_SeedItem, Vector3.zero, Quaternion.identity);
                 newItem.transform.SetParent(T_SeedList, false);
-                newItem.transform.localPosition = new Vector2(i * 267, j * -267);
+                newItem.transform.localPosition = new Vector2(i * 257, j * -257);
 
                 newItem.GetComponent<SeedItem>().initSeedItem(
                     PetKeeper.pet.inventory.seedCounts[(int)seedIndexesToRender[currentSeed]],

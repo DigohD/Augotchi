@@ -65,9 +65,20 @@ public class PlayerScript : NetworkBehaviour {
                 }
             }
 
-            int layerMask = 1 << LayerMask.NameToLayer("PlantRange");
+            int layerMask = 1 << LayerMask.NameToLayer("FarmPlotInteract");
 
-            if (Physics.Raycast(ray, out hit, layerMask))
+            if (Physics.Raycast(ray, out hit, 1000f, layerMask))
+            {
+                Transform objectHit = hit.transform;
+
+                Debug.LogWarning(objectHit.name);
+
+                objectHit.GetComponentInParent<FarmPlot>().onPress();
+            }
+
+            layerMask = 1 << LayerMask.NameToLayer("PlantRange");
+
+            if (Physics.Raycast(ray, out hit, 1000f, layerMask))
             {
                 Transform objectHit = hit.transform;
                 Vector3 hitPoint = hit.point;
