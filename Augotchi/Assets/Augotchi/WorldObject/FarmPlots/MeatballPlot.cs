@@ -7,8 +7,11 @@ public class MeatballPlot : BushPlot {
     override
     public void onPress()
     {
+        int amount = Random.Range(2, 5);
+        PetKeeper.pet.inventory.produceCounts[(int) representedCrop.seedType] += amount;
+
+        gc.queueRewardText("Meatballs +" + amount, Inventory.getHarvestColor());
+
         base.onPress();
-
-
     }
 }

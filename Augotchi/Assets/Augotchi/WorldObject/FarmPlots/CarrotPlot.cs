@@ -9,6 +9,9 @@ public class CarrotPlot : GroundPlanesPlot {
     {
         base.onPress();
 
+        int amount = Random.Range(3, 7);
+        PetKeeper.pet.inventory.produceCounts[(int) representedCrop.seedType] += amount;
 
+        gc.queueRewardText("Carrots +" + amount, Inventory.getHarvestColor());
     }
 }

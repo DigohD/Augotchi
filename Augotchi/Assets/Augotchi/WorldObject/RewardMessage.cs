@@ -15,13 +15,13 @@ public class RewardMessage : MonoBehaviour {
 
     void Update()
     {
-        transform.position = transform.position + (Vector3.up * 4 * Time.deltaTime);
+        transform.position = transform.position + (Vector3.up * 12 * Time.deltaTime);
 
         GetComponent<TextMesh>().color = new Color(0.15f, 0.15f, 0.15f, opacity);
         Color oldColor = transform.GetChild(0).GetComponent<TextMesh>().color;
         transform.GetChild(0).GetComponent<TextMesh>().color = new Color(oldColor.r, oldColor.g, oldColor.b, opacity);
 
-        opacity -= (0.3f * Time.deltaTime);
+        opacity -= (0.5f * Time.deltaTime);
 
         if (opacity < 0)
             Destroy(gameObject);

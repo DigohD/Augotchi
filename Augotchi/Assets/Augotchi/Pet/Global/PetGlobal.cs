@@ -753,7 +753,7 @@ public class PetGlobal {
 
             name = pg.name;
 
-            this.inventory = pg.inventory;
+            this.inventory = new Inventory(pg.inventory.seedCounts, pg.inventory.produceCounts);
             this.Base = pg.Base;
 
             file.Close();
@@ -828,8 +828,6 @@ public class PetGlobal {
             PetGlobal pg = (PetGlobal)bf.Deserialize(file);
 
             file.Close();
-
-
 
             if (pg.petUnlocksData != null)
             {

@@ -12,9 +12,9 @@ public class BushPlot : FarmPlot {
     public GameObject G_BushMesh;
 
     override
-    public void init(Seed seedInfo, GardenCrop gardenCrop)
+    public void init(Seed seedInfo, GardenCrop gardenCrop, GameControl gc, bool onPlant)
     {
-        base.init(seedInfo, gardenCrop);
+        base.init(seedInfo, gardenCrop, gc, onPlant);
 
         G_PlanesMesh.GetComponent<MeshRenderer>().material.mainTextureOffset = new Vector2(0f, 0);
 

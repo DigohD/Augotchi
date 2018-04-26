@@ -19,10 +19,28 @@ public class Inventory {
     }
 
     public int[] seedCounts;
+    public int[] produceCounts;
 
     public Inventory()
     {
         seedCounts = new int[3] { 3, 3, 3 };
+        produceCounts = new int[3] { 0, 0, 0 };
+    }
+
+    public Inventory(int[] oldSeedCounts, int[] oldProduceCounts)
+    {
+        seedCounts = new int[3];
+        produceCounts = new int[3];
+
+        for(int i = 0; i < oldSeedCounts.Length; i++)
+        {
+            seedCounts[i] = oldSeedCounts[i];
+        }
+
+        for (int i = 0; i < oldProduceCounts.Length; i++)
+        {
+            produceCounts[i] = oldProduceCounts[i];
+        }
     }
 
     public static Seed getSeedTypeInfo(SeedType type)
@@ -56,5 +74,46 @@ public class Inventory {
         }
 
         return null;
+    }
+
+    public static Produce getProduceTypeInfo(ProduceType type)
+    {
+        switch (type)
+        {
+            case ProduceType.CARROT:
+                return new Produce(
+                    "Carrot",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    ProduceType.CARROT,
+                    1.5f,
+                    3.5f,
+                    -1.5f
+                );
+            case ProduceType.MEATBALL:
+                return new Produce(
+                    "Meatball",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Meatball",
+                    ProduceType.MEATBALL,
+                    5f,
+                    0f,
+                    0f
+                );
+            case ProduceType.GOOSEBERRY:
+                return new Produce(
+                    "Gooseberry",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    ProduceType.GOOSEBERRY,
+                    0f,
+                    -1.5f,
+                    5f
+                );
+        }
+
+        return null;
+    }
+
+    public static Color getHarvestColor()
+    {
+        return new Color(0.25f, 0.85f, 0.4f);
     }
 }

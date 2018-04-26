@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameControl : MonoBehaviour {
 
@@ -39,6 +40,10 @@ public class GameControl : MonoBehaviour {
     public GameObject P_FarmPlot;
 
     public GameObject[] P_FarmPlots;
+
+    public GameObject G_UIButtons;
+    public GameObject G_CloseButton;
+    public GameObject G_ModeHint;
 
     public GameObject Introduction;
 
@@ -122,7 +127,7 @@ public class GameControl : MonoBehaviour {
             newPlot.transform.SetParent(Map.transform, false);
             newPlot.transform.localScale = Vector3.one;
 
-            newPlot.GetComponent<FarmPlot>().init(Inventory.getSeedTypeInfo(crop.seedType), crop);
+            newPlot.GetComponent<FarmPlot>().init(Inventory.getSeedTypeInfo(crop.seedType), crop, this, false);
         }
     }
 
@@ -148,7 +153,7 @@ public class GameControl : MonoBehaviour {
 
     void test()
     {
-        StartCoroutine( GetTestMarkerPositions());
+        //StartCoroutine( GetTestMarkerPositions());
     }
 
     private void FixedUpdate()
@@ -185,13 +190,13 @@ public class GameControl : MonoBehaviour {
     float loadTimer = 0;
     void Update () {
         loadTimer += Time.deltaTime;
-        if (!isInitialized && loadTimer > 5f)
+        if (!isInitialized && loadTimer > 2.5f)
         {
             initBase();
             isInitialized = true;
             loadingScreen.SetActive(false);
         }
-        else if (loadTimer < 5f)
+        else if (loadTimer < 2.5f)
             return;
 
         if (markerPicked)
@@ -336,7 +341,7 @@ public class GameControl : MonoBehaviour {
         }
 
         rewardTimer += Time.deltaTime;
-        if(rewardStack.Count > 0 && rewardTimer > 2f)
+        if(rewardStack.Count > 0 && rewardTimer > 0.6f)
         {
             rewardTimer = 0;
             spawnRewardText((Reward) rewardStack[0]);
@@ -427,6 +432,12 @@ public class GameControl : MonoBehaviour {
     {
         isPlantingSeed = true;
         seedToPlant = seedInfo;
+
+        G_UIButtons.SetActive(false);
+        G_CloseButton.SetActive(true);
+        G_ModeHint.SetActive(true);
+
+        G_ModeHint.GetComponentInChildren<Text>().text = "Plant Seed!";
     }
 
     public void tryPlantSeed(Vector3 plantPos)
@@ -461,7 +472,7 @@ public class GameControl : MonoBehaviour {
         GardenCrop newCrop = new GardenCrop(seedToPlant.seedType, DateTime.Now.Ticks, longLat);
         PetKeeper.pet.Base.gardenCrops.Add(newCrop);
 
-        farmPlot.GetComponent<FarmPlot>().init(seedToPlant, newCrop);
+        farmPlot.GetComponent<FarmPlot>().init(seedToPlant, newCrop, this, true);
 
         PetKeeper.pet.inventory.seedCounts[(int) seedToPlant.seedType] -= 1;
 
@@ -469,8 +480,7 @@ public class GameControl : MonoBehaviour {
 
         PetKeeper.pet.Save(false);
 
-        isPlantingSeed = false;
-        seedToPlant = null;
+        exitModePressed();
     }
 
     public void moveHouse()
@@ -492,6 +502,16 @@ public class GameControl : MonoBehaviour {
         PetKeeper.pet.Save(false);
 
         initBase();
+    }
+
+    public void exitModePressed()
+    {
+        seedToPlant = null;
+        isPlantingSeed = false;
+
+        G_UIButtons.SetActive(true);
+        G_CloseButton.SetActive(false);
+        G_ModeHint.SetActive(false);
     }
 
     // BACKEND!

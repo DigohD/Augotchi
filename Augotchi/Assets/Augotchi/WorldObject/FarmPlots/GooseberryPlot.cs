@@ -9,6 +9,9 @@ public class GooseberryPlot : BushPlot {
     {
         base.onPress();
 
+        int amount = Random.Range(5, 10);
+        PetKeeper.pet.inventory.produceCounts[(int)representedCrop.seedType] += amount;
 
+        gc.queueRewardText("Gooseberries +" + amount, Inventory.getHarvestColor());
     }
 }
