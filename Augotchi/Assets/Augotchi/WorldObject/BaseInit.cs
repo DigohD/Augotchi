@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BaseInit : MonoBehaviour {
 
+    public AudioClip A_GardenGrow;
+    public AudioClip A_HouseLand;
+
     public GameObject G_House;
     public GameObject G_Garden;
 
@@ -20,6 +23,8 @@ public class BaseInit : MonoBehaviour {
     {
         initgardenScale = G_Garden.transform.localScale.x;
         G_Garden.transform.localScale = Vector3.zero;
+
+        GetComponent<AudioSource>().PlayOneShot(A_GardenGrow);
 
         initHouseY = G_House.transform.localPosition.y;
         G_House.transform.localPosition += Vector3.up * 300;
@@ -67,6 +72,8 @@ public class BaseInit : MonoBehaviour {
                     );
 
                     G_House.GetComponentInChildren<ParticleSystem>().Play();
+
+                    GetComponent<AudioSource>().PlayOneShot(A_HouseLand);
 
                     houseVelY = -houseVelY * 0.1f;
                     houseBoucning = true;

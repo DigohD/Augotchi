@@ -22042,15 +22042,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneLoaded: 0
   A_RewardPop: {fileID: 8300000, guid: 47ce98f1947e9744a96f959c24094f60, type: 3}
-  P_MarkerFood: {fileID: 1389779167061766, guid: f037055e4c55a434b916a33b209714d6,
+  P_MarkerGrass: {fileID: 1712331214671840, guid: 09ebe6d2557cd11418aaaa6c0eaab58f,
     type: 2}
-  P_MarkerCurrency: {fileID: 1541162053019052, guid: e7ae9cb9548f98340860c0669048eab0,
-    type: 2}
-  P_MarkerPark: {fileID: 1227752901290604, guid: 15e4fa416de6ed24b91ae08253bcd7b0,
-    type: 2}
-  P_MarkerRevive: {fileID: 1719196024077404, guid: 27071ef9b43713f4a930c0267fbe2578,
-    type: 2}
-  P_MarkerCrate: {fileID: 1840416088500616, guid: 584c8539b7c4d8d479075c6fa428080a,
+  P_MarkerCrate: {fileID: 1308439643624508, guid: 18b63881183baea4f99b4af4c6f7c5c1,
     type: 2}
   P_RewardText: {fileID: 1052254352882838, guid: 3a2de493f2dd67e428d726e7d793f9c8,
     type: 2}

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class FarmPlot : MonoBehaviour {
 
+    public AudioClip A_FarmGrow;
+    public AudioClip A_FarmHarvest;
+
     TimeSpan timeLeft;
     GameObject G_TimerLabel;
 
@@ -90,6 +93,9 @@ public abstract class FarmPlot : MonoBehaviour {
 
             float scale = Mathf.Sin(Mathf.PI * spawnTimer2);
 
+            if (!GetComponent<AudioSource>().isPlaying)
+                GetComponent<AudioSource>().PlayOneShot(A_FarmGrow);
+
             if (spawnTimer2 >= 0.5f)
             {
                 scale = 1;
@@ -103,6 +109,8 @@ public abstract class FarmPlot : MonoBehaviour {
     public virtual void onPress()
     {
         PetKeeper.pet.Base.gardenCrops.Remove(representedCrop);
+
+        GameControl.playPostMortemAudioClip(A_FarmHarvest);
 
         Destroy(gameObject);
 

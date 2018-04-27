@@ -53,7 +53,7 @@ public class Inventory {
                     10,
                     "Augotchi/Image/UISeed/Carrot",
                     SeedType.CARROT_SEED,
-                    30
+                    3600
                 );
             case SeedType.MEATBALL_SEED:
                 return new Seed(
@@ -61,7 +61,7 @@ public class Inventory {
                     10,
                     "Augotchi/Image/UISeed/Meatball",
                     SeedType.MEATBALL_SEED,
-                    120
+                    9000
                 );
             case SeedType.GOOSEBERRY_SEED:
                 return new Seed(
@@ -69,7 +69,7 @@ public class Inventory {
                     10,
                     "Augotchi/Image/UISeed/Gooseberry",
                     SeedType.GOOSEBERRY_SEED,
-                    60
+                    7200
                 );
         }
 

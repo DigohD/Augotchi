@@ -10,6 +10,9 @@ public class GameControl : MonoBehaviour {
 
     private bool isInitialized = false;
 
+    public static bool playPostMortemSound;
+    public static AudioClip A_postMortemSound;
+
     public static float[] markerRelativeDistances = new float[] { 0, 0, 0, 0, 0, 0, 0, 0 };
 
     public static float zoomValue = 17f;
@@ -27,10 +30,7 @@ public class GameControl : MonoBehaviour {
 
     public AudioClip A_RewardPop;
 
-    public GameObject P_MarkerFood;
-    public GameObject P_MarkerCurrency;
-    public GameObject P_MarkerPark;
-    public GameObject P_MarkerRevive;
+    public GameObject P_MarkerGrass;
     public GameObject P_MarkerCrate;
 
     public GameObject P_RewardText;
@@ -77,7 +77,7 @@ public class GameControl : MonoBehaviour {
         new Vector3(1, 0, -1)
     };
 
-	void Start () {
+	void Awake () {
         player = GameObject.FindGameObjectWithTag("Player");
 
         augotchiMap = GameObject.FindGameObjectWithTag("AugotchiMap");
@@ -90,6 +90,8 @@ public class GameControl : MonoBehaviour {
             Introduction.SetActive(true);
             firstStartup = false;
         }
+
+        generateMarkerRing();
 
         test();
     }
@@ -158,7 +160,13 @@ public class GameControl : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (markerRefs[0] == null)
+        if (playPostMortemSound)
+        {
+            playPostMortemSound = false;
+            GetComponent<AudioSource>().PlayOneShot(A_postMortemSound);
+        }
+
+        /*if (markerRefs[0] == null)
             return; 
         float shortestDistance = float.MaxValue;
         float totalDistance = 0;
@@ -184,7 +192,7 @@ public class GameControl : MonoBehaviour {
         {
             markersOutOfRange = true;
             markerPicked = true;
-        }
+        }*/
     }
 
     float loadTimer = 0;
@@ -199,146 +207,36 @@ public class GameControl : MonoBehaviour {
         else if (loadTimer < 2.5f)
             return;
 
-        if (markerPicked)
-        {
-            markerPicked = false;
-
-            foreach(GameObject marker in GameObject.FindGameObjectsWithTag("Marker"))
-            {
-                Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
-                Destroy(marker);
-            }
-
-            if (!markersOutOfRange && (sceneLoaded || PetKeeper.pet.markerSet == null) && !PetKeeper.pet.isDead)
-            {
-                generateNewMarkers();
-                markerRelativeDistances = new float[] { 0, 0, 0, 0, 0, 0, 0, 0 };
-            }else if (markersOutOfRange)
-            {
-                markerRelativeDistances = new float[] { 0, 0, 0, 0, 0, 0, 0, 0 };
-                markersOutOfRange = false;
-            }
-
-            sceneLoaded = true;
-
-            if (!PetKeeper.pet.isDead)
-            {
-                for (int i = 0; i < dirs.Length; i++)
-                {
-                    GameObject toSpawn = null;
-
-                    switch (PetKeeper.pet.markerSet[i])
-                    {
-                        case Marker.MarkerType.CURRENCY:
-                            toSpawn = P_MarkerCurrency;
-                            break;
-                        case Marker.MarkerType.FOOD:
-                            toSpawn = P_MarkerFood;
-                            break;
-                        case Marker.MarkerType.PARK:
-                            toSpawn = P_MarkerPark;
-                            break;
-                        case Marker.MarkerType.CRATE:
-                            toSpawn = P_MarkerCrate;
-                            break;
-                    }
-
-                    GameObject map = GameObject.FindGameObjectWithTag("Map");
-                    float scaleConversion = map.transform.localScale.x;
-
-                    float distance = markerRelativeDistances[i];
-                    if(distance == 0)
-                    {
-                        distance = UnityEngine.Random.Range(45.0f * scaleConversion, 120f * scaleConversion);
-                        markerRelativeDistances[i] = distance;
-                    }
-
-                    GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * distance), Quaternion.identity);
-                    //GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(4.0f * scaleConversion, 12f * scaleConversion)), Quaternion.identity);
-
-                    markerRefs[i] = marker;
-
-                    marker.transform.SetParent(augotchiMap.transform);
-                    GameObject poof = (GameObject) Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
-                    poof.transform.SetParent(marker.transform);
-
-                    marker.transform.localScale = new Vector3(1, 1, 1);
-
-                    marker.GetComponent<Marker>().gc = this;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < dirs.Length; i++)
-                {
-                    GameObject toSpawn = P_MarkerRevive;
-
-                    GameObject map = GameObject.FindGameObjectWithTag("Map");
-                    float scaleConversion = map.transform.localScale.x;
-
-                    float distance = markerRelativeDistances[i];
-                    if (distance == 0)
-                    {
-                        distance = UnityEngine.Random.Range(45.0f * scaleConversion, 120f * scaleConversion);
-                        markerRelativeDistances[i] = distance;
-                    }
-
-                    GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * distance), Quaternion.identity);
-                    //GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(4.0f * scaleConversion, 12f * scaleConversion)), Quaternion.identity);
-
-                    markerRefs[i] = marker;
-
-                    marker.transform.SetParent(augotchiMap.transform);
-                    Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
-
-                    marker.transform.localScale = new Vector3(1, 1, 1);
-
-                    marker.GetComponent<Marker>().gc = this;
 
 
-                    // TESTING!
+        // TESTING!
 
-                    /*string longLat = VectorExtensions.GetGeoPosition(
-                        marker.transform,
-                        Map.GetComponent<BasicMap>().CenterMercator,
-                        Map.GetComponent<BasicMap>().WorldRelativeScale
-                    ).ToString();
+        /*string longLat = VectorExtensions.GetGeoPosition(
+            marker.transform,
+            Map.GetComponent<BasicMap>().CenterMercator,
+            Map.GetComponent<BasicMap>().WorldRelativeScale
+        ).ToString();
 
-                    StartCoroutine(PostTestMarkerPositions(longLat));*/
+        StartCoroutine(PostTestMarkerPositions(longLat));*/
                     
-                    /*toSpawn = P_MarkerCurrency;
+        /*toSpawn = P_MarkerCurrency;
 
-                    string[] parts = longLat.Split(',');
-                    float longitude = float.Parse(parts[0]);
-                    float latitude = float.Parse(parts[1]);
-                    Vector3 fromLongLat = VectorExtensions.AsUnityPosition(new Vector2(latitude, longitude), Map.GetComponent<BasicMap>().CenterMercator, Map.GetComponent<BasicMap>().WorldRelativeScale);
+        string[] parts = longLat.Split(',');
+        float longitude = float.Parse(parts[0]);
+        float latitude = float.Parse(parts[1]);
+        Vector3 fromLongLat = VectorExtensions.AsUnityPosition(new Vector2(latitude, longitude), Map.GetComponent<BasicMap>().CenterMercator, Map.GetComponent<BasicMap>().WorldRelativeScale);
 
-                    marker = Instantiate(toSpawn, fromLongLat, Quaternion.identity);
-                    //GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(4.0f * scaleConversion, 12f * scaleConversion)), Quaternion.identity);
+        marker = Instantiate(toSpawn, fromLongLat, Quaternion.identity);
+        //GameObject marker = Instantiate(toSpawn, player.transform.position + (dirs[i].normalized * Random.Range(4.0f * scaleConversion, 12f * scaleConversion)), Quaternion.identity);
 
-                    markerRefs[i] = marker;
+        markerRefs[i] = marker;
 
-                    marker.transform.SetParent(augotchiMap.transform);
-                    Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
+        marker.transform.SetParent(augotchiMap.transform);
+        Instantiate(P_MarkerPoof, marker.transform.position, Quaternion.identity);
 
-                    marker.transform.localScale = new Vector3(1, 1, 1);
+        marker.transform.localScale = new Vector3(1, 1, 1);
 
-                    marker.GetComponent<Marker>().gc = this;*/
-
-
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < dirs.Length; i++)
-            {
-                GameObject map = GameObject.FindGameObjectWithTag("Map");
-                float scaleConversion = map.transform.localScale.x;
-
-                markerRelativeDistances[i] = (markerRefs[i].transform.position - player.transform.position).magnitude / scaleConversion;
-            }
-        }
+        marker.GetComponent<Marker>().gc = this;*/
 
         rewardTimer += Time.deltaTime;
         if(rewardStack.Count > 0 && rewardTimer > 0.6f)
@@ -348,6 +246,47 @@ public class GameControl : MonoBehaviour {
             rewardStack.RemoveAt(0);
         }
 	}
+
+    private void generateMarkerRing()
+    {
+        for (int i = 0; i < dirs.Length; i++){
+            float distance = UnityEngine.Random.Range(85f * 1, 125f * 1);
+            GameObject marker = Instantiate(P_MarkerGrass, player.transform.position + (dirs[i].normalized * distance), Quaternion.identity);
+            marker.GetComponent<Marker>().gc = this;
+        }
+
+        for (int i = 0; i < 16; i++)
+        {
+            generateRandomMarker();
+        }
+    }
+
+    private void generateRandomMarker()
+    {
+        Vector3 dir = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f)).normalized;
+        float distance = UnityEngine.Random.Range(75f * 1, 165f * 1);
+
+
+
+        GameObject toSpawn = null;
+        switch (UnityEngine.Random.Range(0, 2))
+        {
+            case 0:
+                toSpawn = P_MarkerGrass;
+                break;
+            case 1:
+                toSpawn = P_MarkerCrate;
+                break;
+        }
+
+        GameObject marker = Instantiate(toSpawn, player.transform.position + (dir * distance), Quaternion.identity);
+        marker.GetComponent<Marker>().gc = this;
+    }
+
+    public void respawnMarker()
+    {
+        generateRandomMarker();
+    }
 
     public void queueRewardText(string message, Color c)
     {
@@ -365,67 +304,6 @@ public class GameControl : MonoBehaviour {
         GetComponent<AudioSource>().PlayOneShot(A_RewardPop);
 
         go.GetComponent<RewardMessage>().setMessage(reward);
-    }
-
-    private void generateNewMarkers()
-    {
-        Marker.MarkerType[] newMarkers = new Marker.MarkerType[8];
-
-        if (PetKeeper.pet.happiness < 25)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                int rnd = UnityEngine.Random.Range(0, 1000);
-                if (rnd < 350)
-                {
-                    newMarkers[i] = Marker.MarkerType.CURRENCY;
-                }
-                else
-                {
-                    newMarkers[i] = Marker.MarkerType.FOOD;
-                }
-            }
-        }
-        else if(PetKeeper.pet.happiness < 75)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                int rnd = UnityEngine.Random.Range(0, 1000);
-                if (rnd < 450)
-                {
-                    newMarkers[i] = Marker.MarkerType.CURRENCY;
-                }
-                else if (rnd < 925)
-                {
-                    newMarkers[i] = Marker.MarkerType.FOOD;
-                }
-                else
-                {
-                    newMarkers[i] = Marker.MarkerType.CRATE;
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                int rnd = UnityEngine.Random.Range(0, 1000);
-                if (rnd < 450)
-                {
-                    newMarkers[i] = Marker.MarkerType.CURRENCY;
-                }
-                else if (rnd < 850)
-                {
-                    newMarkers[i] = Marker.MarkerType.FOOD;
-                }
-                else
-                {
-                    newMarkers[i] = Marker.MarkerType.CRATE;
-                }
-            }
-        }
-        
-        PetKeeper.pet.setMarkers(newMarkers);
     }
 
     public void startPlantingSeed(Seed seedInfo)
@@ -512,6 +390,12 @@ public class GameControl : MonoBehaviour {
         G_UIButtons.SetActive(true);
         G_CloseButton.SetActive(false);
         G_ModeHint.SetActive(false);
+    }
+
+    public static void playPostMortemAudioClip(AudioClip clip)
+    {
+        playPostMortemSound = true;
+        A_postMortemSound = clip;
     }
 
     // BACKEND!

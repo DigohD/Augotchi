@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P_MarkerPoof: {fileID: 1594924380138546, guid: e6ec36cd72d6b3d4c9e3f35f9614a6e6,
     type: 2}
+  G_Visuals: {fileID: 1526588289871196}
   gc: {fileID: 0}
   isIndividual: 1
 --- !u!136 &136167081954038462
