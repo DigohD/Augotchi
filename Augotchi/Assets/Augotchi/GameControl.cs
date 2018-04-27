@@ -32,6 +32,7 @@ public class GameControl : MonoBehaviour {
 
     public GameObject P_MarkerGrass;
     public GameObject P_MarkerCrate;
+    public GameObject P_MarkerRoot;
 
     public GameObject P_RewardText;
     public GameObject P_MarkerPoof;
@@ -90,8 +91,6 @@ public class GameControl : MonoBehaviour {
             Introduction.SetActive(true);
             firstStartup = false;
         }
-
-        generateMarkerRing();
 
         test();
     }
@@ -203,6 +202,7 @@ public class GameControl : MonoBehaviour {
             initBase();
             isInitialized = true;
             loadingScreen.SetActive(false);
+            generateMarkerRing();
         }
         else if (loadTimer < 2.5f)
             return;
@@ -255,7 +255,14 @@ public class GameControl : MonoBehaviour {
             marker.GetComponent<Marker>().gc = this;
         }
 
-        for (int i = 0; i < 16; i++)
+        Debug.LogWarning(PetKeeper.pet.inventory);
+        Debug.LogWarning(PetKeeper.pet.inventory.uniqueCounts);
+        if (PetKeeper.pet.inventory.uniqueCounts[(int) Inventory.UniqueType.WRONGWORLD_ROOTS] < 1)
+            generateSpecificMarker(P_MarkerRoot);
+        else
+            generateRandomMarker();
+
+        for (int i = 0; i < 15; i++)
         {
             generateRandomMarker();
         }
@@ -265,8 +272,6 @@ public class GameControl : MonoBehaviour {
     {
         Vector3 dir = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f)).normalized;
         float distance = UnityEngine.Random.Range(75f * 1, 165f * 1);
-
-
 
         GameObject toSpawn = null;
         switch (UnityEngine.Random.Range(0, 2))
@@ -283,8 +288,23 @@ public class GameControl : MonoBehaviour {
         marker.GetComponent<Marker>().gc = this;
     }
 
-    public void respawnMarker()
+    private void generateSpecificMarker(GameObject toSpawn)
     {
+        Vector3 dir = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f)).normalized;
+        float distance = UnityEngine.Random.Range(75f * 1, 165f * 1);
+
+        GameObject newMarker = Instantiate(toSpawn, player.transform.position + (dir * distance), Quaternion.identity);
+        newMarker.GetComponent<Marker>().gc = this;
+    }
+
+    public void respawnMarker(Marker marker)
+    {
+        if(marker is MarkerRoot && PetKeeper.pet.inventory.uniqueCounts[(int) Inventory.UniqueType.WRONGWORLD_ROOTS] < 1)
+        {
+            generateSpecificMarker(P_MarkerRoot);
+            return;
+        }
+
         generateRandomMarker();
     }
 

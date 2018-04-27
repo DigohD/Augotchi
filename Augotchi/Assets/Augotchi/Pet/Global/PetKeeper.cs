@@ -80,4 +80,9 @@ public class PetKeeper : MonoBehaviour {
         Firebase.Analytics.FirebaseAnalytics.LogEvent("Steplogger","Step", 1);
     }
 
+    public void DEBUG_Kill_Pet()
+    {
+        pet.die();
+    }
+
 }

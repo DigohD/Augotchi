@@ -18,21 +18,29 @@ public class Inventory {
         GOOSEBERRY = 2
     }
 
+    public enum UniqueType
+    {
+        WRONGWORLD_ROOTS = 0
+    }
+
     public int[] seedCounts;
     public int[] produceCounts;
+    public int[] uniqueCounts;
 
     public Inventory()
     {
         seedCounts = new int[3] { 3, 3, 3 };
         produceCounts = new int[3] { 0, 0, 0 };
+        uniqueCounts = new int[1] { 0 };
     }
 
-    public Inventory(int[] oldSeedCounts, int[] oldProduceCounts)
+    public Inventory(int[] oldSeedCounts, int[] oldProduceCounts, int[] oldUniqueCounts)
     {
         seedCounts = new int[3];
         produceCounts = new int[3];
+        uniqueCounts = new int[1];
 
-        for(int i = 0; i < oldSeedCounts.Length; i++)
+        for (int i = 0; i < oldSeedCounts.Length; i++)
         {
             seedCounts[i] = oldSeedCounts[i];
         }
@@ -40,6 +48,11 @@ public class Inventory {
         for (int i = 0; i < oldProduceCounts.Length; i++)
         {
             produceCounts[i] = oldProduceCounts[i];
+        }
+
+        for (int i = 0; i < oldUniqueCounts.Length; i++)
+        {
+            uniqueCounts[i] = oldUniqueCounts[i];
         }
     }
 
@@ -106,6 +119,21 @@ public class Inventory {
                     0f,
                     -1.5f,
                     5f
+                );
+        }
+
+        return null;
+    }
+
+    public static Unique getUniqueTypeInfo(UniqueType type)
+    {
+        switch (type)
+        {
+            case UniqueType.WRONGWORLD_ROOTS:
+                return new Unique(
+                    "Wrongworld Roots",
+                    "Augotchi/Image/UIUnique/Wrongworldroot",
+                    UniqueType.WRONGWORLD_ROOTS
                 );
         }
 

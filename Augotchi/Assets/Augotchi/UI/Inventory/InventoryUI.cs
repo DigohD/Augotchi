@@ -10,12 +10,16 @@ public class InventoryUI : MonoBehaviour {
 
     public GameObject P_SeedItem;
     public GameObject P_ProduceItem;
+    public GameObject P_UniqueItem;
 
     public Transform T_SeedList;
     public GameObject G_SeedSection;
 
     public Transform T_ProduceList;
     public GameObject G_ProduceSection;
+
+    public Transform T_UniqueList;
+    public GameObject G_UniqueSection;
 
     private void Start()
     {
@@ -33,6 +37,7 @@ public class InventoryUI : MonoBehaviour {
     {
         G_SeedSection.SetActive(false);
         G_ProduceSection.SetActive(false);
+        G_UniqueSection.SetActive(false);
 
         switch (sectionIndex)
         {
@@ -41,6 +46,9 @@ public class InventoryUI : MonoBehaviour {
                 break;
             case 1:
                 G_ProduceSection.SetActive(true);
+                break;
+            case 2:
+                G_UniqueSection.SetActive(true);
                 break;
         }
     }
@@ -51,6 +59,7 @@ public class InventoryUI : MonoBehaviour {
 
         renderSeedList();
         renderProduceList();
+        renderUniqueList();
     }
 
     private void renderSeedList()
@@ -131,6 +140,47 @@ public class InventoryUI : MonoBehaviour {
                 );
 
                 currentProduce++;
+            }
+            j++;
+        }
+    }
+
+    private void renderUniqueList()
+    {
+        foreach (Transform t in T_UniqueList)
+            Destroy(t.gameObject);
+
+        ArrayList uniqueIndexesToRender = new ArrayList();
+        for (int k = 0; k < PetKeeper.pet.inventory.uniqueCounts.Length; k++)
+        {
+            if (PetKeeper.pet.inventory.uniqueCounts[k] > 0)
+                uniqueIndexesToRender.Add(k);
+        }
+
+        int uniqueCount = uniqueIndexesToRender.Count;
+        int currentUnique = 0;
+
+        T_UniqueList.localPosition = Vector3.zero;
+        ((RectTransform)T_UniqueList).sizeDelta = new Vector2(0, (uniqueCount / 3) * 257);
+
+        int j = 0;
+        while (currentUnique < uniqueCount)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (currentUnique >= uniqueCount)
+                    break;
+
+                GameObject newItem = Instantiate(P_UniqueItem, Vector3.zero, Quaternion.identity);
+                newItem.transform.SetParent(T_UniqueList, false);
+                newItem.transform.localPosition = new Vector2(i * 257, j * -257);
+
+                newItem.GetComponent<UniqueItem>().initUniqueItem(
+                    PetKeeper.pet.inventory.uniqueCounts[(int) uniqueIndexesToRender[currentUnique]],
+                    Inventory.getUniqueTypeInfo((Inventory.UniqueType)(int) uniqueIndexesToRender[currentUnique])
+                );
+
+                currentUnique++;
             }
             j++;
         }

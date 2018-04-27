@@ -269,6 +269,8 @@ public class PetGlobal {
             die();
         }
 
+        //die();
+
         activeTicks++;
         
 
@@ -302,7 +304,7 @@ public class PetGlobal {
         Save(false);
     }
 
-    private void revive()
+    public void revive()
     {
         isDead = false;
         reviveProgress = 0;
@@ -312,6 +314,8 @@ public class PetGlobal {
         hunger = 25;
         happiness = 25;
         health = 25;
+
+        Save(false);
     }
 
     public void degenerate()
@@ -753,7 +757,12 @@ public class PetGlobal {
 
             name = pg.name;
 
-            this.inventory = new Inventory(pg.inventory.seedCounts, pg.inventory.produceCounts);
+
+            this.inventory = new Inventory(
+                pg.inventory.seedCounts == null ? new int[0] : pg.inventory.seedCounts,
+                pg.inventory.produceCounts == null ? new int[0] : pg.inventory.produceCounts,
+                pg.inventory.uniqueCounts == null ? new int[0] : pg.inventory.uniqueCounts
+            );
             this.Base = pg.Base;
 
             file.Close();

@@ -44,7 +44,16 @@ public abstract class Marker : MonoBehaviour {
 
             executeEffect();
 
-            gc.respawnMarker();
+            try
+            {
+                gc.respawnMarker(this);
+            }catch(System.Exception e)
+            {
+
+                Debug.LogError("Marker not have gamecontrol ref. " + name);
+                return;
+            }
+            
 
             if (isIndividual)
                 Destroy(gameObject);
@@ -68,13 +77,13 @@ public abstract class Marker : MonoBehaviour {
             GetComponent<AudioSource>().PlayOneShot(A_MarkerAppear);
         }else if(!isRevealing && (transform.position - player.transform.position).magnitude > 175f)
         {
-            gc.respawnMarker();
+            gc.respawnMarker(this);
 
             Destroy(gameObject);
         }
         else if (isRevealing && (transform.position - player.transform.position).magnitude > 300)
         {
-            gc.respawnMarker();
+            gc.respawnMarker(this);
 
             Destroy(gameObject);
         }

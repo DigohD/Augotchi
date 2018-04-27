@@ -1208,7 +1208,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 7
+      scalar: 4
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1306,8 +1306,8 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.19958717
-          value: 0.68613255
+          time: 0.41011268
+          value: 0.5577527
           inSlope: 1.2843311
           outSlope: 1.2843311
           tangentMode: 0
@@ -1556,9 +1556,9 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.7794118, g: 0.7794118, b: 0.7794118, a: 0.6784314}
+        key0: {r: 1, g: 1, b: 1, a: 0.43529412}
         key1: {r: 1, g: 1, b: 1, a: 0}
-        key2: {r: 0, g: 0, b: 0, a: 0}
+        key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1566,7 +1566,7 @@ ParticleSystem:
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 65535
-        ctime2: 0
+        ctime2: 65535
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -7376,7 +7376,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 80e4a25e824765c429ab7ee58f415ae1, type: 2}
+  - {fileID: 2100000, guid: ea1821629e07a9e4c8792ed27a5e3b85, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
