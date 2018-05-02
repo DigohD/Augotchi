@@ -25,8 +25,6 @@ public class WorldButton : MonoBehaviour {
 
     public void onClick()
     {
-        PetKeeper.pet.clearFeedingListeners();
-
         if (customizationUI)
         {
             if (isCreation)

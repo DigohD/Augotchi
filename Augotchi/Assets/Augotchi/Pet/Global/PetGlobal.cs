@@ -13,6 +13,8 @@ public class PetGlobal {
     public Inventory inventory;
     public Base Base;
 
+    public List<Quest> questLog;
+
     readonly float MIN_HUNGER = 0, MAX_HUNGER = 100;
     readonly float MIN_HAPPINESS = 0, MAX_HAPPINESS = 100;
     readonly float MIN_HEALTH = 0, MAX_HEALTH = 100;
@@ -40,16 +42,19 @@ public class PetGlobal {
     public int vegetableFed;
 
     public int currency;
+    public int buildingMaterials;
     public int puffles = 100;
 
     long saveTimeStamp;
 
     long lastPettingTimeStamp;
 
-    public event EventHandler OnPetting;
-    public event EventHandler OnFeedCannedFood;
-    public event EventHandler OnFeedVegetables;
-    public event EventHandler OnFeedCandy;
+    public event EventHandler OnBuildingMaterialsGained;
+    public event EventHandler OnCoinsGained;
+    public event EventHandler OnSeedGained;
+    public event EventHandler OnStepTaken;
+    public event EventHandler OnFeeding;
+    public event EventHandler OnExperienceGained;
 
     public Marker.MarkerType[] markerSet;
     public float[] markerRelativeDistances;
@@ -97,6 +102,7 @@ public class PetGlobal {
         long saveTimeStamp, 
         long lastPettingTimeStamp, 
         int currency, 
+        int buildingMaterials,
         Marker.MarkerType[] markerSet, 
         PetVisualData petVisualData, 
         PetUnlocksData petUnlocksData,
@@ -122,6 +128,7 @@ public class PetGlobal {
         int longestAliveTicks,
         string name,
         Inventory inventory,
+        List<Quest> questLog,
         Base Base
         )
     {
@@ -134,6 +141,7 @@ public class PetGlobal {
         this.vegetables = vegetables;
 
         this.currency = currency;
+        this.buildingMaterials = buildingMaterials;
 
         this.lastPettingTimeStamp = lastPettingTimeStamp;
 
@@ -178,7 +186,14 @@ public class PetGlobal {
         this.name = name;
 
         this.inventory = inventory;
+        this.questLog = questLog;
+
         this.Base = Base;
+    }
+
+    private void initListeners()
+    {
+        
     }
 
     public void degenerateTick()
@@ -464,64 +479,29 @@ public class PetGlobal {
         happiness -= (0.005f * 360 * 24);
     }
 
-    public void feedCandy()
+    public void feed(float hunger, float health, float happiness)
     {
-        if (candy <= 0)
-            return;
+        addHunger(hunger);
+        addHealth(health);
+        addHappiness(happiness);
 
-        if (OnFeedCandy != null)
-            OnFeedCandy(this, new EventArgs());
-
-        happiness += 15f;
-        health -= 7.5f;
-        hunger += 5f;
-
-        candy--;
-        candyFed++;
+        if (this.OnFeeding != null)
+            this.OnFeeding(this, new Quest.QuestEventArgs(1));
 
         Save(false);
     }
 
-    public void feedFood()
+    public void clearAllListeners()
     {
-        if (food <= 0)
-            return;
 
-        if (OnFeedCannedFood != null)
-            OnFeedCannedFood(this, new EventArgs());
-
-        hunger += 25f;
-
-        food--;
-        foodFed++;
-
-        Save(false);
     }
 
-    public void feedVegetables()
+    public void addStep()
     {
-        if (vegetables <= 0)
-            return;
+        PetKeeper.pet.stepCounter++;
 
-        if (OnFeedVegetables != null)
-            OnFeedVegetables(this, new EventArgs());
-
-        hunger += 10f;
-        health += 10f;
-        happiness -= 2.5f;
-
-        vegetables--;
-        vegetableFed++;
-
-        Save(false);
-    }
-
-    public void clearFeedingListeners()
-    {
-        OnFeedCandy = null;
-        OnFeedVegetables = null;
-        OnFeedCannedFood = null;
-        OnPetting = null;
+        if(this.OnStepTaken != null)
+            this.OnStepTaken(this, new Quest.QuestEventArgs(1));
     }
 
     public void hundredSteps()
@@ -531,9 +511,43 @@ public class PetGlobal {
         Save(false);
     }
 
+    public void addSeed(Inventory.SeedType seedType, int amount)
+    {
+        switch (seedType)
+        {
+            case Inventory.SeedType.CARROT_SEED:
+                inventory.seedCounts[(int) Inventory.SeedType.CARROT_SEED] += amount;
+                break;
+            case Inventory.SeedType.GOOSEBERRY_SEED:
+                inventory.seedCounts[(int) Inventory.SeedType.GOOSEBERRY_SEED] += amount;
+                break;
+            case Inventory.SeedType.MEATBALL_SEED:
+                inventory.seedCounts[(int) Inventory.SeedType.MEATBALL_SEED] += amount;
+                break;
+        }
+
+        if(this.OnSeedGained != null)
+            this.OnSeedGained(this, new Quest.QuestEventArgs(amount));
+
+        Save(false);
+    }
+
     public void giveCurrency(int amount)
     {
         currency += amount;
+
+        if(this.OnCoinsGained != null)
+            this.OnCoinsGained(this, new Quest.QuestEventArgs(amount));
+
+        Save(false);
+    }
+
+    public void giveBuildingMaterials(int amount)
+    {
+        buildingMaterials += amount;
+
+        if(this.OnBuildingMaterialsGained != null)
+            this.OnBuildingMaterialsGained(this, new Quest.QuestEventArgs(amount));
 
         Save(false);
     }
@@ -554,9 +568,6 @@ public class PetGlobal {
 
         if(ts.Hours > 0 || ts.Days > 0)
         {
-            if (OnPetting != null)
-                OnPetting(this, new EventArgs());
-
             lastPettingTimeStamp = nowDT;
 
             happiness += 5f;
@@ -567,21 +578,21 @@ public class PetGlobal {
         }
     }
 
-    public void addHunger(int amount)
+    public void addHunger(float amount)
     {
         hunger += amount;
 
         Save(false);
     }
 
-    public void addHappiness(int amount)
+    public void addHappiness(float amount)
     {
         happiness += amount;
 
         Save(false);
     }
 
-    public void addHealth(int amount)
+    public void addHealth(float amount)
     {
         health += amount;
 
@@ -604,6 +615,9 @@ public class PetGlobal {
 
             addRandomLootItem();
         }
+
+        if(this.OnExperienceGained != null)
+            this.OnExperienceGained(this, new Quest.QuestEventArgs(amount));
 
         Save(false);
     }
@@ -629,7 +643,10 @@ public class PetGlobal {
         if (inventory == null)
             inventory = new Inventory();
 
-        BinaryFormatter bf = new BinaryFormatter();
+        if(questLog == null)
+            questLog = new List<Quest>();
+
+    BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/AugotchiSave.gd");
         bf.Serialize(file, 
             new PetGlobal(
@@ -642,6 +659,7 @@ public class PetGlobal {
                 saveTimeStamp, 
                 lastPettingTimeStamp, 
                 currency, 
+                buildingMaterials,
                 markerSet,
                 petVisualData, 
                 petUnlocksData,
@@ -667,6 +685,7 @@ public class PetGlobal {
                 longestAliveTicks,
                 name,
                 inventory,
+                questLog,
                 Base
             ));
         file.Close();
@@ -693,6 +712,7 @@ public class PetGlobal {
             vegetables = pg.vegetables;
 
             currency = pg.currency;
+            buildingMaterials = pg.buildingMaterials;
 
             saveTimeStamp = pg.saveTimeStamp;
 
@@ -763,6 +783,12 @@ public class PetGlobal {
                 pg.inventory.produceCounts == null ? new int[0] : pg.inventory.produceCounts,
                 pg.inventory.uniqueCounts == null ? new int[0] : pg.inventory.uniqueCounts
             );
+
+            this.questLog = pg.questLog == null ? new List<Quest>() : pg.questLog;
+            foreach (Quest q in questLog)
+                q.initQuestListener();
+
+
             this.Base = pg.Base;
 
             file.Close();
@@ -798,6 +824,7 @@ public class PetGlobal {
         vegetables = 5;
 
         currency = 0;
+        buildingMaterials = 0;
 
         lastPettingTimeStamp = 0;
 
@@ -888,6 +915,7 @@ public class PetGlobal {
             vegetables = pg.vegetables;
 
             currency = pg.currency;
+            buildingMaterials = pg.buildingMaterials;
 
             saveTimeStamp = pg.saveTimeStamp;
 

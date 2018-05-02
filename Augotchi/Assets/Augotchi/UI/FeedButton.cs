@@ -29,17 +29,6 @@ public class FeedButton : MonoBehaviour {
 
     public void onClick()
     {
-        switch (feedType)
-        {
-            case FeedType.CANDY:
-                PetKeeper.pet.feedCandy();
-                break;
-            case FeedType.FOOD:
-                PetKeeper.pet.feedFood();
-                break;
-            case FeedType.VEGETABLES:
-                PetKeeper.pet.feedVegetables();
-                break;
-        }
+
     }
 }

@@ -18,10 +18,7 @@ public class HomePet : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        PetKeeper.pet.OnPetting += this.OnPetting;
-        PetKeeper.pet.OnFeedCandy += this.OnFeedCandy;
-        PetKeeper.pet.OnFeedCannedFood += this.OnFeedCannedFood;
-        PetKeeper.pet.OnFeedVegetables += this.OnFeedVegetables;
+
     }
 
     private void Update()

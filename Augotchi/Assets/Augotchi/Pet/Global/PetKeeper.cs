@@ -26,8 +26,6 @@ public class PetKeeper : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-        Debug.LogWarning("Init PetKeeper");
-
         pedometer = new Pedometer(this.OnStep);
 
         pet = new PetGlobal();
@@ -74,10 +72,9 @@ public class PetKeeper : MonoBehaviour {
 
         PlayerScript.steps = this.steps;
 
-        PetKeeper.pet.stepCounter++;
+        pet.addStep();
+        
         PetKeeper.pet.Save(false);
-
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("Steplogger","Step", 1);
     }
 
     public void DEBUG_Kill_Pet()

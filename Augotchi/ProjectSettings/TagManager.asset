@@ -16,6 +16,7 @@ TagManager:
   - Poof
   - IndividualMarker
   - Base
+  - FarmPlot
   layers:
   - Default
   - TransparentFX

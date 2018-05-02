@@ -29,8 +29,6 @@ public class RewardMessage : MonoBehaviour {
 
     public void setMessage(Reward reward)
     {
-        Debug.LogWarning(reward.color.ToString());
-
         GetComponent<TextMesh>().text = reward.message;
         transform.GetChild(0).GetComponent<TextMesh>().text = reward.message;
         transform.GetChild(0).GetComponent<TextMesh>().color = reward.color;

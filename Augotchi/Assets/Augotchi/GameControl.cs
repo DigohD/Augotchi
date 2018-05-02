@@ -66,6 +66,8 @@ public class GameControl : MonoBehaviour {
 
     public GameObject loadingScreen;
 
+    public GameObject buildBaseButton;
+
     Vector3[] dirs = new Vector3[8]
     {
         new Vector3(1, 0, 0),
@@ -99,8 +101,11 @@ public class GameControl : MonoBehaviour {
     {
         if(PetKeeper.pet.Base.longLat == null)
         {
+            buildBaseButton.SetActive(true);
             return;
         }
+
+        buildBaseButton.SetActive(false);
 
         GameObject Map = GameObject.FindGameObjectWithTag("Map");
 
@@ -387,7 +392,12 @@ public class GameControl : MonoBehaviour {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject baseObject = GameObject.FindGameObjectWithTag("Base");
 
+        foreach (GameObject fp in GameObject.FindGameObjectsWithTag("FarmPlot"))
+            Destroy(fp);
+
         Destroy(baseObject);
+
+        PetKeeper.pet.Base.gardenCrops.Clear();
 
         string longLat = VectorExtensions.GetGeoPosition(
             player.transform,
