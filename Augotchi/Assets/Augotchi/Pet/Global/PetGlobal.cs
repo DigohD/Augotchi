@@ -785,6 +785,14 @@ public class PetGlobal {
             );
 
             this.questLog = pg.questLog == null ? new List<Quest>() : pg.questLog;
+
+            this.questLog.Clear();
+
+            this.questLog.Add(Quest.generateQuest());
+            this.questLog.Add(Quest.generateQuest());
+            this.questLog.Add(Quest.generateQuest());
+            this.questLog.Add(Quest.generateQuest());
+
             foreach (Quest q in questLog)
                 q.initQuestListener();
 

@@ -51,7 +51,7 @@ public class PetWorld : MonoBehaviour {
     {
         if ((pws == PetWorldState.IDLE_SIT || pws == PetWorldState.IDLE_STAND) && Random.Range(0, 1000) < 3)
         {
-            if(pws == PetWorldState.IDLE_SIT && Random.Range(0, 3) == 0)
+            /*if(pws == PetWorldState.IDLE_SIT && Random.Range(0, 3) == 0)
             {
                 GameControl gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>();
                 gc.queueRewardText(PetKeeper.pet.name + "\nPooped!", new Color(0.39f, 0.21f, 0.1f));
@@ -63,7 +63,7 @@ public class PetWorld : MonoBehaviour {
                 newPoop.transform.SetParent(map.transform);
                 newPoop.transform.localScale = new Vector3(1, 1, 1);
                 newPoop.GetComponentInChildren<ParticleSystem>().transform.localScale = Vector3.one;
-            }
+            }*/
                 
             goToTarget();
         }

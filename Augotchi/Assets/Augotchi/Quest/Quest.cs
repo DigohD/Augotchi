@@ -19,22 +19,42 @@ public class Quest {
     public string title;
     public string description;
 
+    public string imagePath;
+
     public int target;
     public int progress;
 
-    public int reward;
+    public QuestRewardType rewardType;
+    public string rewardImagePath;
+    public int rewardAmount;
 
     public bool complete = false;
 
-    public enum QuestType { GATHERING_COINS, GATHERING_BUILDING_MATERIALS, FIND_SEEDS, GAIN_EXPERIENCE, FEED_FOOD, WALK }
+    public enum QuestType {
+        GATHERING_COINS = 0,
+        GATHERING_BUILDING_MATERIALS = 1,
+        FIND_SEEDS = 2,
+        GAIN_EXPERIENCE = 3,
+        FEED_FOOD = 4,
+        WALK = 5
+    }
+
+    public enum QuestRewardType
+    {
+        COINS = 0,
+        BUILDING_MATERIALS = 1,
+        EXPERIENCE = 2
+    }
+
     public QuestType questType;
 
-    public Quest(QuestType questType, int target, int progress, int reward)
+    public Quest(QuestType questType, int target, QuestRewardType rewardType, int reward, string rewardImagePath)
     {
         this.questType = questType;
         this.target = target;
-        this.progress = progress;
-        this.reward = reward;
+        this.rewardAmount = reward;
+        this.rewardType = rewardType;
+        this.rewardImagePath = rewardImagePath;
 
         switch (questType)
         {
@@ -103,4 +123,108 @@ public class Quest {
 
         QuestUI.reRender = true;
     }
+
+    public static Quest generateQuest()
+    {
+        QuestRewardType rewardType = (QuestRewardType) UnityEngine.Random.Range(0, Enum.GetNames(typeof(QuestRewardType)).Length);
+
+        Quest toReturn = null;
+        switch ((QuestType) UnityEngine.Random.Range(0, Enum.GetNames(typeof(QuestType)).Length))
+        {
+            case QuestType.FEED_FOOD:
+                int rnd = UnityEngine.Random.Range(1, 4);
+                toReturn = new Quest(
+                    QuestType.FEED_FOOD,
+                    rnd * 5,
+                    rewardType,
+                    rnd * 20 * getRewardTypeConversionRate(rewardType),
+                    getRewardTypeImagePath(rewardType)
+                );
+                break;
+            case QuestType.FIND_SEEDS:
+                rnd = UnityEngine.Random.Range(3, 7);
+                toReturn = new Quest(
+                    QuestType.FIND_SEEDS,
+                    rnd * 4,
+                    rewardType,
+                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    getRewardTypeImagePath(rewardType)
+                );
+                break;
+            case QuestType.GAIN_EXPERIENCE:
+                rnd = UnityEngine.Random.Range(2, 11);
+                toReturn = new Quest(
+                    QuestType.GAIN_EXPERIENCE,
+                    rnd * 500,
+                    rewardType,
+                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    getRewardTypeImagePath(rewardType)
+                );
+                break;
+            case QuestType.GATHERING_BUILDING_MATERIALS:
+                rnd = UnityEngine.Random.Range(1, 5);
+                toReturn = new Quest(
+                    QuestType.GATHERING_BUILDING_MATERIALS,
+                    rnd * 25,
+                    rewardType,
+                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    getRewardTypeImagePath(rewardType)
+                );
+                break;
+            case QuestType.GATHERING_COINS:
+                rnd = UnityEngine.Random.Range(1, 11);
+                toReturn = new Quest(
+                    QuestType.GATHERING_COINS,
+                    rnd * 50,
+                    rewardType,
+                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    getRewardTypeImagePath(rewardType)
+                );
+                break;
+            case QuestType.WALK:
+                rnd = UnityEngine.Random.Range(1, 7);
+                toReturn = new Quest(
+                    QuestType.WALK,
+                    rnd * 500,
+                    rewardType,
+                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    getRewardTypeImagePath(rewardType)
+                );
+                break;
+        }
+
+        return toReturn;
+    }
+
+    private static int getRewardTypeConversionRate(QuestRewardType rewardType)
+    {
+        switch (rewardType)
+        {
+            case QuestRewardType.BUILDING_MATERIALS:
+                return 1;
+            case QuestRewardType.COINS:
+                return 2;
+            case QuestRewardType.EXPERIENCE:
+                return 5;
+        }
+
+        return 1;
+    }
+
+    private static string getRewardTypeImagePath(QuestRewardType rewardType)
+    {
+        switch (rewardType)
+        {
+            case QuestRewardType.BUILDING_MATERIALS:
+                return "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries";
+            case QuestRewardType.COINS:
+                return "Augotchi/Image/UIProduce/ProduceIcon_Carrot";
+            case QuestRewardType.EXPERIENCE:
+                return "Augotchi/Image/UIProduce/ProduceIcon_Meatball";
+        }
+
+        return "Augotchi/Image/Whiskers";
+    }
+
+
 }
