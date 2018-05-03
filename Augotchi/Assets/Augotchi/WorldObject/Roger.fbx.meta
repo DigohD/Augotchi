@@ -1,0 +1,220 @@
+fileFormatVersion: 2
+guid: a1456093fbbe9ae4b85eab3b9d09676c
+timeCreated: 1525358132
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Animal
+    100002: Armature
+    100004: BackLeg_Foot.L
+    100006: BackLeg_Foot.L_end
+    100008: BackLeg_Foot.R
+    100010: BackLeg_Foot.R_end
+    100012: BackLeg_Lower.L
+    100014: BackLeg_Lower.R
+    100016: BackLeg_Middle.L
+    100018: BackLeg_Middle.R
+    100020: BackLeg_Upper.L
+    100022: BackLeg_Upper.R
+    100024: Backpack
+    100026: Ear_Base.L
+    100028: Ear_Base.R
+    100030: Ear_Lower.L
+    100032: Ear_Lower.L_end
+    100034: Ear_Lower.R
+    100036: Ear_Lower.R_end
+    100038: Ears_1
+    100040: FrontLeg_Foot.L
+    100042: FrontLeg_Foot.R
+    100044: FrontLeg_Lower.L
+    100046: FrontLeg_Lower.R
+    100048: FrontLeg_Toes.L
+    100050: FrontLeg_Toes.L_end
+    100052: FrontLeg_Toes.R
+    100054: FrontLeg_Toes.R_end
+    100056: FrontLeg_Upper.L
+    100058: FrontLeg_Upper.R
+    100060: Head
+    100062: Head_end
+    100064: Hip.L
+    100066: Hip.R
+    100068: LowerBack
+    100070: LowerNeck
+    100072: MainBody
+    100074: MiddleBack
+    100076: MiddleNeck
+    100078: //RootNode
+    100080: Shoulder.L
+    100082: Shoulder.R
+    100084: Tail_1
+    100086: Tail_1 1
+    100088: Tail_2
+    100090: Tail_3
+    100092: Tail_4
+    100094: Tail_5
+    100096: Tail_5_end
+    100098: UpperNeck
+    400000: Animal
+    400002: Armature
+    400004: BackLeg_Foot.L
+    400006: BackLeg_Foot.L_end
+    400008: BackLeg_Foot.R
+    400010: BackLeg_Foot.R_end
+    400012: BackLeg_Lower.L
+    400014: BackLeg_Lower.R
+    400016: BackLeg_Middle.L
+    400018: BackLeg_Middle.R
+    400020: BackLeg_Upper.L
+    400022: BackLeg_Upper.R
+    400024: Backpack
+    400026: Ear_Base.L
+    400028: Ear_Base.R
+    400030: Ear_Lower.L
+    400032: Ear_Lower.L_end
+    400034: Ear_Lower.R
+    400036: Ear_Lower.R_end
+    400038: Ears_1
+    400040: FrontLeg_Foot.L
+    400042: FrontLeg_Foot.R
+    400044: FrontLeg_Lower.L
+    400046: FrontLeg_Lower.R
+    400048: FrontLeg_Toes.L
+    400050: FrontLeg_Toes.L_end
+    400052: FrontLeg_Toes.R
+    400054: FrontLeg_Toes.R_end
+    400056: FrontLeg_Upper.L
+    400058: FrontLeg_Upper.R
+    400060: Head
+    400062: Head_end
+    400064: Hip.L
+    400066: Hip.R
+    400068: LowerBack
+    400070: LowerNeck
+    400072: MainBody
+    400074: MiddleBack
+    400076: MiddleNeck
+    400078: //RootNode
+    400080: Shoulder.L
+    400082: Shoulder.R
+    400084: Tail_1
+    400086: Tail_1 1
+    400088: Tail_2
+    400090: Tail_3
+    400092: Tail_4
+    400094: Tail_5
+    400096: Tail_5_end
+    400098: UpperNeck
+    2100000: Material
+    2100002: Material.001
+    2100004: Body
+    2100006: Whiskers
+    4300000: Backpack
+    4300002: Tail_1
+    4300004: Ears_1
+    4300006: Animal
+    9500000: //RootNode
+    13700000: Animal
+    13700002: Backpack
+    13700004: Ears_1
+    13700006: Tail_1
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: 3fd28f82498368b47a4919c453cda206, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: f6be51d0899e737468fe54072878f1ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: a9114ef51308c354abea9d58b6bd3264, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Whiskers
+    second: {fileID: 2100000, guid: 868e8c346eb54484d892609f6d8e041b, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
