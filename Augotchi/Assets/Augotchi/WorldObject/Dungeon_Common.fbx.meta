@@ -1,17 +1,35 @@
 fileFormatVersion: 2
-guid: d4fb2591c504e0d46be223b4da004fea
-timeCreated: 1525277417
+guid: ab3636faa7982ca409006c4a3c78d596
+timeCreated: 1525338323
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: unnamed
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Icosphere
-  externalObjects: {}
+    100000: Cave
+    100002: //RootNode
+    100004: Grass
+    400000: Cave
+    400002: //RootNode
+    400004: Grass
+    2100000: Material_001
+    2100002: Material
+    2300000: Cave
+    2300002: Grass
+    3300000: Cave
+    3300002: Grass
+    4300000: Cave
+    4300002: Grass
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 6cc71f9f371cae4419f7eefe7562f815, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_001
+    second: {fileID: 2100000, guid: 84e8432337c100046a26a39ff9e5e032, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
