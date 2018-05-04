@@ -30,13 +30,19 @@ public class Quest {
 
     public bool complete = false;
 
+
+    /*
+     * Find my missing X
+     */
     public enum QuestType {
         GATHERING_COINS = 0,
         GATHERING_BUILDING_MATERIALS = 1,
         FIND_SEEDS = 2,
         GAIN_EXPERIENCE = 3,
         FEED_FOOD = 4,
-        WALK = 5
+        WALK = 5,
+        HARVEST = 6,
+        MARKERS = 7
     }
 
     public enum QuestRewardType
@@ -63,7 +69,7 @@ public class Quest {
                 this.description = "Gather building materials";
                 break;
             case QuestType.GATHERING_COINS:
-                this.title = "Treasure hunt!";
+                this.title = "Coinspiration theory!";
                 this.description = "Gather a number of coins.";
                 break;
             case QuestType.FEED_FOOD:
@@ -81,6 +87,14 @@ public class Quest {
             case QuestType.WALK:
                 this.title = "Walk in the park!";
                 this.description = "Take a number of steps.";
+                break;
+            case QuestType.HARVEST:
+                this.title = "Farm plot hot shot!";
+                this.description = "Harvest produce from your farm plots a number of times.";
+                break;
+            case QuestType.MARKERS:
+                this.title = "Mark my world!";
+                this.description = "Find and activate a number of markers in the world.";
                 break;
         }
 
@@ -109,6 +123,12 @@ public class Quest {
             case QuestType.WALK:
                 PetKeeper.pet.OnStepTaken += this.OnQuestProgress;
                 break;
+            case QuestType.HARVEST:
+                PetKeeper.pet.OnFarmHarvest += this.OnQuestProgress;
+                break;
+            case QuestType.MARKERS:
+                PetKeeper.pet.OnMarkerPicked += this.OnQuestProgress;
+                break;
         }
     }
 
@@ -126,10 +146,25 @@ public class Quest {
 
     public static Quest generateQuest()
     {
-        QuestRewardType rewardType = (QuestRewardType) UnityEngine.Random.Range(0, Enum.GetNames(typeof(QuestRewardType)).Length);
+        QuestRewardType rewardType = (QuestRewardType)UnityEngine.Random.Range(0, Enum.GetNames(typeof(QuestRewardType)).Length);
+
+        QuestType questType = 0;
+        bool questAlreadyInLog = false;
+        do
+        {
+            questAlreadyInLog = false;
+
+            questType = (QuestType)UnityEngine.Random.Range(0, Enum.GetNames(typeof(QuestType)).Length);
+
+            foreach (Quest q in PetKeeper.pet.questLog)
+            {
+                if (q.questType == questType)
+                    questAlreadyInLog = true;
+            }
+        } while (questAlreadyInLog);
 
         Quest toReturn = null;
-        switch ((QuestType) UnityEngine.Random.Range(0, Enum.GetNames(typeof(QuestType)).Length))
+        switch (questType)
         {
             case QuestType.FEED_FOOD:
                 int rnd = UnityEngine.Random.Range(1, 4);
@@ -141,6 +176,7 @@ public class Quest {
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
+
             case QuestType.FIND_SEEDS:
                 rnd = UnityEngine.Random.Range(3, 7);
                 toReturn = new Quest(
@@ -151,6 +187,7 @@ public class Quest {
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
+
             case QuestType.GAIN_EXPERIENCE:
                 rnd = UnityEngine.Random.Range(2, 11);
                 toReturn = new Quest(
@@ -161,6 +198,7 @@ public class Quest {
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
+
             case QuestType.GATHERING_BUILDING_MATERIALS:
                 rnd = UnityEngine.Random.Range(1, 5);
                 toReturn = new Quest(
@@ -171,6 +209,7 @@ public class Quest {
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
+
             case QuestType.GATHERING_COINS:
                 rnd = UnityEngine.Random.Range(1, 11);
                 toReturn = new Quest(
@@ -181,6 +220,7 @@ public class Quest {
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
+
             case QuestType.WALK:
                 rnd = UnityEngine.Random.Range(1, 7);
                 toReturn = new Quest(
@@ -188,6 +228,28 @@ public class Quest {
                     rnd * 500,
                     rewardType,
                     rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    getRewardTypeImagePath(rewardType)
+                );
+                break;
+
+            case QuestType.HARVEST:
+                rnd = UnityEngine.Random.Range(3, 10);
+                toReturn = new Quest(
+                    QuestType.HARVEST,
+                    rnd,
+                    rewardType,
+                    rnd * 25 * getRewardTypeConversionRate(rewardType),
+                    getRewardTypeImagePath(rewardType)
+                );
+                break;
+
+            case QuestType.MARKERS:
+                rnd = UnityEngine.Random.Range(3, 7);
+                toReturn = new Quest(
+                    QuestType.MARKERS,
+                    rnd * 5,
+                    rewardType,
+                    rnd * 5 * getRewardTypeConversionRate(rewardType),
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
@@ -216,11 +278,11 @@ public class Quest {
         switch (rewardType)
         {
             case QuestRewardType.BUILDING_MATERIALS:
-                return "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries";
+                return "Augotchi/Image/Reward/Icon_BM";
             case QuestRewardType.COINS:
-                return "Augotchi/Image/UIProduce/ProduceIcon_Carrot";
+                return "Augotchi/Image/Reward/Icon_Coin";
             case QuestRewardType.EXPERIENCE:
-                return "Augotchi/Image/UIProduce/ProduceIcon_Meatball";
+                return "Augotchi/Image/Reward/Icon_XP";
         }
 
         return "Augotchi/Image/Whiskers";

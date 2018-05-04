@@ -55,6 +55,8 @@ public class PetGlobal {
     public event EventHandler OnStepTaken;
     public event EventHandler OnFeeding;
     public event EventHandler OnExperienceGained;
+    public event EventHandler OnFarmHarvest;
+    public event EventHandler OnMarkerPicked;
 
     public Marker.MarkerType[] markerSet;
     public float[] markerRelativeDistances;
@@ -491,6 +493,12 @@ public class PetGlobal {
         Save(false);
     }
 
+    public void onMarkerPicked()
+    {
+        if (this.OnMarkerPicked != null)
+            this.OnMarkerPicked(this, new Quest.QuestEventArgs(1));
+    }
+
     public void clearAllListeners()
     {
 
@@ -528,6 +536,16 @@ public class PetGlobal {
 
         if(this.OnSeedGained != null)
             this.OnSeedGained(this, new Quest.QuestEventArgs(amount));
+
+        Save(false);
+    }
+
+    public void addFarmProduce(Inventory.SeedType seedType, int amount)
+    {
+        inventory.produceCounts[(int) seedType] += amount;
+
+        if (this.OnFarmHarvest != null)
+            this.OnFarmHarvest(this, new Quest.QuestEventArgs(1));
 
         Save(false);
     }
@@ -777,7 +795,6 @@ public class PetGlobal {
 
             name = pg.name;
 
-
             this.inventory = new Inventory(
                 pg.inventory.seedCounts == null ? new int[0] : pg.inventory.seedCounts,
                 pg.inventory.produceCounts == null ? new int[0] : pg.inventory.produceCounts,
@@ -786,16 +803,8 @@ public class PetGlobal {
 
             this.questLog = pg.questLog == null ? new List<Quest>() : pg.questLog;
 
-            this.questLog.Clear();
-
-            this.questLog.Add(Quest.generateQuest());
-            this.questLog.Add(Quest.generateQuest());
-            this.questLog.Add(Quest.generateQuest());
-            this.questLog.Add(Quest.generateQuest());
-
             foreach (Quest q in questLog)
                 q.initQuestListener();
-
 
             this.Base = pg.Base;
 

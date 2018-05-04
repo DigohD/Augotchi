@@ -9,14 +9,16 @@ public class Seed {
     public string imagePath;
     public Inventory.SeedType seedType;
     public int growthTime;
+    public int price;
 
-    public Seed(string name, int puffleCost, string imagePath, Inventory.SeedType seedType, int growthTime)
+    public Seed(string name, int puffleCost, string imagePath, Inventory.SeedType seedType, int growthTime, int price)
     {
         this.name = name;
         this.puffleCost = puffleCost;
         this.imagePath = imagePath;
         this.seedType = seedType;
         this.growthTime = growthTime;
+        this.price = price;
     }
 
 }

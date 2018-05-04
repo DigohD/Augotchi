@@ -22,6 +22,8 @@ public abstract class Marker : MonoBehaviour {
     bool isRevealing;
     float revealTimer;
 
+    public bool isAnimated;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -42,6 +44,7 @@ public abstract class Marker : MonoBehaviour {
 
             Instantiate(P_MarkerPoof, transform.position, Quaternion.identity);
 
+            PetKeeper.pet.onMarkerPicked();
             executeEffect();
 
             try
@@ -97,12 +100,14 @@ public abstract class Marker : MonoBehaviour {
                     gardenScaleBase = revealTimer / 0.5f * visualInitScale;
                 else
                     gardenScaleBase = visualInitScale;
-                float newScale = gardenScaleBase + (Mathf.Sin(revealTimer * Mathf.PI / 0.5f) * 75f);
+                float scaleSin = isAnimated ? 0.1f : 75f;
+                float newScale = gardenScaleBase + (Mathf.Sin(revealTimer * Mathf.PI / 0.5f) * scaleSin);
                 G_Visuals.transform.localScale = Vector3.one * newScale;
             }
             else if (revealTimer < 1f)
             {
-                float newScale = visualInitScale + (Mathf.Sin((revealTimer * Mathf.PI * 4f) + Mathf.PI) * 10.5f * (1f - (revealTimer - 0.5f)));
+                float scaleSin = isAnimated ? 0.02f : 10.5f;
+                float newScale = visualInitScale + (Mathf.Sin((revealTimer * Mathf.PI * 4f) + Mathf.PI) * scaleSin * (1f - (revealTimer - 0.5f)));
                 G_Visuals.transform.localScale = Vector3.one * newScale;
             }
             else

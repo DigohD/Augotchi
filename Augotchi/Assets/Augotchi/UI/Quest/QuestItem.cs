@@ -19,7 +19,7 @@ public class QuestItem : MonoBehaviour {
     {
         nameText.text = quest.title;
         descText.text = quest.description;
-        //image.sprite = (Sprite)Resources.Load(produceInfo.imagePath, typeof(Sprite));
+        image.sprite = (Sprite) Resources.Load(quest.rewardImagePath, typeof(Sprite));
         progressText.text = quest.progress + "/" + quest.target;
         rewardAmountText.text = "x" + quest.rewardAmount;
 

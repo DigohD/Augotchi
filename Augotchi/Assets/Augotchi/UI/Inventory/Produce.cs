@@ -12,13 +12,16 @@ public class Produce {
     public float healthYield;
     public float happinessYield;
 
+    public int price;
+
     public Produce(
         string name, 
         string imagePath, 
         Inventory.ProduceType produceType,
         float hungerYield,
         float healthYield,
-        float happinessYield
+        float happinessYield,
+        int price
     )
     {
         this.name = name;
@@ -28,5 +31,7 @@ public class Produce {
         this.hungerYield = hungerYield;
         this.healthYield = healthYield;
         this.happinessYield = happinessYield;
+
+        this.price = price;
     }
 }

@@ -33,6 +33,9 @@ public class GameControl : MonoBehaviour {
     public GameObject P_MarkerGrass;
     public GameObject P_MarkerCrate;
     public GameObject P_MarkerRoot;
+    public GameObject P_MarkerBM;
+    public GameObject P_MarkerQuest;
+    public GameObject P_MarkerShop;
 
     public GameObject P_RewardText;
     public GameObject P_MarkerPoof;
@@ -45,6 +48,8 @@ public class GameControl : MonoBehaviour {
     public GameObject G_UIButtons;
     public GameObject G_CloseButton;
     public GameObject G_ModeHint;
+
+    public GameObject G_Shop;
 
     public GameObject Introduction;
 
@@ -67,6 +72,7 @@ public class GameControl : MonoBehaviour {
     public GameObject loadingScreen;
 
     public GameObject buildBaseButton;
+    public GameObject moveBaseButton;
 
     Vector3[] dirs = new Vector3[8]
     {
@@ -101,8 +107,13 @@ public class GameControl : MonoBehaviour {
     {
         if(PetKeeper.pet.Base.longLat == null)
         {
+            moveBaseButton.SetActive(false);
             buildBaseButton.SetActive(true);
             return;
+        }
+        else
+        {
+            moveBaseButton.SetActive(true);
         }
 
         buildBaseButton.SetActive(false);
@@ -260,12 +271,19 @@ public class GameControl : MonoBehaviour {
             marker.GetComponent<Marker>().gc = this;
         }
 
-        Debug.LogWarning(PetKeeper.pet.inventory);
-        Debug.LogWarning(PetKeeper.pet.inventory.uniqueCounts);
         if (PetKeeper.pet.inventory.uniqueCounts[(int) Inventory.UniqueType.WRONGWORLD_ROOTS] < 1)
             generateSpecificMarker(P_MarkerRoot);
         else
             generateRandomMarker();
+
+        if (PetKeeper.pet.questLog.Count < 5)
+            generateSpecificMarker(P_MarkerQuest);
+        else
+            generateRandomMarker();
+
+        ShopUI.shop = new Shop();
+        ShopUI.reRender = true;
+        generateSpecificMarker(P_MarkerShop);
 
         for (int i = 0; i < 15; i++)
         {
@@ -279,14 +297,17 @@ public class GameControl : MonoBehaviour {
         float distance = UnityEngine.Random.Range(75f * 1, 165f * 1);
 
         GameObject toSpawn = null;
-        switch (UnityEngine.Random.Range(0, 2))
+        int rnd = UnityEngine.Random.Range(0, 1000);
+
+        if(rnd < 550)
         {
-            case 0:
-                toSpawn = P_MarkerGrass;
-                break;
-            case 1:
-                toSpawn = P_MarkerCrate;
-                break;
+            toSpawn = P_MarkerGrass;
+        }else if(rnd < 950)
+        {
+            toSpawn = P_MarkerBM;
+        }else
+        {
+            toSpawn = P_MarkerCrate;
         }
 
         GameObject marker = Instantiate(toSpawn, player.transform.position + (dir * distance), Quaternion.identity);
@@ -307,6 +328,16 @@ public class GameControl : MonoBehaviour {
         if(marker is MarkerRoot && PetKeeper.pet.inventory.uniqueCounts[(int) Inventory.UniqueType.WRONGWORLD_ROOTS] < 1)
         {
             generateSpecificMarker(P_MarkerRoot);
+            return;
+        }else if (marker is MarkerQuest && PetKeeper.pet.questLog.Count < 5)
+        {
+            generateSpecificMarker(P_MarkerQuest);
+            return;
+        }else if (marker is MarkerShop)
+        {
+            ShopUI.shop = new Shop();
+            ShopUI.reRender = true;
+            generateSpecificMarker(P_MarkerShop);
             return;
         }
 
@@ -386,7 +417,7 @@ public class GameControl : MonoBehaviour {
         exitModePressed();
     }
 
-    public void moveHouse()
+    public void moveHouse(int cost)
     {
         GameObject Map = GameObject.FindGameObjectWithTag("Map");
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -407,6 +438,8 @@ public class GameControl : MonoBehaviour {
 
         PetKeeper.pet.Base.longLat = longLat;
 
+        PetKeeper.pet.buildingMaterials -= cost;
+
         PetKeeper.pet.Save(false);
 
         initBase();
@@ -426,6 +459,13 @@ public class GameControl : MonoBehaviour {
     {
         playPostMortemSound = true;
         A_postMortemSound = clip;
+    }
+
+    public void openShop()
+    {
+        ShopUI.reRender = true;
+
+        G_Shop.SetActive(true);
     }
 
     // BACKEND!

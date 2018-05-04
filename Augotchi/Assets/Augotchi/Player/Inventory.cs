@@ -66,7 +66,8 @@ public class Inventory {
                     10,
                     "Augotchi/Image/UISeed/Carrot",
                     SeedType.CARROT_SEED,
-                    3600
+                    3600,
+                    4
                 );
             case SeedType.MEATBALL_SEED:
                 return new Seed(
@@ -74,7 +75,8 @@ public class Inventory {
                     10,
                     "Augotchi/Image/UISeed/Meatball",
                     SeedType.MEATBALL_SEED,
-                    9000
+                    9000,
+                    5
                 );
             case SeedType.GOOSEBERRY_SEED:
                 return new Seed(
@@ -82,7 +84,8 @@ public class Inventory {
                     10,
                     "Augotchi/Image/UISeed/Gooseberry",
                     SeedType.GOOSEBERRY_SEED,
-                    7200
+                    7200,
+                    3
                 );
         }
 
@@ -100,7 +103,8 @@ public class Inventory {
                     ProduceType.CARROT,
                     1.5f,
                     3.5f,
-                    -1.5f
+                    -1.5f,
+                    10
                 );
             case ProduceType.MEATBALL:
                 return new Produce(
@@ -109,7 +113,8 @@ public class Inventory {
                     ProduceType.MEATBALL,
                     5f,
                     0f,
-                    0f
+                    0f,
+                    15
                 );
             case ProduceType.GOOSEBERRY:
                 return new Produce(
@@ -118,7 +123,8 @@ public class Inventory {
                     ProduceType.GOOSEBERRY,
                     0f,
                     -1.5f,
-                    5f
+                    5f,
+                    8
                 );
         }
 
@@ -133,7 +139,8 @@ public class Inventory {
                 return new Unique(
                     "Wrongworld Roots",
                     "Augotchi/Image/UIUnique/Wrongworldroot",
-                    UniqueType.WRONGWORLD_ROOTS
+                    UniqueType.WRONGWORLD_ROOTS,
+                    500
                 );
         }
 

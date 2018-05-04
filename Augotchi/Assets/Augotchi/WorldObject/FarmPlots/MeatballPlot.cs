@@ -8,7 +8,7 @@ public class MeatballPlot : BushPlot {
     public void onPress()
     {
         int amount = Random.Range(2, 5);
-        PetKeeper.pet.inventory.produceCounts[(int) representedCrop.seedType] += amount;
+        PetKeeper.pet.addFarmProduce(representedCrop.seedType, amount);
 
         gc.queueRewardText("Meatballs +" + amount, Inventory.getHarvestColor());
 
