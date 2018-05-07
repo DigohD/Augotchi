@@ -11,6 +11,8 @@ public class QuestItem : MonoBehaviour {
     public Text progressText;
     public Text rewardAmountText;
 
+    public AudioClip A_QuestDone;
+
     public GameObject G_ClaimRewardButton;
 
     Quest representedQuest;
@@ -34,9 +36,22 @@ public class QuestItem : MonoBehaviour {
 
     public void onClick()
     {
-        PetKeeper.pet.giveCurrency(representedQuest.rewardAmount);
-
         PetKeeper.pet.questLog.Remove(representedQuest);
+
+        GameControl.playPostMortemAudioClip(A_QuestDone);
+
+        switch (representedQuest.rewardType)
+        {
+            case Quest.QuestRewardType.BUILDING_MATERIALS:
+                PetKeeper.pet.giveCurrency(representedQuest.rewardAmount);
+                break;
+            case Quest.QuestRewardType.COINS:
+                PetKeeper.pet.giveBuildingMaterials(representedQuest.rewardAmount);
+                break;
+            case Quest.QuestRewardType.EXPERIENCE:
+                PetKeeper.pet.grantXP(representedQuest.rewardAmount);
+                break;
+        }
 
         QuestUI.reRender = true;
     }

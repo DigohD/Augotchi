@@ -9,6 +9,5 @@ public class WorldUI : MonoBehaviour {
 
 	void Update () {
         StepCounter.SetActive(!PetKeeper.pet.isDead);
-        ReviveCounter.SetActive(PetKeeper.pet.isDead);
 	}
 }

@@ -49,6 +49,15 @@ public class PetGlobal {
 
     long lastPettingTimeStamp;
 
+    // THESE LISTENERS ARE NOT USED AT THIS POINT! LEAVE FOR SERIALIZING ERROR PREVENTION!
+
+    public event EventHandler OnPetting;
+    public event EventHandler OnFeedCannedFood;
+    public event EventHandler OnFeedVegetables;
+    public event EventHandler OnFeedCandy;
+
+    // END OF GARBAGE LISTENERS!
+
     public event EventHandler OnBuildingMaterialsGained;
     public event EventHandler OnCoinsGained;
     public event EventHandler OnSeedGained;
@@ -619,7 +628,8 @@ public class PetGlobal {
 
     public void grantXP(int amount)
     {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().queueRewardText("XP: +" + amount, GameControl.XPColor);
+        if(amount > 1)
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().queueRewardText("XP: +" + amount, GameControl.XPColor);
         xp += amount;
 
         int nextLevel = level + 1;
@@ -795,11 +805,14 @@ public class PetGlobal {
 
             name = pg.name;
 
-            this.inventory = new Inventory(
-                pg.inventory.seedCounts == null ? new int[0] : pg.inventory.seedCounts,
-                pg.inventory.produceCounts == null ? new int[0] : pg.inventory.produceCounts,
-                pg.inventory.uniqueCounts == null ? new int[0] : pg.inventory.uniqueCounts
-            );
+            if (pg.inventory != null)
+                this.inventory = new Inventory(
+                    pg.inventory.seedCounts == null ? new int[0] : pg.inventory.seedCounts,
+                    pg.inventory.produceCounts == null ? new int[0] : pg.inventory.produceCounts,
+                    pg.inventory.uniqueCounts == null ? new int[0] : pg.inventory.uniqueCounts
+                );
+            else
+                this.inventory = new Inventory();
 
             this.questLog = pg.questLog == null ? new List<Quest>() : pg.questLog;
 

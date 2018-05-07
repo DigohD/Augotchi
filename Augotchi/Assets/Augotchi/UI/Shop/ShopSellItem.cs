@@ -13,6 +13,8 @@ public class ShopSellItem : MonoBehaviour {
 
     private Produce produceInfo;
 
+    public AudioClip A_SellSound;
+
     public void initShopSellItem(int count, Produce produceInfo)
     {
         nameText.text = produceInfo.name;
@@ -28,6 +30,8 @@ public class ShopSellItem : MonoBehaviour {
     {
         PetKeeper.pet.inventory.produceCounts[(int) produceInfo.produceType] -= 1;
         PetKeeper.pet.giveCurrency(produceInfo.price);
+
+        GameControl.playPostMortemAudioClip(A_SellSound);
 
         InventoryUI.reRender = true;
         ShopUI.reRender = true;

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Marker : MonoBehaviour {
 
     public AudioClip A_MarkerAppear;
+    public AudioClip A_OnPicked;
 
     public GameObject P_MarkerPoof;
 
@@ -29,6 +30,8 @@ public abstract class Marker : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
 
         visualInitScale = G_Visuals.transform.localScale.x;
+
+        transform.localRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
     }
 
     public virtual void picked()
@@ -46,6 +49,9 @@ public abstract class Marker : MonoBehaviour {
 
             PetKeeper.pet.onMarkerPicked();
             executeEffect();
+
+            if (A_OnPicked != null)
+                GameControl.playPostMortemAudioClip(A_OnPicked);
 
             try
             {

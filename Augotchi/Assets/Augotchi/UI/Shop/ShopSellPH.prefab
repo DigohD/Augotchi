@@ -647,6 +647,7 @@ MonoBehaviour:
   image: {fileID: 114401787346947600}
   countText: {fileID: 114531397988836620}
   priceText: {fileID: 114981680730761288}
+  A_SellSound: {fileID: 8300000, guid: b1741426e02897e4e9da66d625d25171, type: 3}
 --- !u!114 &114981680730761288
 MonoBehaviour:
   m_ObjectHideFlags: 1

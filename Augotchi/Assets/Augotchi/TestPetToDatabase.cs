@@ -1,10 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Firebase;
-using Firebase.Unity.Editor;
 using System.Runtime.Serialization.Formatters.Binary;
-using Firebase.Database;
 using System.Net.NetworkInformation;
 using System;
 using System.IO;

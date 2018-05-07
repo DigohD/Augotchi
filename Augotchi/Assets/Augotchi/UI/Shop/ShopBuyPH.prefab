@@ -680,6 +680,7 @@ MonoBehaviour:
   image: {fileID: 114897420250050784}
   countText: {fileID: 114916895279043180}
   buyButton: {fileID: 114754748384832872}
+  A_BuySound: {fileID: 8300000, guid: 09e1ffa25efa8f24286ec1180ec65767, type: 3}
 --- !u!222 &222178841016786200
 CanvasRenderer:
   m_ObjectHideFlags: 1

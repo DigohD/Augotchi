@@ -135,10 +135,12 @@ public class Quest {
     private void OnQuestProgress(System.Object sender, EventArgs e)
     {
         progress += ((QuestEventArgs)e).progress;
-        if(progress >= target)
+        if(!complete && progress >= target)
         {
             progress = target;
             complete = true;
+
+            GameControl.playPostMortemAudioClip((AudioClip) Resources.Load("Augotchi/Audio/Fanfare", typeof(AudioClip)));
         }
 
         QuestUI.reRender = true;

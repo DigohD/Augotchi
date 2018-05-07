@@ -480,6 +480,7 @@ MonoBehaviour:
   image: {fileID: 114743078811354406}
   progressText: {fileID: 114722719019422376}
   rewardAmountText: {fileID: 114586055837433016}
+  A_QuestDone: {fileID: 8300000, guid: b1741426e02897e4e9da66d625d25171, type: 3}
   G_ClaimRewardButton: {fileID: 1655739892582196}
 --- !u!114 &114586055837433016
 MonoBehaviour:

@@ -13,6 +13,8 @@ public class ShopBuyItem : MonoBehaviour {
 
     public Button buyButton;
 
+    public AudioClip A_BuySound;
+
     public void initShopBuyItem(Shop.ShopItem item)
     {
         switch (item.itemType)
@@ -70,6 +72,8 @@ public class ShopBuyItem : MonoBehaviour {
         }
 
         PetKeeper.pet.takeCurrency(item.price);
+
+        GameControl.playPostMortemAudioClip(A_BuySound);
 
         item.amount -= 1;
         if (item.amount <= 0)

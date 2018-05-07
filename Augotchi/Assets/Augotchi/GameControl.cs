@@ -12,6 +12,7 @@ public class GameControl : MonoBehaviour {
 
     public static bool playPostMortemSound;
     public static AudioClip A_postMortemSound;
+    public AudioClip A_ShopSound;
 
     public static float[] markerRelativeDistances = new float[] { 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -299,7 +300,7 @@ public class GameControl : MonoBehaviour {
         GameObject toSpawn = null;
         int rnd = UnityEngine.Random.Range(0, 1000);
 
-        if(rnd < 550)
+        if(rnd < 475)
         {
             toSpawn = P_MarkerGrass;
         }else if(rnd < 950)
@@ -461,9 +462,17 @@ public class GameControl : MonoBehaviour {
         A_postMortemSound = clip;
     }
 
+    public void playPostMortemAudioClipNonStatic(AudioClip clip)
+    {
+        playPostMortemSound = true;
+        A_postMortemSound = clip;
+    }
+
     public void openShop()
     {
         ShopUI.reRender = true;
+
+        GetComponent<AudioSource>().PlayOneShot(A_ShopSound);
 
         G_Shop.SetActive(true);
     }
