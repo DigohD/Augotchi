@@ -9,6 +9,6 @@ public class MarkerCrate : Marker {
         PetKeeper.pet.markersCrate++;
 
         PetKeeper.pet.addRandomLootItem();
-        PetKeeper.pet.grantXP(500);
+        PetKeeper.pet.grantXP(100);
     }
 }

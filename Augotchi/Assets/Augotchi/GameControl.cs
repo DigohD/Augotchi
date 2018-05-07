@@ -295,12 +295,12 @@ public class GameControl : MonoBehaviour {
     private void generateRandomMarker()
     {
         Vector3 dir = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f)).normalized;
-        float distance = UnityEngine.Random.Range(75f * 1, 165f * 1);
+        float distance = UnityEngine.Random.Range(60f * 1, 125f * 1);
 
         GameObject toSpawn = null;
         int rnd = UnityEngine.Random.Range(0, 1000);
 
-        if(rnd < 475)
+        if(rnd < 300)
         {
             toSpawn = P_MarkerGrass;
         }else if(rnd < 950)
@@ -318,7 +318,7 @@ public class GameControl : MonoBehaviour {
     private void generateSpecificMarker(GameObject toSpawn)
     {
         Vector3 dir = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f)).normalized;
-        float distance = UnityEngine.Random.Range(75f * 1, 165f * 1);
+        float distance = UnityEngine.Random.Range(60f * 1, 125f * 1);
 
         GameObject newMarker = Instantiate(toSpawn, player.transform.position + (dir * distance), Quaternion.identity);
         newMarker.GetComponent<Marker>().gc = this;
@@ -415,7 +415,10 @@ public class GameControl : MonoBehaviour {
 
         PetKeeper.pet.Save(false);
 
-        exitModePressed();
+        if(PetKeeper.pet.inventory.seedCounts[(int) seedToPlant.seedType] <= 0)
+        {
+            exitModePressed();
+        }
     }
 
     public void moveHouse(int cost)

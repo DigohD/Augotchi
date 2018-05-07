@@ -26,6 +26,6 @@ public class MarkerGrass : Marker {
 
         InventoryUI.reRender = true;
 
-        PetKeeper.pet.grantXP(100);
+        PetKeeper.pet.grantXP(25);
     }
 }

@@ -691,6 +691,7 @@ MonoBehaviour:
   A_FarmHarvest: {fileID: 8300000, guid: 56dbf1b76edc7844998dbf9b97d8e0e2, type: 3}
   T_TimerLabel: {fileID: 4246990805220222}
   T_FinishedLabel: {fileID: 4113854628861364}
+  experienceGain: 30
   planesMat: {fileID: 2100000, guid: 20985dc2b996e064c880abdda911fdf9, type: 2}
   produceMat: {fileID: 2100000, guid: 68856752d7d4b534cb4ef71df3e65cdf, type: 2}
   G_PlanesMesh: {fileID: 1035245788734072}

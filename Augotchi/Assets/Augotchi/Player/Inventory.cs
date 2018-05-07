@@ -103,7 +103,7 @@ public class Inventory {
                     ProduceType.CARROT,
                     1.5f,
                     3.5f,
-                    -1.5f,
+                    0f,
                     10
                 );
             case ProduceType.MEATBALL:
@@ -122,8 +122,8 @@ public class Inventory {
                     "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
                     ProduceType.GOOSEBERRY,
                     0f,
-                    -1.5f,
-                    5f,
+                    1.5f,
+                    3.5f,
                     8
                 );
         }

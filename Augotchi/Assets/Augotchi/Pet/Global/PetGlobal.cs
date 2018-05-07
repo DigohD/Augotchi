@@ -19,6 +19,10 @@ public class PetGlobal {
     readonly float MIN_HAPPINESS = 0, MAX_HAPPINESS = 100;
     readonly float MIN_HEALTH = 0, MAX_HEALTH = 100;
 
+    readonly float DECAY_HUNGER = 0.004f;
+    readonly float DECAY_HAPPINESS = 0.003f;
+    readonly float DECAY_HEALTH = 0.003f;
+
     public float hunger;
     public float happiness;
     public float health;
@@ -346,25 +350,8 @@ public class PetGlobal {
 
     public void degenerate()
     {
-        if(hunger > 75)
-        {
-            hunger -= 0.005f;
-        }
-        if(hunger < 25)
-        {
-            hunger += 0.005f;
-        }
-        hunger -= 0.01f;
-
-        if (hunger > 75)
-        {
-            health -= 0.01f;
-        }
-        if (hunger < 25)
-        {
-            health -= 0.01f;
-        }
-        health -= 0.003f;
+        hunger -= DECAY_HUNGER;
+        health -= DECAY_HEALTH;
 
         if (hunger < 25)
         {
@@ -383,7 +370,7 @@ public class PetGlobal {
         {
             happiness += 0.01f;
         }
-        happiness -= 0.005f;
+        happiness -= DECAY_HAPPINESS;
 
         if (health < 0)
             health = 0;
@@ -399,34 +386,12 @@ public class PetGlobal {
             happiness = 0;
         if (happiness > 100)
             happiness = 100;
-
-        if(happiness >= 75)
-        {
-            
-        }
     }
 
     private void degenerateHourly()
     {
-        if (hunger > 75)
-        {
-            hunger -= (0.005f * 360);
-        }
-        if (hunger < 25)
-        {
-            hunger += (0.005f * 360);
-        }
-        hunger -= (0.01f * 360);
-
-        if (hunger > 75)
-        {
-            health -= (0.01f * 360);
-        }
-        if (hunger < 25)
-        {
-            health -= (0.01f * 360);
-        }
-        health -= (0.003f * 360);
+        hunger -= (DECAY_HUNGER * 360);
+        health -= (DECAY_HEALTH * 360);
 
         if (hunger < 25)
         {
@@ -445,30 +410,13 @@ public class PetGlobal {
         {
             happiness += (0.01f * 360);
         }
-        happiness -= (0.005f * 360);
+        happiness -= (DECAY_HAPPINESS * 360);
     }
 
     private void degenerateDaily()
     {
-        if (hunger > 75)
-        {
-            hunger -= (0.005f * 360 * 24);
-        }
-        if (hunger < 25)
-        {
-            hunger += (0.005f * 360 * 24);
-        }
-        hunger -= (0.01f * 360 * 24);
-
-        if (hunger > 75)
-        {
-            health -= (0.01f * 360 * 24);
-        }
-        if (hunger < 25)
-        {
-            health -= (0.01f * 360 * 24);
-        }
-        health -= (0.003f * 360 * 24);
+        hunger -= (DECAY_HUNGER * 360 * 24);
+        health -= (DECAY_HEALTH * 360 * 24);
 
         if (hunger < 25)
         {
@@ -487,7 +435,7 @@ public class PetGlobal {
         {
             happiness += (0.01f * 360 * 24);
         }
-        happiness -= (0.005f * 360 * 24);
+        happiness -= (DECAY_HAPPINESS * 360 * 24);
     }
 
     public void feed(float hunger, float health, float happiness)
@@ -641,7 +589,10 @@ public class PetGlobal {
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().queueRewardText("Level Up!", GameControl.LevelUpColor);
             nextLevelXP = xpToNextLevel(level);
 
-            addRandomLootItem();
+            giveBuildingMaterials(level * 10);
+            giveCurrency(level * 10);
+
+            //addRandomLootItem();
         }
 
         if(this.OnExperienceGained != null)

@@ -74,7 +74,7 @@ public abstract class Marker : MonoBehaviour {
         if (!player)
             player = GameObject.FindGameObjectWithTag("Player");
 
-        if(!isRevealing && (transform.position - player.transform.position).magnitude < 40)
+        if(!isRevealing && (transform.position - player.transform.position).magnitude < 45)
         {
             Instantiate(P_MarkerPoof, transform.position, Quaternion.identity);
 
@@ -84,13 +84,13 @@ public abstract class Marker : MonoBehaviour {
             isRevealing = true;
 
             GetComponent<AudioSource>().PlayOneShot(A_MarkerAppear);
-        }else if(!isRevealing && (transform.position - player.transform.position).magnitude > 175f)
+        }else if(!isRevealing && (transform.position - player.transform.position).magnitude > 125)
         {
             gc.respawnMarker(this);
 
             Destroy(gameObject);
         }
-        else if (isRevealing && (transform.position - player.transform.position).magnitude > 300)
+        else if (isRevealing && (transform.position - player.transform.position).magnitude > 200)
         {
             gc.respawnMarker(this);
 

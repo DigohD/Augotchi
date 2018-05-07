@@ -11,5 +11,6 @@ public class MarkerQuest : Marker {
         PetKeeper.pet.questLog.Add(Quest.generateQuest());
 
         QuestUI.reRender = true;
+        PetKeeper.pet.grantXP(50);
     }
 }

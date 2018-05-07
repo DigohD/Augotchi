@@ -13,6 +13,6 @@ public class MarkerRoot : Marker {
 
         InventoryUI.reRender = true;
 
-        PetKeeper.pet.grantXP(500);
+        PetKeeper.pet.grantXP(50);
     }
 }

@@ -25,6 +25,8 @@ public abstract class FarmPlot : MonoBehaviour {
     float timer = 0;
     float spawnTimer = 0;
 
+    public int experienceGain;
+
     void Start()
     {
         transform.localScale = Vector3.zero;
@@ -115,6 +117,8 @@ public abstract class FarmPlot : MonoBehaviour {
         Destroy(gameObject);
 
         InventoryUI.reRender = true;
+
+        PetKeeper.pet.grantXP(experienceGain);
 
         PetKeeper.pet.Save(false);
     }
