@@ -91,7 +91,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Gloss: 0.5
+    - _Gloss: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -121,7 +121,7 @@ Material:
     - _ShadowIntensity: 0.76
     - _Shininess: 0.275
     - _SmoothnessTextureChannel: 0
-    - _SpecIntensity: 0.2
+    - _SpecIntensity: 0
     - _SpecularHighlights: 1
     - _SpecularIntensity: 0.44
     - _SrcBlend: 1
