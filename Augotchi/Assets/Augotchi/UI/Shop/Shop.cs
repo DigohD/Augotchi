@@ -19,7 +19,7 @@ public class Shop {
     {
         buyList = new List<ShopItem>();
 
-        int items = Random.Range(2, 4);
+        int items = Random.Range(3, 7);
         for(int i = 0; i < items; i++)
         {
             addBuyItemToList(buyList);

@@ -15,12 +15,15 @@ public class SeedItem : MonoBehaviour {
 
     private Transform inventory;
 
+    public Image rarityFrame;
+
     public void initSeedItem(int count, Seed seedInfo, Transform inventory)
     {
         costText.text = "" + seedInfo.puffleCost;
         nameText.text = seedInfo.name;
         countText.text = "x" + count;
         image.sprite = (Sprite) Resources.Load(seedInfo.imagePath, typeof(Sprite));
+        rarityFrame.color = Inventory.getRarityColor(seedInfo.rarity);
 
         this.puffleCost = seedInfo.puffleCost;
         this.seedInfo = seedInfo;

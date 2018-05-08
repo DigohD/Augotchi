@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeatballPlot : BushPlot {
+public class NuggetPlot : BushPlot {
 
     override
     public void onPress()
     {
         int amount = Random.Range(2, 5);
-        PetKeeper.pet.addFarmProduce(representedCrop.seedType, amount);
+        PetKeeper.pet.addFarmProduce(Inventory.ProduceType.NUGGETS, amount);
 
-        gc.queueRewardText("Meatballs +" + amount, Inventory.getHarvestColor());
+        gc.queueRewardText("Nuggets +" + amount, Inventory.getHarvestColor());
 
         base.onPress();
     }

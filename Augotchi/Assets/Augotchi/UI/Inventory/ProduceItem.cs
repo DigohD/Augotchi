@@ -15,11 +15,14 @@ public class ProduceItem : MonoBehaviour {
 
     private Transform inventory;
 
+    public Image rarityFrame;
+
     public void initProduceItem(int count, Produce produceInfo)
     {
         nameText.text = produceInfo.name;
         countText.text = "x" + count;
         image.sprite = (Sprite) Resources.Load(produceInfo.imagePath, typeof(Sprite));
+        rarityFrame.color = Inventory.getRarityColor(produceInfo.rarity);
 
         this.produceInfo = produceInfo;
 

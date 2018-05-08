@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarkerGrass : Marker {
+public class MarkerPond : Marker {
 
     protected override void executeEffect()
     {

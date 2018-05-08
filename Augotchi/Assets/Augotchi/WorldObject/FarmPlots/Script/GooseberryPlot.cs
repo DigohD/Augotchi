@@ -8,7 +8,7 @@ public class GooseberryPlot : BushPlot {
     public void onPress()
     {
         int amount = Random.Range(5, 10);
-        PetKeeper.pet.addFarmProduce(representedCrop.seedType, amount);
+        PetKeeper.pet.addFarmProduce(Inventory.ProduceType.GOOSEBERRY, amount);
 
         gc.queueRewardText("Gooseberries +" + amount, Inventory.getHarvestColor());
 

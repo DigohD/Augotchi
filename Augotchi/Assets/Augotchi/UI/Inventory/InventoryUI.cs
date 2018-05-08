@@ -70,6 +70,7 @@ public class InventoryUI : MonoBehaviour {
         ArrayList seedIndexesToRender = new ArrayList();
         for (int k = 0; k < PetKeeper.pet.inventory.seedCounts.Length; k++)
         {
+            Debug.LogWarning("k: " + PetKeeper.pet.inventory.seedCounts[k]);
             if (PetKeeper.pet.inventory.seedCounts[k] > 0)
                 seedIndexesToRender.Add(k);
         }

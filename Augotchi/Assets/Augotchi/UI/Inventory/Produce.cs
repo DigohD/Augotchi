@@ -12,7 +12,14 @@ public class Produce {
     public float healthYield;
     public float happinessYield;
 
+    public float strengthYield;
+    public float intelligenceYield;
+    public float agilityYield;
+
     public int price;
+
+    public bool isEdible;
+    public Inventory.ItemRarity rarity;
 
     public Produce(
         string name, 
@@ -21,7 +28,12 @@ public class Produce {
         float hungerYield,
         float healthYield,
         float happinessYield,
-        int price
+        float strengthYield,
+        float intelligenceYield,
+        float agilityYield,
+        int price,
+        bool isEdible,
+        Inventory.ItemRarity rarity
     )
     {
         this.name = name;
@@ -32,6 +44,13 @@ public class Produce {
         this.healthYield = healthYield;
         this.happinessYield = happinessYield;
 
+        this.strengthYield = strengthYield;
+        this.intelligenceYield = intelligenceYield;
+        this.agilityYield = agilityYield;
+
         this.price = price;
+
+        this.isEdible = isEdible;
+        this.rarity = rarity;
     }
 }

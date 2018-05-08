@@ -478,18 +478,7 @@ public class PetGlobal {
 
     public void addSeed(Inventory.SeedType seedType, int amount)
     {
-        switch (seedType)
-        {
-            case Inventory.SeedType.CARROT_SEED:
-                inventory.seedCounts[(int) Inventory.SeedType.CARROT_SEED] += amount;
-                break;
-            case Inventory.SeedType.GOOSEBERRY_SEED:
-                inventory.seedCounts[(int) Inventory.SeedType.GOOSEBERRY_SEED] += amount;
-                break;
-            case Inventory.SeedType.MEATBALL_SEED:
-                inventory.seedCounts[(int) Inventory.SeedType.MEATBALL_SEED] += amount;
-                break;
-        }
+        inventory.seedCounts[(int) seedType] += amount;
 
         if(this.OnSeedGained != null)
             this.OnSeedGained(this, new Quest.QuestEventArgs(amount));
@@ -497,9 +486,9 @@ public class PetGlobal {
         Save(false);
     }
 
-    public void addFarmProduce(Inventory.SeedType seedType, int amount)
+    public void addFarmProduce(Inventory.ProduceType produceType, int amount)
     {
-        inventory.produceCounts[(int) seedType] += amount;
+        inventory.produceCounts[(int) produceType] += amount;
 
         if (this.OnFarmHarvest != null)
             this.OnFarmHarvest(this, new Quest.QuestEventArgs(1));

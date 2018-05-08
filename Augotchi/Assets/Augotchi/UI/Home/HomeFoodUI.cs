@@ -31,7 +31,8 @@ public class HomeFoodUI : MonoBehaviour {
         ArrayList produceIndexesToRender = new ArrayList();
         for (int k = 0; k < PetKeeper.pet.inventory.produceCounts.Length; k++)
         {
-            if (PetKeeper.pet.inventory.produceCounts[k] > 0)
+            bool isEdible = Inventory.getProduceTypeInfo((Inventory.ProduceType)k).isEdible;
+            if (PetKeeper.pet.inventory.produceCounts[k] > 0 && isEdible)
                 produceIndexesToRender.Add(k);
         }
 

@@ -8,7 +8,7 @@ public class CarrotPlot : GroundPlanesPlot {
     public void onPress()
     {
         int amount = Random.Range(3, 7);
-        PetKeeper.pet.addFarmProduce(representedCrop.seedType, amount);
+        PetKeeper.pet.addFarmProduce(Inventory.ProduceType.CARROT, amount);
 
         gc.queueRewardText("Carrots +" + amount, Inventory.getHarvestColor());
 
