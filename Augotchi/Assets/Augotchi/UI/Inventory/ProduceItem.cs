@@ -35,6 +35,13 @@ public class ProduceItem : MonoBehaviour {
 
         HomeFoodUI.reRender = true;
 
-        PetKeeper.pet.feed(produceInfo.hungerYield, produceInfo.healthYield, produceInfo.happinessYield);
+        PetKeeper.pet.feed(
+            produceInfo.hungerYield,
+            produceInfo.healthYield, 
+            produceInfo.happinessYield,
+            produceInfo.strengthYield,
+            produceInfo.intelligenceYield,
+            produceInfo.agilityYield
+        );
     }
 }

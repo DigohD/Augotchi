@@ -50,4 +50,17 @@ public class LootTable {
             return amazingSeeds[Random.Range(0, amazingSeeds.Length)];
         }
     }
+
+    private static Inventory.ProduceType[] pondLoot = new Inventory.ProduceType[4]
+    {
+        Inventory.ProduceType.SALMON,
+        Inventory.ProduceType.PERCH,
+        Inventory.ProduceType.PIKE,
+        Inventory.ProduceType.SHRIMP
+    };
+
+    public static Inventory.ProduceType GeneratePondLoot()
+    {
+        return pondLoot[Random.Range(0, pondLoot.Length)];
+    }
 }

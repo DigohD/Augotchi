@@ -20,7 +20,6 @@ public class BushPlot : FarmPlot {
 
         G_PlanesMesh.GetComponent<MeshRenderer>().materials = new Material[1] { planesMat };
         G_ProduceMesh.GetComponent<MeshRenderer>().materials = new Material[1] { produceMat };
-        G_BushMesh.GetComponent<MeshRenderer>().materials = new Material[1] { produceMat };
     }
 
     protected override void updateVisuals(float percent)

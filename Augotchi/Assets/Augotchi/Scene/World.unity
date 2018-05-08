@@ -2065,6 +2065,7 @@ Transform:
   - {fileID: 482517746}
   - {fileID: 693598839}
   - {fileID: 1051298442}
+  - {fileID: 1661687403}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8245,6 +8246,48 @@ RectTransform:
   m_AnchoredPosition: {x: -3.1286618e-10, y: -69.76}
   m_SizeDelta: {x: 800, y: 1098.77}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &583486209
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 114606472}
+    m_Modifications:
+    - target: {fileID: 4671194797666212, guid: 3703c6e058bb0634191a4d9e295be3d1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671194797666212, guid: 3703c6e058bb0634191a4d9e295be3d1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671194797666212, guid: 3703c6e058bb0634191a4d9e295be3d1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671194797666212, guid: 3703c6e058bb0634191a4d9e295be3d1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671194797666212, guid: 3703c6e058bb0634191a4d9e295be3d1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671194797666212, guid: 3703c6e058bb0634191a4d9e295be3d1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671194797666212, guid: 3703c6e058bb0634191a4d9e295be3d1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671194797666212, guid: 3703c6e058bb0634191a4d9e295be3d1, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3703c6e058bb0634191a4d9e295be3d1, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &589052797
 GameObject:
   m_ObjectHideFlags: 0
@@ -18198,6 +18241,10 @@ Prefab:
       propertyPath: m_Name
       value: MarkerPond
       objectReference: {fileID: 0}
+    - target: {fileID: 1712331214671840, guid: 09ebe6d2557cd11418aaaa6c0eaab58f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09ebe6d2557cd11418aaaa6c0eaab58f, type: 2}
   m_IsPrefabParent: 0
@@ -22447,6 +22494,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1653304410}
+--- !u!4 &1661687403 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4671194797666212, guid: 3703c6e058bb0634191a4d9e295be3d1,
+    type: 2}
+  m_PrefabInternal: {fileID: 583486209}
 --- !u!1 &1666079254
 GameObject:
   m_ObjectHideFlags: 0
@@ -27872,6 +27924,15 @@ MonoBehaviour:
   - {fileID: 1794773625106202, guid: 003e6e96353a7f042941a63b5858908a, type: 2}
   - {fileID: 1447366961976272, guid: 6c367e73b8730174c9359b7a06d65ca9, type: 2}
   - {fileID: 1538771234813106, guid: e07586a6234cb1441b8d35b313dfeb72, type: 2}
+  - {fileID: 1048910835079572, guid: b83709aba2c28c843982c7e2e5f7eb4e, type: 2}
+  - {fileID: 1692275579234892, guid: 0a35030c4d093524caf4265d25d8fa09, type: 2}
+  - {fileID: 1158315899361162, guid: 9147447babcb64e4bbba023995df9a71, type: 2}
+  - {fileID: 1627420201166770, guid: a37bf1528df7dfc429f760adf860047c, type: 2}
+  - {fileID: 1406544481151846, guid: 06fba9b8461231e4cb8440bae5529218, type: 2}
+  - {fileID: 1704205671307242, guid: 97979200806e0fc429d2245c89822977, type: 2}
+  - {fileID: 1366077689074654, guid: 6993ee6453965a54697e98071f20642e, type: 2}
+  - {fileID: 1301955627983178, guid: 4113acd47bf4d084fbc0736f812fe819, type: 2}
+  - {fileID: 1110604237405202, guid: 910ace35ae569e643994d3ad3f980348, type: 2}
   G_UIButtons: {fileID: 1144351479}
   G_CloseButton: {fileID: 269600581}
   G_ModeHint: {fileID: 459464354}

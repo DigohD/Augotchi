@@ -18,7 +18,7 @@ public class Seed {
         this.puffleCost = puffleCost;
         this.imagePath = imagePath;
         this.seedType = seedType;
-        this.growthTime = growthTime;
+        this.growthTime = 15;
         this.price = price;
         this.rarity = rarity;
     }

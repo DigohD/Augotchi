@@ -23,6 +23,8 @@ public class PetGlobal {
     readonly float DECAY_HAPPINESS = 0.003f;
     readonly float DECAY_HEALTH = 0.003f;
 
+    readonly float DECAY_STAT = 0.0006f;
+
     public float hunger;
     public float happiness;
     public float health;
@@ -91,6 +93,10 @@ public class PetGlobal {
 
     public string name;
 
+    public float strength;
+    public float intelligence;
+    public float agility;
+
     public PetGlobal()
     {
         
@@ -144,7 +150,10 @@ public class PetGlobal {
         string name,
         Inventory inventory,
         List<Quest> questLog,
-        Base Base
+        Base Base,
+        float strength,
+        float intelligence,
+        float agility
         )
     {
         this.hunger = hunger;
@@ -204,6 +213,10 @@ public class PetGlobal {
         this.questLog = questLog;
 
         this.Base = Base;
+
+        this.strength = strength;
+        this.intelligence = intelligence;
+        this.agility = agility;
     }
 
     private void initListeners()
@@ -372,6 +385,10 @@ public class PetGlobal {
         }
         happiness -= DECAY_HAPPINESS;
 
+        strength -= DECAY_STAT;
+        intelligence -= DECAY_STAT;
+        agility -= DECAY_STAT;
+
         if (health < 0)
             health = 0;
         if (health > 100)
@@ -386,6 +403,13 @@ public class PetGlobal {
             happiness = 0;
         if (happiness > 100)
             happiness = 100;
+
+        if (strength < 0)
+            strength = 0;
+        if (intelligence < 0)
+            intelligence = 0;
+        if (agility < 0)
+            agility = 0;
     }
 
     private void degenerateHourly()
@@ -411,6 +435,10 @@ public class PetGlobal {
             happiness += (0.01f * 360);
         }
         happiness -= (DECAY_HAPPINESS * 360);
+
+        strength -= (DECAY_STAT * 360);
+        intelligence -= (DECAY_STAT * 360);
+        agility -= (DECAY_STAT * 360);
     }
 
     private void degenerateDaily()
@@ -436,13 +464,21 @@ public class PetGlobal {
             happiness += (0.01f * 360 * 24);
         }
         happiness -= (DECAY_HAPPINESS * 360 * 24);
+
+        strength -= (DECAY_STAT * 360 * 24);
+        intelligence -= (DECAY_STAT * 360 * 24);
+        agility -= (DECAY_STAT * 360 * 24);
     }
 
-    public void feed(float hunger, float health, float happiness)
+    public void feed(float hunger, float health, float happiness, float strength, float intelligence, float agility)
     {
         addHunger(hunger);
         addHealth(health);
         addHappiness(happiness);
+
+        addStrength(strength);
+        addIntelligence(intelligence);
+        addAgility(agility);
 
         if (this.OnFeeding != null)
             this.OnFeeding(this, new Quest.QuestEventArgs(1));
@@ -563,6 +599,32 @@ public class PetGlobal {
         Save(false);
     }
 
+    public void addStrength(float amount)
+    {
+        strength += CalculateStatYield(strength, amount);
+
+        Save(false);
+    }
+
+    public void addIntelligence(float amount)
+    {
+        intelligence += CalculateStatYield(intelligence, amount);
+
+        Save(false);
+    }
+
+    public void addAgility(float amount)
+    {
+        agility += CalculateStatYield(agility, amount);
+
+        Save(false);
+    }
+
+    private float CalculateStatYield(float currentPower, float amount)
+    {
+        return (500 / (currentPower + 500) * amount);
+    }
+
     public void grantXP(int amount)
     {
         if(amount > 1)
@@ -654,7 +716,10 @@ public class PetGlobal {
                 name,
                 inventory,
                 questLog,
-                Base
+                Base,
+                strength,
+                intelligence,
+                agility
             ));
         file.Close();
 
@@ -744,6 +809,10 @@ public class PetGlobal {
             longestAliveTicks = pg.longestAliveTicks;
 
             name = pg.name;
+
+            strength = pg.strength;
+            intelligence = pg.intelligence;
+            agility = pg.agility;
 
             if (pg.inventory != null)
                 this.inventory = new Inventory(
