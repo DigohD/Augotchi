@@ -96,6 +96,7 @@ public class Quest {
                 this.title = "Mark my world!";
                 this.description = "Find and activate a number of markers in the world.";
                 break;
+            
         }
 
         initQuestListener();
@@ -260,7 +261,7 @@ public class Quest {
         return toReturn;
     }
 
-    private static int getRewardTypeConversionRate(QuestRewardType rewardType)
+    public static int getRewardTypeConversionRate(QuestRewardType rewardType)
     {
         switch (rewardType)
         {
@@ -275,7 +276,7 @@ public class Quest {
         return 1;
     }
 
-    private static string getRewardTypeImagePath(QuestRewardType rewardType)
+    public static string getRewardTypeImagePath(QuestRewardType rewardType)
     {
         switch (rewardType)
         {

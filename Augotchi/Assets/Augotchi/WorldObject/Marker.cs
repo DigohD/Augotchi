@@ -25,7 +25,7 @@ public abstract class Marker : MonoBehaviour {
 
     public bool isAnimated;
 
-    private void Start()
+    protected virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 

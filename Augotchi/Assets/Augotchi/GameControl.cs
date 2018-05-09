@@ -16,6 +16,8 @@ public class GameControl : MonoBehaviour {
 
     public static float[] markerRelativeDistances = new float[] { 0, 0, 0, 0, 0, 0, 0, 0 };
 
+    private static bool dungeonDoneQueued;
+
     public static float zoomValue = 17f;
     public static Quaternion rotation = Quaternion.identity;
 
@@ -37,6 +39,7 @@ public class GameControl : MonoBehaviour {
     public GameObject P_MarkerBM;
     public GameObject P_MarkerQuest;
     public GameObject P_MarkerShop;
+    public GameObject P_MarkerDungeon;
 
     public GameObject P_RewardText;
     public GameObject P_MarkerPoof;
@@ -51,6 +54,8 @@ public class GameControl : MonoBehaviour {
     public GameObject G_ModeHint;
 
     public GameObject G_Shop;
+    public GameObject G_DungeonUI;
+    public GameObject G_DungeonDoneUI;
 
     public GameObject Introduction;
 
@@ -182,6 +187,12 @@ public class GameControl : MonoBehaviour {
             GetComponent<AudioSource>().PlayOneShot(A_postMortemSound);
         }
 
+        if (dungeonDoneQueued)
+        {
+            G_DungeonDoneUI.SetActive(true);
+            dungeonDoneQueued = false;
+        }
+
         /*if (markerRefs[0] == null)
             return; 
         float shortestDistance = float.MaxValue;
@@ -303,10 +314,14 @@ public class GameControl : MonoBehaviour {
         if(rnd < 300)
         {
             toSpawn = P_MarkerGrass;
-        }else if(rnd < 950)
+        }else if(rnd < 875)
         {
             toSpawn = P_MarkerBM;
-        }else
+        }else if(rnd < 950)
+        {
+            toSpawn = P_MarkerDungeon;
+        }
+        else
         {
             toSpawn = P_MarkerCrate;
         }
@@ -478,6 +493,20 @@ public class GameControl : MonoBehaviour {
         GetComponent<AudioSource>().PlayOneShot(A_ShopSound);
 
         G_Shop.SetActive(true);
+    }
+
+    public void showDungeon(Dungeon dungeon)
+    {
+        DungeonUI.ReRender(dungeon);
+
+        G_DungeonUI.SetActive(true);
+    }
+
+    public static void showDungeonDone(Dungeon dungeon, bool succeeded)
+    {
+        DungeonDoneUI.ReRender(dungeon, succeeded);
+
+        dungeonDoneQueued = true;
     }
 
     // BACKEND!

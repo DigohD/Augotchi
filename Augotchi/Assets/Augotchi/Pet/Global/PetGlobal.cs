@@ -97,6 +97,10 @@ public class PetGlobal {
     public float intelligence;
     public float agility;
 
+    public bool isDungeoneering;
+    public long dungeonStartTimestamp;
+    public Dungeon activeDungeon;
+
     public PetGlobal()
     {
         
@@ -153,7 +157,10 @@ public class PetGlobal {
         Base Base,
         float strength,
         float intelligence,
-        float agility
+        float agility,
+        bool isDungeoneering,
+        Dungeon activeDungeon,
+        long dungeonStartTimestamp
         )
     {
         this.hunger = hunger;
@@ -217,6 +224,10 @@ public class PetGlobal {
         this.strength = strength;
         this.intelligence = intelligence;
         this.agility = agility;
+
+        this.isDungeoneering = isDungeoneering;
+        this.activeDungeon = activeDungeon;
+        this.dungeonStartTimestamp = dungeonStartTimestamp;
     }
 
     private void initListeners()
@@ -315,7 +326,48 @@ public class PetGlobal {
         //die();
 
         activeTicks++;
-        
+
+        if (isDungeoneering)
+        {
+            long dungeonFinishedTimeStamp = PetKeeper.pet.dungeonStartTimestamp + (PetKeeper.pet.activeDungeon.time * TimeSpan.TicksPerSecond);
+
+            if(DateTime.Now.Ticks >= dungeonFinishedTimeStamp)
+            {
+                int petPower = (int)
+                    ((PetKeeper.pet.strength * activeDungeon.strengthWeight) +
+                    (PetKeeper.pet.intelligence * activeDungeon.intelligenceWeight) +
+                    (PetKeeper.pet.agility * activeDungeon.agilityWeight));
+                float petDungeonRate = (float) petPower / (float) activeDungeon.difficultyRating;
+
+                // 1 - o.9/(1 + p/d)
+                float successRate = 1f - (0.9f / (1f + petDungeonRate));
+                bool succeeded = false;
+
+                if (UnityEngine.Random.Range(0, 1f) < successRate)
+                {
+                    succeeded = true;
+
+                    switch (activeDungeon.rewardType)
+                    {
+                        case Quest.QuestRewardType.BUILDING_MATERIALS:
+                            PetKeeper.pet.giveCurrency(activeDungeon.rewardAmount);
+                            break;
+                        case Quest.QuestRewardType.COINS:
+                            PetKeeper.pet.giveBuildingMaterials(activeDungeon.rewardAmount);
+                            break;
+                        case Quest.QuestRewardType.EXPERIENCE:
+                            PetKeeper.pet.grantXP(activeDungeon.rewardAmount);
+                            break;
+                    }
+                }
+
+                GameControl.showDungeonDone(activeDungeon, succeeded);
+
+                isDungeoneering = false;
+                activeDungeon = null;
+                dungeonStartTimestamp = 0;
+            }
+        }
 
         Save(false);
     }
@@ -659,6 +711,15 @@ public class PetGlobal {
         Save(false);
     }
 
+    public void startDungeon(Dungeon dungeon)
+    {
+        isDungeoneering = true;
+        activeDungeon = dungeon;
+        dungeonStartTimestamp = DateTime.Now.Ticks;
+
+        Save(false);
+    }
+
     public void Save(bool ignoreTime)
     {
         if(!ignoreTime)
@@ -719,7 +780,10 @@ public class PetGlobal {
                 Base,
                 strength,
                 intelligence,
-                agility
+                agility,
+                isDungeoneering,
+                activeDungeon,
+                dungeonStartTimestamp
             ));
         file.Close();
 
@@ -814,6 +878,10 @@ public class PetGlobal {
             intelligence = pg.intelligence;
             agility = pg.agility;
 
+            isDungeoneering = pg.isDungeoneering;
+            activeDungeon = pg.activeDungeon;
+            dungeonStartTimestamp = pg.dungeonStartTimestamp;
+
             if (pg.inventory != null)
                 this.inventory = new Inventory(
                     pg.inventory.seedCounts == null ? new int[0] : pg.inventory.seedCounts,
@@ -900,7 +968,7 @@ public class PetGlobal {
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/AugotchiSave.gd", FileMode.Open);
-            PetGlobal pg = (PetGlobal)bf.Deserialize(file);
+            PetGlobal pg = (PetGlobal) bf.Deserialize(file);
 
             file.Close();
 

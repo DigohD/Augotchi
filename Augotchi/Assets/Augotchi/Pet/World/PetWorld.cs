@@ -25,7 +25,7 @@ public class PetWorld : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (PetKeeper.pet.isDead)
+        if (PetKeeper.pet.isDead || PetKeeper.pet.isDungeoneering)
         {
             gameObject.SetActive(false);
             return;
