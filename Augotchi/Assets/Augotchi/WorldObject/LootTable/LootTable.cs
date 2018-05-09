@@ -63,4 +63,23 @@ public class LootTable {
     {
         return pondLoot[Random.Range(0, pondLoot.Length)];
     }
+
+    private static Inventory.ProduceType[] forestLoot = new Inventory.ProduceType[3]
+    {
+        Inventory.ProduceType.MUSHROOM,
+        Inventory.ProduceType.BLUEBERRY,
+        Inventory.ProduceType.EGG
+    };
+
+    public static Inventory.ProduceType GenerateForestLoot()
+    {
+        if(Random.Range(0, 20) == 0)
+        {
+            return Inventory.ProduceType.TRUFFLE;
+        }
+        else
+        {
+            return forestLoot[Random.Range(0, forestLoot.Length)];
+        }
+    }
 }

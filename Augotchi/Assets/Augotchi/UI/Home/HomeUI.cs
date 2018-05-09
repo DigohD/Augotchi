@@ -10,10 +10,15 @@ public class HomeUI : MonoBehaviour
 
     private void Awake()
     {
-        if (PetKeeper.pet.isDead)
+        if (!PetKeeper.pet.isDungeoneering && PetKeeper.pet.isDead)
         {
             G_FoodUI.SetActive(false);
             G_ReviveUI.SetActive(true);
+        }
+        else if (PetKeeper.pet.isDungeoneering)
+        {
+            G_FoodUI.SetActive(false);
+            G_ReviveUI.SetActive(false);
         }
         else
         {
@@ -24,10 +29,15 @@ public class HomeUI : MonoBehaviour
 
     void Update()
     {
-        if (PetKeeper.pet.isDead)
+        if (!PetKeeper.pet.isDungeoneering && PetKeeper.pet.isDead)
         {
             G_FoodUI.SetActive(false);
             G_ReviveUI.SetActive(true);
+        }
+        else if (PetKeeper.pet.isDungeoneering)
+        {
+            G_FoodUI.SetActive(false);
+            G_ReviveUI.SetActive(false);
         }
         else
         {

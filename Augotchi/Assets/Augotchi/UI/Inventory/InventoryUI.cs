@@ -121,7 +121,7 @@ public class InventoryUI : MonoBehaviour {
         int currentProduce = 0;
 
         T_ProduceList.localPosition = Vector3.zero;
-        ((RectTransform)T_ProduceList).sizeDelta = new Vector2(0, (produceCount / 3) * 257);
+        ((RectTransform)T_ProduceList).sizeDelta = new Vector2(0, 257 + ((produceCount / 3) * 257));
 
         int j = 0;
         while (currentProduce < produceCount)

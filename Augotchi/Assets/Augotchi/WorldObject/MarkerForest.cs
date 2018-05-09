@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarkerPond : Marker {
+public class MarkerForest : Marker {
 
     protected override void executeEffect()
     {
-        Inventory.ProduceType produceType = LootTable.GeneratePondLoot();
+        Inventory.ProduceType produceType = LootTable.GenerateForestLoot();
 
         string name = System.Enum.GetName(typeof(Inventory.ProduceType), produceType);
 

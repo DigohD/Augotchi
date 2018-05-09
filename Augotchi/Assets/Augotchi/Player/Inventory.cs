@@ -102,7 +102,7 @@ public class Inventory {
                 return new Seed(
                     "Carrot Seed",
                     10,
-                    "Augotchi/Image/UISeed/Carrot",
+                    "Augotchi/Image/UISeed/Seedbag_Carrot",
                     SeedType.CARROT_SEED,
                     3600,
                     4,
@@ -112,7 +112,7 @@ public class Inventory {
                 return new Seed(
                     "Meatball Seed",
                     10,
-                    "Augotchi/Image/UISeed/Meatball",
+                    "Augotchi/Image/UISeed/Seedbag_Meatball",
                     SeedType.MEATBALL_SEED,
                     9000,
                     5,
@@ -122,7 +122,7 @@ public class Inventory {
                 return new Seed(
                     "Gooseberry Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Gooseberry",
                     SeedType.GOOSEBERRY_SEED,
                     7200,
                     3,
@@ -132,7 +132,7 @@ public class Inventory {
                 return new Seed(
                     "Cabbage Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Cabbage",
                     SeedType.CABBAGE_SEED,
                     18000,
                     25,
@@ -142,7 +142,7 @@ public class Inventory {
                 return new Seed(
                     "Sausage Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Sausage",
                     SeedType.SAUSAGE_SEED,
                     19800,
                     30,
@@ -152,7 +152,7 @@ public class Inventory {
                 return new Seed(
                     "Sugarcube Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Sugarcubes",
                     SeedType.SUGARCUBE_SEED,
                     16200,
                     25,
@@ -162,7 +162,7 @@ public class Inventory {
                 return new Seed(
                     "Potato Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Potato",
                     SeedType.POTATO_SEED,
                     28800,
                     75,
@@ -172,7 +172,7 @@ public class Inventory {
                 return new Seed(
                     "Spinach Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Spinach",
                     SeedType.SPINACH_SEED,
                     36000,
                     75,
@@ -182,7 +182,7 @@ public class Inventory {
                 return new Seed(
                     "Chili Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Chili",
                     SeedType.CHILI_SEED,
                     43200,
                     75,
@@ -192,7 +192,7 @@ public class Inventory {
                 return new Seed(
                     "Onion Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Onion",
                     SeedType.ONION_SEED,
                     64800,
                     100,
@@ -202,7 +202,7 @@ public class Inventory {
                 return new Seed(
                     "Pizza Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Pizza",
                     SeedType.PIZZA_SEED,
                     86400,
                     150,
@@ -212,7 +212,7 @@ public class Inventory {
                 return new Seed(
                     "Nugget Seed",
                     10,
-                    "Augotchi/Image/UISeed/Gooseberry",
+                    "Augotchi/Image/UISeed/Seedbag_Nugget",
                     SeedType.NUGGETS_SEED,
                     172800,
                     250,
@@ -275,7 +275,7 @@ public class Inventory {
             case ProduceType.CABBAGE:
                 return new Produce(
                     "Cabbage",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Cabbage",
                     ProduceType.CABBAGE,
                     5f,
                     10f,
@@ -290,7 +290,7 @@ public class Inventory {
             case ProduceType.SAUSAGE:
                 return new Produce(
                     "Sausage",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Sausage",
                     ProduceType.SAUSAGE,
                     15f,
                     0f,
@@ -305,7 +305,7 @@ public class Inventory {
             case ProduceType.SUGARCUBE:
                 return new Produce(
                     "Sugar cube",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Sugarcubes",
                     ProduceType.SUGARCUBE,
                     5f,
                     0f,
@@ -320,7 +320,7 @@ public class Inventory {
             case ProduceType.POTATO:
                 return new Produce(
                     "Potato",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Potato",
                     ProduceType.POTATO,
                     10f,
                     5f,
@@ -335,7 +335,7 @@ public class Inventory {
             case ProduceType.SPINACH:
                 return new Produce(
                     "Spinach",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Spinach",
                     ProduceType.SPINACH,
                     5f,
                     10f,
@@ -350,7 +350,7 @@ public class Inventory {
             case ProduceType.CHILI:
                 return new Produce(
                     "Chili",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Chili",
                     ProduceType.CHILI,
                     5f,
                     0f,
@@ -365,7 +365,7 @@ public class Inventory {
             case ProduceType.ONION:
                 return new Produce(
                     "Onion",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Onion",
                     ProduceType.ONION,
                     15f,
                     15f,
@@ -380,7 +380,7 @@ public class Inventory {
             case ProduceType.PIZZA:
                 return new Produce(
                     "Pizza",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Pizza",
                     ProduceType.PIZZA,
                     10f,
                     0f,
@@ -395,7 +395,7 @@ public class Inventory {
             case ProduceType.MUSHROOM:
                 return new Produce(
                     "Mushroom",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Mushroom",
                     ProduceType.MUSHROOM,
                     5f,
                     0f,
@@ -410,7 +410,7 @@ public class Inventory {
             case ProduceType.BLUEBERRY:
                 return new Produce(
                     "Blueberry",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Blueberry",
                     ProduceType.BLUEBERRY,
                     5f,
                     0f,
@@ -425,7 +425,7 @@ public class Inventory {
             case ProduceType.EGG:
                 return new Produce(
                     "Egg",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Egg",
                     ProduceType.EGG,
                     5f,
                     0f,
@@ -440,7 +440,7 @@ public class Inventory {
             case ProduceType.SALMON:
                 return new Produce(
                     "Salmon",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Salmon",
                     ProduceType.SALMON,
                     5f,
                     0f,
@@ -455,7 +455,7 @@ public class Inventory {
             case ProduceType.PERCH:
                 return new Produce(
                     "Perch",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Perch",
                     ProduceType.PERCH,
                     5f,
                     0f,
@@ -470,7 +470,7 @@ public class Inventory {
             case ProduceType.PIKE:
                 return new Produce(
                     "Pike",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Pike",
                     ProduceType.PIKE,
                     5f,
                     0f,
@@ -485,7 +485,7 @@ public class Inventory {
             case ProduceType.SHRIMP:
                 return new Produce(
                     "Shrimp",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Schrimp",
                     ProduceType.SHRIMP,
                     5f,
                     0f,
@@ -500,7 +500,7 @@ public class Inventory {
             case ProduceType.NUGGETS:
                 return new Produce(
                     "Gold nugget",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Nugget",
                     ProduceType.NUGGETS,
                     0f,
                     0f,
@@ -515,7 +515,7 @@ public class Inventory {
             case ProduceType.TRUFFLE:
                 return new Produce(
                     "Truffle",
-                    "Augotchi/Image/UIProduce/ProduceIcon_Gooseberries",
+                    "Augotchi/Image/UIProduce/ProduceIcon_Truffle",
                     ProduceType.TRUFFLE,
                     0f,
                     0f,

@@ -584,6 +584,13 @@ public class PetGlobal {
         Save(false);
     }
 
+    public void addWildProduce(Inventory.ProduceType produceType, int amount)
+    {
+        inventory.produceCounts[(int)produceType] += amount;
+
+        Save(false);
+    }
+
     public void giveCurrency(int amount)
     {
         currency += amount;

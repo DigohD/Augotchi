@@ -46,7 +46,7 @@ public class DungeonUI : MonoBehaviour {
         nameText.text = rDungeon.name;
 
         float difficultyPercent = (float) rDungeon.difficultyRating / 2500f;
-        Color DifficultyColor = new Color(difficultyPercent, 1 - difficultyPercent, 0, 1);
+        Color DifficultyColor = new Color(difficultyPercent * 0.9f, (1 - difficultyPercent) * 0.9f, 0, 1);
         difficultyText.text = "" + rDungeon.difficultyRating;
         difficultyBG.color = DifficultyColor;
 
@@ -80,7 +80,7 @@ public class DungeonUI : MonoBehaviour {
         float successRate = 1f - (0.9f / (1f + petDungeonRate));
 
         successText.text = (int) (successRate * 100) + "%";
-        successBG.color = new Color(1 - successRate, successRate, 0, 1);
+        successBG.color = new Color((1 - successRate) * 0.9f, successRate * 0.9f, 0, 1);
 
         
         rewardImage.sprite = (Sprite) Resources.Load(Quest.getRewardTypeImagePath(rDungeon.rewardType), typeof(Sprite));

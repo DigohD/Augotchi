@@ -425,7 +425,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7610f634d75ced84f8568eb62e808b5f, type: 2}
+  - {fileID: 2100000, guid: 1ba5203c8468aaa439484aed708b840e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -692,7 +692,7 @@ MonoBehaviour:
   T_TimerLabel: {fileID: 4353420397235466}
   T_FinishedLabel: {fileID: 4058218041476090}
   experienceGain: 100
-  planesMat: {fileID: 2100000, guid: fbedff9a073e40e43b0d55e28f92d09f, type: 2}
+  planesMat: {fileID: 2100000, guid: 98a1a482dbfcc9c4898c0e96af6e11d6, type: 2}
   produceMat: {fileID: 2100000, guid: 04b616958f0eee34bbe984898d0ca08f, type: 2}
   G_PlanesMesh: {fileID: 1690396041271340}
   G_ProduceMesh: {fileID: 1384578393667978}

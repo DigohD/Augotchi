@@ -40,6 +40,8 @@ public class GameControl : MonoBehaviour {
     public GameObject P_MarkerQuest;
     public GameObject P_MarkerShop;
     public GameObject P_MarkerDungeon;
+    public GameObject P_MarkerPond;
+    public GameObject P_MarkerForest;
 
     public GameObject P_RewardText;
     public GameObject P_MarkerPoof;
@@ -311,13 +313,22 @@ public class GameControl : MonoBehaviour {
         GameObject toSpawn = null;
         int rnd = UnityEngine.Random.Range(0, 1000);
 
-        if(rnd < 300)
+        if(rnd < 250)
         {
             toSpawn = P_MarkerGrass;
-        }else if(rnd < 875)
+        }else if(rnd < 750)
         {
             toSpawn = P_MarkerBM;
-        }else if(rnd < 950)
+        }
+        else if (rnd < 810)
+        {
+            toSpawn = P_MarkerPond;
+        }
+        else if (rnd < 870)
+        {
+            toSpawn = P_MarkerForest;
+        }
+        else if(rnd < 930)
         {
             toSpawn = P_MarkerDungeon;
         }

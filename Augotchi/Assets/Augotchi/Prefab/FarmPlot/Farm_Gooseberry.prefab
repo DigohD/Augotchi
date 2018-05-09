@@ -693,7 +693,7 @@ MonoBehaviour:
   T_FinishedLabel: {fileID: 4113854628861364}
   experienceGain: 30
   planesMat: {fileID: 2100000, guid: 20985dc2b996e064c880abdda911fdf9, type: 2}
-  produceMat: {fileID: 2100000, guid: 68856752d7d4b534cb4ef71df3e65cdf, type: 2}
+  produceMat: {fileID: 2100000, guid: 95f4caa1d61eaba4bb4f389db6b2af05, type: 3}
   G_PlanesMesh: {fileID: 1035245788734072}
   G_ProduceMesh: {fileID: 1078861128479708}
   G_BushMesh: {fileID: 1079361785058156}

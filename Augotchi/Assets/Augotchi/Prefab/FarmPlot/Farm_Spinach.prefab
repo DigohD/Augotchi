@@ -620,7 +620,7 @@ MonoBehaviour:
   T_TimerLabel: {fileID: 4511576742122576}
   T_FinishedLabel: {fileID: 4579249843749796}
   experienceGain: 100
-  planesMat: {fileID: 2100000, guid: 06f75d2549321724a83bcd16e26ea57f, type: 2}
+  planesMat: {fileID: 2100000, guid: 9d0dcb03abcee4c42befb7efbd377b1f, type: 2}
   produceMat: {fileID: 2100000, guid: 5fc8f8b2472a2d3468a06d56fab18ea4, type: 2}
   G_PlanesMesh: {fileID: 1157187864487434}
   G_ProduceMesh: {fileID: 1842471522692364}
