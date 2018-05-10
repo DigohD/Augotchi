@@ -47,7 +47,7 @@ public class DungeonUI : MonoBehaviour {
 
         float difficultyPercent = (float) rDungeon.difficultyRating / 2500f;
         Color DifficultyColor = new Color(difficultyPercent * 0.9f, (1 - difficultyPercent) * 0.9f, 0, 1);
-        difficultyText.text = "" + rDungeon.difficultyRating;
+        difficultyText.text = "Difficulty\n" + rDungeon.difficultyRating;
         difficultyBG.color = DifficultyColor;
 
         int addUp =

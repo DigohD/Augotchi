@@ -58,7 +58,7 @@ public class Dungeon {
         string dName = GenerateDungeonName(dDifficultyRating);
 
         // 1800
-        int dTime = 5 * dDifficultyRating;
+        int dTime = 1800 * dDifficultyRating;
 
         Quest.QuestRewardType dRewardType = (Quest.QuestRewardType) Random.Range(0, System.Enum.GetNames(typeof(Quest.QuestRewardType)).Length);
         int dRewardAmount = 100 + (dDifficultyRating * 25 * Quest.getRewardTypeConversionRate(dRewardType));
