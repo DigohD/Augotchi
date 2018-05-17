@@ -17,6 +17,8 @@ TagManager:
   - IndividualMarker
   - Base
   - FarmPlot
+  - GardenDecor
+  - InventoryUI
   layers:
   - Default
   - TransparentFX
@@ -32,7 +34,7 @@ TagManager:
   - House
   - FarmPlot
   - FarmPlotInteract
-  - 
+  - DecorRemove
   - 
   - 
   - 

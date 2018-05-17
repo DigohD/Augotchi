@@ -10,6 +10,7 @@ public class InventoryUI : MonoBehaviour {
 
     public GameObject P_SeedItem;
     public GameObject P_ProduceItem;
+    public GameObject P_GardenDecorItem;
     public GameObject P_UniqueItem;
 
     public Transform T_SeedList;
@@ -20,6 +21,9 @@ public class InventoryUI : MonoBehaviour {
 
     public Transform T_UniqueList;
     public GameObject G_UniqueSection;
+
+    public Transform T_GardenDecorList;
+    public GameObject G_GardenDecorSection;
 
     private void Start()
     {
@@ -37,6 +41,7 @@ public class InventoryUI : MonoBehaviour {
     {
         G_SeedSection.SetActive(false);
         G_ProduceSection.SetActive(false);
+        G_GardenDecorSection.SetActive(false);
         G_UniqueSection.SetActive(false);
 
         switch (sectionIndex)
@@ -50,6 +55,9 @@ public class InventoryUI : MonoBehaviour {
             case 2:
                 G_UniqueSection.SetActive(true);
                 break;
+            case 3:
+                G_GardenDecorSection.SetActive(true);
+                break;
         }
     }
 
@@ -59,6 +67,7 @@ public class InventoryUI : MonoBehaviour {
 
         renderSeedList();
         renderProduceList();
+        renderGardenDecorList();
         renderUniqueList();
     }
 
@@ -184,6 +193,35 @@ public class InventoryUI : MonoBehaviour {
                 currentUnique++;
             }
             j++;
+        }
+    }
+
+    private void renderGardenDecorList()
+    {
+        foreach (Transform t in T_GardenDecorList)
+            Destroy(t.gameObject);
+
+        ArrayList gardenDecorIndexesToRender = new ArrayList();
+        for (int k = 0; k < PetKeeper.pet.inventory.gardenDecorCounts.Length; k++)
+        {
+            if (PetKeeper.pet.inventory.gardenDecorCounts[k] >= 1)
+                gardenDecorIndexesToRender.Add(k);
+        }
+
+        T_GardenDecorList.localPosition = Vector3.zero;
+        ((RectTransform) T_GardenDecorList).sizeDelta = new Vector2(0, 170 + gardenDecorIndexesToRender.Count * 170);
+
+        for (int i = 0; i < gardenDecorIndexesToRender.Count; i++)
+        {
+            GameObject newItem = Instantiate(P_GardenDecorItem, Vector3.zero, Quaternion.identity);
+            newItem.transform.SetParent(T_GardenDecorList, false);
+            newItem.transform.localPosition = new Vector2(0, -10 + (i * -170));
+
+            newItem.GetComponent<GardenDecorItem>().initGardenDecorItem(
+                PetKeeper.pet.inventory.gardenDecorCounts[(int) gardenDecorIndexesToRender[i]],
+                Inventory.getGardenDecorTypeInfo((Inventory.GardenDecorType)(int) gardenDecorIndexesToRender[i]),
+                transform
+            );
         }
     }
 }

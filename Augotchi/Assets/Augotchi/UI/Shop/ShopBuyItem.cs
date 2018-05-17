@@ -40,6 +40,13 @@ public class ShopBuyItem : MonoBehaviour {
                 image.sprite = (Sprite)Resources.Load(uniqueInfo.imagePath, typeof(Sprite));
                 item.price = uniqueInfo.price * 5;
                 break;
+            case Shop.ItemType.GARDEN_DECOR:
+                GardenDecor decorInfo = Inventory.getGardenDecorTypeInfo((Inventory.GardenDecorType) item.itemIndex);
+                nameText.text = decorInfo.name;
+                countText.text = "x" + item.amount;
+                image.sprite = (Sprite) Resources.Load(decorInfo.imagePath, typeof(Sprite));
+                item.price = decorInfo.coinCost;
+                break;
         }
 
         buyButton.GetComponentInChildren<Text>().text = "" + (item.price);
@@ -68,6 +75,10 @@ public class ShopBuyItem : MonoBehaviour {
             case Shop.ItemType.UNIQUE:
                 Unique uniqueInfo = Inventory.getUniqueTypeInfo((Inventory.UniqueType)item.itemIndex);
                 PetKeeper.pet.inventory.uniqueCounts[(int) uniqueInfo.uniqueType] += 1;
+                break;
+            case Shop.ItemType.GARDEN_DECOR:
+                GardenDecor decorInfo = Inventory.getGardenDecorTypeInfo((Inventory.GardenDecorType) item.itemIndex);
+                PetKeeper.pet.inventory.gardenDecorCounts[(int) decorInfo.gardenDecorType] += 1;
                 break;
         }
 

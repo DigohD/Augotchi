@@ -46,6 +46,38 @@ public class Inventory {
         TRUFFLE = 19
     }
 
+    public enum GardenDecorType
+    {
+        OAK = 0,
+        SPRUCE = 1,
+        BUSH = 2,
+        MUSHROOM = 3,
+        FENCE = 4,
+        DRYSTONE = 5,
+        STONEPATH = 6,
+        FOUNTAIN = 7,
+        BENCH = 8,
+        FLAGPOLE = 9,
+        TABLE = 10,
+        STATUE = 11,
+        POND = 12,
+        URN = 13,
+        GOLDPILE = 14,
+        ARCHWAY = 15,
+        TORCH = 16,
+        LAMPPOST = 17,
+        FLATSTONE = 18,
+        LARGESTONE = 19,
+        MEDIUMSTONE = 20,
+        SMALLSTONE = 21,
+        TALLSTONE = 22,
+        STONEPILE = 23,
+        FLOWERPATCH = 24,
+        FLOWERBUCKET = 25,
+        SUNFLOWERS = 26,
+        PRIZEROSES = 27
+    }
+
     public enum UniqueType
     {
         WRONGWORLD_ROOTS = 0
@@ -53,6 +85,7 @@ public class Inventory {
 
     public int[] seedCounts;
     public int[] produceCounts;
+    public int[] gardenDecorCounts;
     public int[] uniqueCounts;
 
     public Inventory()
@@ -69,13 +102,26 @@ public class Inventory {
             0, 0, 0, 0, 0,
             0, 0, 0, 0, 0
         };
+
+        gardenDecorCounts = new int[28]
+        {
+            1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1,
+
+            1, 1, 1, 1, 1,
+            1, 1, 1
+        };
+
         uniqueCounts = new int[1] { 0 };
     }
 
-    public Inventory(int[] oldSeedCounts, int[] oldProduceCounts, int[] oldUniqueCounts)
+    public Inventory(int[] oldSeedCounts, int[] oldProduceCounts, int[] oldGardenDecorCounts, int[] oldUniqueCounts)
     {
         seedCounts = new int[12];
         produceCounts = new int[20];
+        gardenDecorCounts = new int[28];
         uniqueCounts = new int[1];
 
         for (int i = 0; i < oldSeedCounts.Length; i++)
@@ -86,6 +132,11 @@ public class Inventory {
         for (int i = 0; i < oldProduceCounts.Length; i++)
         {
             produceCounts[i] = oldProduceCounts[i];
+        }
+
+        for (int i = 0; i < oldGardenDecorCounts.Length; i++)
+        {
+            gardenDecorCounts[i] = oldGardenDecorCounts[i];
         }
 
         for (int i = 0; i < oldUniqueCounts.Length; i++)
@@ -526,6 +577,267 @@ public class Inventory {
                     400,
                     false,
                     ItemRarity.AMAZING
+                );
+        }
+
+        return null;
+    }
+
+    public static GardenDecor getGardenDecorTypeInfo(GardenDecorType type)
+    {
+        switch (type)
+        {
+            case GardenDecorType.OAK:
+                return new GardenDecor(
+                    "Oak Tree",
+                    0,
+                    0,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.OAK,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.SPRUCE:
+                return new GardenDecor(
+                    "Spruce Tree",
+                    0,
+                    0,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.SPRUCE,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.BUSH:
+                return new GardenDecor(
+                    "Bush",
+                    250,
+                    500,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.BUSH,
+                    ItemRarity.COMMON
+                );
+            case GardenDecorType.MUSHROOM:
+                return new GardenDecor(
+                    "Mushroom",
+                    500,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.MUSHROOM,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.FENCE:
+                return new GardenDecor(
+                    "Fence",
+                    250,
+                    500,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.FENCE,
+                    ItemRarity.COMMON
+                );
+            case GardenDecorType.STONEPATH:
+                return new GardenDecor(
+                    "Stone Path",
+                    250,
+                    500,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.STONEPATH,
+                    ItemRarity.COMMON
+                );
+            case GardenDecorType.DRYSTONE:
+                return new GardenDecor(
+                    "Dry Stone",
+                    250,
+                    500,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.DRYSTONE,
+                    ItemRarity.COMMON
+                );
+            case GardenDecorType.FOUNTAIN:
+                return new GardenDecor(
+                    "Fountain",
+                    25000,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.FOUNTAIN,
+                    ItemRarity.AMAZING
+                );
+            case GardenDecorType.BENCH:
+                return new GardenDecor(
+                    "Bench",
+                    750,
+                    1500,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.BENCH,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.FLAGPOLE:
+                return new GardenDecor(
+                    "Flagpole",
+                    12500,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.FLAGPOLE,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.TABLE:
+                return new GardenDecor(
+                    "Table",
+                    1000,
+                    2000,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.TABLE,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.STATUE:
+                return new GardenDecor(
+                    "Statue",
+                    25000,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.STATUE,
+                    ItemRarity.AMAZING
+                );
+            case GardenDecorType.POND:
+                return new GardenDecor(
+                    "Pond",
+                    25000,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.POND,
+                    ItemRarity.AMAZING
+                );
+            case GardenDecorType.URN:
+                return new GardenDecor(
+                    "Urn",
+                    500,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.URN,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.GOLDPILE:
+                return new GardenDecor(
+                    "Gold Pile",
+                    2000,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.GOLDPILE,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.ARCHWAY:
+                return new GardenDecor(
+                    "Archway",
+                    5000,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.ARCHWAY,
+                    ItemRarity.EPIC
+                );
+            case GardenDecorType.TORCH:
+                return new GardenDecor(
+                    "Torch",
+                    1000,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.TORCH,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.LAMPPOST:
+                return new GardenDecor(
+                    "Lamp Pole",
+                    5000,
+                    -1,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.LAMPPOST,
+                    ItemRarity.EPIC
+                );
+            case GardenDecorType.FLATSTONE:
+                return new GardenDecor(
+                    "Flat Stone",
+                    1000,
+                    2000,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.FLATSTONE,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.LARGESTONE:
+                return new GardenDecor(
+                    "Large Stone",
+                    1000,
+                    2000,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.LARGESTONE,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.MEDIUMSTONE:
+                return new GardenDecor(
+                    "Medium Stone",
+                    500,
+                    1000,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.MEDIUMSTONE,
+                    ItemRarity.COMMON
+                );
+            case GardenDecorType.SMALLSTONE:
+                return new GardenDecor(
+                    "Small Stone",
+                    250,
+                    500,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.SMALLSTONE,
+                    ItemRarity.COMMON
+                );
+            case GardenDecorType.TALLSTONE:
+                return new GardenDecor(
+                    "Tall Stone",
+                    2500,
+                    5000,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.TALLSTONE,
+                    ItemRarity.EPIC
+                );
+            case GardenDecorType.STONEPILE:
+                return new GardenDecor(
+                    "Stone Pile",
+                    2500,
+                    5000,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.STONEPILE,
+                    ItemRarity.EPIC
+                );
+            case GardenDecorType.FLOWERPATCH:
+                return new GardenDecor(
+                    "Flower Patch",
+                    250,
+                    500,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.FLOWERPATCH,
+                    ItemRarity.COMMON
+                );
+            case GardenDecorType.FLOWERBUCKET:
+                return new GardenDecor(
+                    "Flower Bucket",
+                    250,
+                    500,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.FLOWERBUCKET,
+                    ItemRarity.COMMON
+                );
+            case GardenDecorType.SUNFLOWERS:
+                return new GardenDecor(
+                    "Sunflowers",
+                    500,
+                    1000,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.SUNFLOWERS,
+                    ItemRarity.RARE
+                );
+            case GardenDecorType.PRIZEROSES:
+                return new GardenDecor(
+                    "Prized Roses",
+                    2500,
+                    5000,
+                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    GardenDecorType.PRIZEROSES,
+                    ItemRarity.EPIC
                 );
         }
 

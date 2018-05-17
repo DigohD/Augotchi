@@ -195,12 +195,30 @@
 			{
 				var changeFromPreviousPosition = _mousePositionPrevious - _mousePosition;
 
-                if(changeFromPreviousPosition.magnitude > 5)
+                if(changeFromPreviousPosition.magnitude > 15)
                 {
                     changeFromPreviousPosition = Vector3.zero;
                 }
 
-				if (Mathf.Abs(changeFromPreviousPosition.x) > 0.0f || Mathf.Abs(changeFromPreviousPosition.y) > 0.0f)
+                GameObject go = GameObject.FindGameObjectWithTag("GameController");
+                if (go != null)
+                {
+                    if (go.GetComponent<GameControl>().isTweakingGardenDecor)
+                    {
+                        return;
+                    }
+                }
+
+                go = GameObject.FindGameObjectWithTag("InventoryUI");
+                if (go != null)
+                {
+                    if (go.active)
+                    {
+                        return;
+                    }
+                }
+
+                if (Mathf.Abs(changeFromPreviousPosition.x) > 0.0f || Mathf.Abs(changeFromPreviousPosition.y) > 0.0f)
 				{
 					_mousePositionPrevious = _mousePosition;
 					var offset = _origin - _mousePosition;
@@ -236,7 +254,7 @@
                         rot += (changeFromPreviousPosition.y * 0.1f);
                     }
 
-                    GameObject.FindGameObjectWithTag("CameraTarget").transform.Rotate(0, rot * 16f, 0);
+                    GameObject.FindGameObjectWithTag("CameraTarget").transform.Rotate(0, rot * 4f, 0);
                     GameControl.rotation = GameObject.FindGameObjectWithTag("CameraTarget").transform.rotation;
                 }
 				else

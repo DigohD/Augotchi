@@ -50,10 +50,12 @@ public class GameControl : MonoBehaviour {
     public GameObject P_FarmPlot;
 
     public GameObject[] P_FarmPlots;
+    public GameObject[] P_GardenDecors;
 
     public GameObject G_UIButtons;
     public GameObject G_CloseButton;
     public GameObject G_ModeHint;
+    public GameObject G_TweakUI;
 
     public GameObject G_Shop;
     public GameObject G_DungeonUI;
@@ -76,6 +78,16 @@ public class GameControl : MonoBehaviour {
 
     private bool isPlantingSeed = false;
     private Seed seedToPlant = null;
+
+    private bool isBuildingGardenDecor = false;
+    private GardenDecor gardenDecorToBuild = null;
+
+    [HideInInspector]
+    public bool isTweakingGardenDecor = false;
+    public GameObject tweakedGardenDecor = null;
+
+    [HideInInspector]
+    public bool isRemovingGardenDecor = false;
 
     public GameObject loadingScreen;
 
@@ -153,6 +165,25 @@ public class GameControl : MonoBehaviour {
             newPlot.transform.localScale = Vector3.one;
 
             newPlot.GetComponent<FarmPlot>().init(Inventory.getSeedTypeInfo(crop.seedType), crop, this, false);
+        }
+
+        foreach (BaseGardenDecor decor in PetKeeper.pet.Base.baseGardenDecors)
+        {
+            parts = decor.longLat.Split(',');
+            longitude = float.Parse(parts[0]);
+            latitude = float.Parse(parts[1]);
+            fromLongLat = VectorExtensions.AsUnityPosition(
+                new Vector2(latitude, longitude),
+                Map.GetComponent<BasicMap>().CenterMercator,
+                Map.GetComponent<BasicMap>().WorldRelativeScale
+            );
+
+            GameObject newDecor = (GameObject) Instantiate(P_GardenDecors[(int) decor.gardenDecorType], fromLongLat + (Vector3.up * (0.2f + decor.yOffset)), Quaternion.identity);
+            newDecor.transform.SetParent(Map.transform, false);
+            newDecor.transform.localScale = Vector3.zero;
+            newDecor.transform.localRotation = Quaternion.Euler(0, decor.yRotation, 0);
+
+            newDecor.GetComponent<GardenDecorWorld>().init(decor);
         }
     }
 
@@ -236,8 +267,6 @@ public class GameControl : MonoBehaviour {
         }
         else if (loadTimer < 2.5f)
             return;
-
-
 
         // TESTING!
 
@@ -447,6 +476,136 @@ public class GameControl : MonoBehaviour {
         }
     }
 
+    public void startBuildingGardenDecor(GardenDecor gardenDecorInfo)
+    {
+        isBuildingGardenDecor = true;
+        gardenDecorToBuild = gardenDecorInfo;
+
+        G_UIButtons.SetActive(false);
+        G_CloseButton.SetActive(true);
+        G_ModeHint.SetActive(true);
+
+        G_ModeHint.GetComponentInChildren<Text>().text = "Build Decor!";
+    }
+
+    public void tryBuildgardenDecor(Vector3 buildPos)
+    {
+        if (!isBuildingGardenDecor)
+            return;
+
+        GameObject Map = GameObject.FindGameObjectWithTag("Map");
+
+        Vector3 buildPosLocal = buildPos / Map.transform.localScale.x;
+
+        /*RaycastHit hit;
+        int layerMask = 1 << LayerMask.NameToLayer("House");
+        if (Physics.SphereCast(buildPosLocal + (Vector3.up * 50), 6.5f * Map.transform.localScale.x, Vector3.down, out hit, 1000, layerMask))
+        {
+            queueRewardText("House in the way!", new Color(0.8f, 0.5f, 0.5f));
+            return;
+        }*/
+
+        queueRewardText("Built Decor!", new Color(0.8f, 0.5f, 0.5f));
+
+        GameObject decor = Instantiate(P_GardenDecors[(int) gardenDecorToBuild.gardenDecorType], buildPosLocal + (Vector3.up * 0.2f), Quaternion.identity);
+        decor.transform.SetParent(Map.transform, false);
+        decor.transform.localScale = Vector3.one * 1.3f;
+
+        decor.GetComponent<GardenDecorWorld>().hasSpawned = true;
+        decor.GetComponent<GardenDecorWorld>().updateVisual();
+
+        InventoryUI.reRender = true;
+
+        PetKeeper.pet.Save(false);
+
+        startTweakingGardenDecor(decor);
+    }
+
+    public void startTweakingGardenDecor(GameObject tweakedGardenDecor)
+    {
+        isBuildingGardenDecor = false;
+        isTweakingGardenDecor = true;
+        this.tweakedGardenDecor = tweakedGardenDecor;
+
+        G_TweakUI.SetActive(true);
+        G_UIButtons.SetActive(false);
+        G_CloseButton.SetActive(true);
+        G_ModeHint.SetActive(true);
+
+        G_ModeHint.GetComponentInChildren<Text>().text = "Tweak Decor!";
+    }
+
+    public void tweakGardenDecorRotation(float deltaRot)
+    {
+        tweakedGardenDecor.transform.Rotate(0, deltaRot * Time.deltaTime, 0);
+    }
+
+    public void tweakGardenDecorScale(float newScale)
+    {
+        tweakedGardenDecor.transform.localScale = Vector3.one * newScale;
+    }
+
+    public void tweakGardenDecorOffset(float deltaOffset)
+    {
+        tweakedGardenDecor.transform.Translate(0, deltaOffset * Time.deltaTime, 0);
+    }
+
+    public void tweakGardenDecorNextVariation()
+    {
+        tweakedGardenDecor.GetComponent<GardenDecorWorld>().nextVariation();
+    }
+
+    public void tweakGardenDecorPreviousVariation()
+    {
+        tweakedGardenDecor.GetComponent<GardenDecorWorld>().previousVariation();
+    }
+
+    public void gardenDecorBuildConfirmed()
+    {
+        string longLat = VectorExtensions.GetGeoPosition(
+            tweakedGardenDecor.transform.position,
+            Map.GetComponent<BasicMap>().CenterMercator,
+            Map.GetComponent<BasicMap>().WorldRelativeScale
+        ).ToString();
+
+        BaseGardenDecor newDecor = new BaseGardenDecor(gardenDecorToBuild.gardenDecorType, longLat, 0);
+        newDecor.yRotation = tweakedGardenDecor.transform.rotation.eulerAngles.y;
+        newDecor.scale = tweakedGardenDecor.transform.localScale.x;
+        newDecor.variation = tweakedGardenDecor.GetComponent<GardenDecorWorld>().representedDecor.variation;
+        newDecor.yOffset = tweakedGardenDecor.transform.localPosition.y - 0.2f;
+        PetKeeper.pet.Base.baseGardenDecors.Add(newDecor);
+
+        tweakedGardenDecor.GetComponent<GardenDecorWorld>().init(newDecor);
+
+        PetKeeper.pet.buildingMaterials -= gardenDecorToBuild.bmCost;
+        PetKeeper.pet.inventory.gardenDecorCounts[(int) gardenDecorToBuild.gardenDecorType] -= 1;
+
+        queueRewardText("Built Decor!", new Color(0.7f, 0.7f, 0.7f, 1));
+
+        isTweakingGardenDecor = false;
+
+        PetKeeper.pet.Save(false);
+
+        exitModePressed();
+    }
+
+    public void startRemoveDecor()
+    {
+        isRemovingGardenDecor = true;
+
+        foreach(GameObject decor in GameObject.FindGameObjectsWithTag("GardenDecor"))
+        {
+            decor.GetComponent<GardenDecorWorld>().showRemoval();
+        }
+
+        G_TweakUI.SetActive(false);
+        G_UIButtons.SetActive(false);
+        G_CloseButton.SetActive(true);
+        G_ModeHint.SetActive(true);
+
+        G_ModeHint.GetComponentInChildren<Text>().text = "Remove Decor!";
+    }
+
     public void moveHouse(int cost)
     {
         GameObject Map = GameObject.FindGameObjectWithTag("Map");
@@ -456,8 +615,15 @@ public class GameControl : MonoBehaviour {
         foreach (GameObject fp in GameObject.FindGameObjectsWithTag("FarmPlot"))
             Destroy(fp);
 
+        foreach (GameObject gd in GameObject.FindGameObjectsWithTag("GardenDecor"))
+        {
+            PetKeeper.pet.buildingMaterials += Inventory.getGardenDecorTypeInfo(gd.GetComponent<GardenDecorWorld>().representedDecor.gardenDecorType).bmCost;
+            Destroy(gd);
+        }
+           
         Destroy(baseObject);
 
+        PetKeeper.pet.Base.baseGardenDecors.Clear();
         PetKeeper.pet.Base.gardenCrops.Clear();
 
         string longLat = VectorExtensions.GetGeoPosition(
@@ -477,12 +643,32 @@ public class GameControl : MonoBehaviour {
 
     public void exitModePressed()
     {
+        if (isTweakingGardenDecor)
+        {
+            Destroy(tweakedGardenDecor);
+
+            queueRewardText("Cancelled!", new Color(0.7f, 0.7f, 0.7f, 1));
+        }
+
         seedToPlant = null;
         isPlantingSeed = false;
+        gardenDecorToBuild = null;
+        isBuildingGardenDecor = false;
+        tweakedGardenDecor = null;
+        isTweakingGardenDecor= false;
+        isRemovingGardenDecor = false;
 
+        foreach (GameObject decor in GameObject.FindGameObjectsWithTag("GardenDecor"))
+        {
+            decor.GetComponent<GardenDecorWorld>().hideRemoval();
+        }
+
+        G_TweakUI.SetActive(false);
         G_UIButtons.SetActive(true);
         G_CloseButton.SetActive(false);
         G_ModeHint.SetActive(false);
+
+        InventoryUI.reRender = true;
     }
 
     public static void playPostMortemAudioClip(AudioClip clip)

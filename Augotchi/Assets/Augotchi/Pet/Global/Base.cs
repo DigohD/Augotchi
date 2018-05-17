@@ -8,5 +8,6 @@ using UnityEngine;
 [System.Serializable]
 public class Base {
     public string longLat;
+    public List<BaseGardenDecor> baseGardenDecors = new List<BaseGardenDecor>();
     public List<GardenCrop> gardenCrops = new List<GardenCrop>();
 }
