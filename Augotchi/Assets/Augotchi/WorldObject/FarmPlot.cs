@@ -41,6 +41,7 @@ public abstract class FarmPlot : MonoBehaviour {
         else
             delayedSpawnTime = UnityEngine.Random.Range(0.5f, 1.5f);
 
+        Debug.Log("FARMTIME " + seedInfo.growthTime);
         initialGrowthTime = seedInfo.growthTime;
 
         long growthTimeTicks = TimeSpan.TicksPerSecond * seedInfo.growthTime;

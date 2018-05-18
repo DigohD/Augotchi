@@ -32,6 +32,9 @@ public class HomePet : MonoBehaviour {
             transform.localRotation = Quaternion.Euler(0, 235, 0);
             transform.localPosition = new Vector3(5f, 5f, 0);
 
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(false);
+
             petFactory.setDeadEyes();
             return;
         }

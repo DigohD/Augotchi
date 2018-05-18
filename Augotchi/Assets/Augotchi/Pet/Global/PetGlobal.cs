@@ -237,6 +237,49 @@ public class PetGlobal {
 
     public void degenerateTick()
     {
+        if (isDungeoneering)
+        {
+            long dungeonFinishedTimeStamp = PetKeeper.pet.dungeonStartTimestamp + (PetKeeper.pet.activeDungeon.time * TimeSpan.TicksPerSecond);
+
+            if (DateTime.Now.Ticks >= dungeonFinishedTimeStamp)
+            {
+                int petPower = (int)
+                    ((PetKeeper.pet.strength * activeDungeon.strengthWeight) +
+                    (PetKeeper.pet.intelligence * activeDungeon.intelligenceWeight) +
+                    (PetKeeper.pet.agility * activeDungeon.agilityWeight));
+                float petDungeonRate = (float)petPower / (float)activeDungeon.difficultyRating;
+
+                // 1 - o.9/(1 + p/d)
+                float successRate = 1f - (0.9f / (1f + petDungeonRate));
+                bool succeeded = false;
+
+                if (UnityEngine.Random.Range(0, 1f) < successRate)
+                {
+                    succeeded = true;
+
+                    switch (activeDungeon.rewardType)
+                    {
+                        case Quest.QuestRewardType.BUILDING_MATERIALS:
+                            PetKeeper.pet.giveCurrency(activeDungeon.rewardAmount);
+                            break;
+                        case Quest.QuestRewardType.COINS:
+                            PetKeeper.pet.giveBuildingMaterials(activeDungeon.rewardAmount);
+                            break;
+                        case Quest.QuestRewardType.EXPERIENCE:
+                            PetKeeper.pet.grantXP(activeDungeon.rewardAmount);
+                            break;
+                    }
+                }
+
+                GameControl.showDungeonDone(activeDungeon, succeeded);
+
+                isDungeoneering = false;
+                activeDungeon = null;
+                dungeonStartTimestamp = 0;
+            }
+            return;
+        }
+
         if (isDead)
         {
             Save(false);
@@ -326,48 +369,6 @@ public class PetGlobal {
         //die();
 
         activeTicks++;
-
-        if (isDungeoneering)
-        {
-            long dungeonFinishedTimeStamp = PetKeeper.pet.dungeonStartTimestamp + (PetKeeper.pet.activeDungeon.time * TimeSpan.TicksPerSecond);
-
-            if(DateTime.Now.Ticks >= dungeonFinishedTimeStamp)
-            {
-                int petPower = (int)
-                    ((PetKeeper.pet.strength * activeDungeon.strengthWeight) +
-                    (PetKeeper.pet.intelligence * activeDungeon.intelligenceWeight) +
-                    (PetKeeper.pet.agility * activeDungeon.agilityWeight));
-                float petDungeonRate = (float) petPower / (float) activeDungeon.difficultyRating;
-
-                // 1 - o.9/(1 + p/d)
-                float successRate = 1f - (0.9f / (1f + petDungeonRate));
-                bool succeeded = false;
-
-                if (UnityEngine.Random.Range(0, 1f) < successRate)
-                {
-                    succeeded = true;
-
-                    switch (activeDungeon.rewardType)
-                    {
-                        case Quest.QuestRewardType.BUILDING_MATERIALS:
-                            PetKeeper.pet.giveCurrency(activeDungeon.rewardAmount);
-                            break;
-                        case Quest.QuestRewardType.COINS:
-                            PetKeeper.pet.giveBuildingMaterials(activeDungeon.rewardAmount);
-                            break;
-                        case Quest.QuestRewardType.EXPERIENCE:
-                            PetKeeper.pet.grantXP(activeDungeon.rewardAmount);
-                            break;
-                    }
-                }
-
-                GameControl.showDungeonDone(activeDungeon, succeeded);
-
-                isDungeoneering = false;
-                activeDungeon = null;
-                dungeonStartTimestamp = 0;
-            }
-        }
 
         Save(false);
     }
