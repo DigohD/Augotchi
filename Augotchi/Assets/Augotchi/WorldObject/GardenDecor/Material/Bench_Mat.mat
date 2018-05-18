@@ -109,8 +109,8 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineSize: 0.002
     - _Parallax: 0.02
-    - _RimIntensity: 0.5
-    - _RimSize: 1.5
+    - _RimIntensity: 0.16
+    - _RimSize: 1.4
     - _RimSmoothness: 0.5
     - _ShadowIntensity: 1
     - _Shininess: 0.275
