@@ -75,7 +75,8 @@ public class Inventory {
         FLOWERPATCH = 24,
         FLOWERBUCKET = 25,
         SUNFLOWERS = 26,
-        PRIZEROSES = 27
+        PRIZEROSES = 27,
+        FLOWERPOT = 28
     }
 
     public enum UniqueType
@@ -103,15 +104,15 @@ public class Inventory {
             0, 0, 0, 0, 0
         };
 
-        gardenDecorCounts = new int[28]
+        gardenDecorCounts = new int[29]
         {
-            1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
 
-            1, 1, 1, 1, 1,
-            1, 1, 1
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0
         };
 
         uniqueCounts = new int[1] { 0 };
@@ -121,7 +122,7 @@ public class Inventory {
     {
         seedCounts = new int[12];
         produceCounts = new int[20];
-        gardenDecorCounts = new int[28];
+        gardenDecorCounts = new int[29];
         uniqueCounts = new int[1];
 
         for (int i = 0; i < oldSeedCounts.Length; i++)
@@ -590,18 +591,18 @@ public class Inventory {
             case GardenDecorType.OAK:
                 return new GardenDecor(
                     "Oak Tree",
-                    0,
-                    0,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    1000,
+                    2000,
+                    "Augotchi/Image/UIDecor/DecorIcon_Oak",
                     GardenDecorType.OAK,
                     ItemRarity.RARE
                 );
             case GardenDecorType.SPRUCE:
                 return new GardenDecor(
                     "Spruce Tree",
-                    0,
-                    0,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    1000,
+                    2000,
+                    "Augotchi/Image/UIDecor/DecorIcon_Spruce",
                     GardenDecorType.SPRUCE,
                     ItemRarity.RARE
                 );
@@ -610,7 +611,7 @@ public class Inventory {
                     "Bush",
                     250,
                     500,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Bush",
                     GardenDecorType.BUSH,
                     ItemRarity.COMMON
                 );
@@ -619,7 +620,7 @@ public class Inventory {
                     "Mushroom",
                     500,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Mushroom",
                     GardenDecorType.MUSHROOM,
                     ItemRarity.RARE
                 );
@@ -628,7 +629,7 @@ public class Inventory {
                     "Fence",
                     250,
                     500,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Fence",
                     GardenDecorType.FENCE,
                     ItemRarity.COMMON
                 );
@@ -637,7 +638,7 @@ public class Inventory {
                     "Stone Path",
                     250,
                     500,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_StonePath",
                     GardenDecorType.STONEPATH,
                     ItemRarity.COMMON
                 );
@@ -646,7 +647,7 @@ public class Inventory {
                     "Dry Stone",
                     250,
                     500,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Drystone",
                     GardenDecorType.DRYSTONE,
                     ItemRarity.COMMON
                 );
@@ -655,7 +656,7 @@ public class Inventory {
                     "Fountain",
                     25000,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Fountain",
                     GardenDecorType.FOUNTAIN,
                     ItemRarity.AMAZING
                 );
@@ -664,7 +665,7 @@ public class Inventory {
                     "Bench",
                     750,
                     1500,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Bench",
                     GardenDecorType.BENCH,
                     ItemRarity.RARE
                 );
@@ -673,7 +674,7 @@ public class Inventory {
                     "Flagpole",
                     12500,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Flagpole",
                     GardenDecorType.FLAGPOLE,
                     ItemRarity.RARE
                 );
@@ -682,7 +683,7 @@ public class Inventory {
                     "Table",
                     1000,
                     2000,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Table",
                     GardenDecorType.TABLE,
                     ItemRarity.RARE
                 );
@@ -691,7 +692,7 @@ public class Inventory {
                     "Statue",
                     25000,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Statue",
                     GardenDecorType.STATUE,
                     ItemRarity.AMAZING
                 );
@@ -700,7 +701,7 @@ public class Inventory {
                     "Pond",
                     25000,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Pond",
                     GardenDecorType.POND,
                     ItemRarity.AMAZING
                 );
@@ -709,7 +710,7 @@ public class Inventory {
                     "Urn",
                     500,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Urn",
                     GardenDecorType.URN,
                     ItemRarity.RARE
                 );
@@ -718,7 +719,7 @@ public class Inventory {
                     "Gold Pile",
                     2000,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_GoldPile",
                     GardenDecorType.GOLDPILE,
                     ItemRarity.RARE
                 );
@@ -727,7 +728,7 @@ public class Inventory {
                     "Archway",
                     5000,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Archway",
                     GardenDecorType.ARCHWAY,
                     ItemRarity.EPIC
                 );
@@ -736,7 +737,7 @@ public class Inventory {
                     "Torch",
                     1000,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Torch",
                     GardenDecorType.TORCH,
                     ItemRarity.RARE
                 );
@@ -745,7 +746,7 @@ public class Inventory {
                     "Lamp Pole",
                     5000,
                     -1,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_LampPost",
                     GardenDecorType.LAMPPOST,
                     ItemRarity.EPIC
                 );
@@ -754,7 +755,7 @@ public class Inventory {
                     "Flat Stone",
                     1000,
                     2000,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_FlatStone",
                     GardenDecorType.FLATSTONE,
                     ItemRarity.RARE
                 );
@@ -763,7 +764,7 @@ public class Inventory {
                     "Large Stone",
                     1000,
                     2000,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_LargeStone",
                     GardenDecorType.LARGESTONE,
                     ItemRarity.RARE
                 );
@@ -772,7 +773,7 @@ public class Inventory {
                     "Medium Stone",
                     500,
                     1000,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_MediumStone",
                     GardenDecorType.MEDIUMSTONE,
                     ItemRarity.COMMON
                 );
@@ -781,7 +782,7 @@ public class Inventory {
                     "Small Stone",
                     250,
                     500,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_SmallStone",
                     GardenDecorType.SMALLSTONE,
                     ItemRarity.COMMON
                 );
@@ -790,7 +791,7 @@ public class Inventory {
                     "Tall Stone",
                     2500,
                     5000,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_TallStone",
                     GardenDecorType.TALLSTONE,
                     ItemRarity.EPIC
                 );
@@ -799,7 +800,7 @@ public class Inventory {
                     "Stone Pile",
                     2500,
                     5000,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_StonePile",
                     GardenDecorType.STONEPILE,
                     ItemRarity.EPIC
                 );
@@ -808,17 +809,17 @@ public class Inventory {
                     "Flower Patch",
                     250,
                     500,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_FlowerPatch",
                     GardenDecorType.FLOWERPATCH,
                     ItemRarity.COMMON
                 );
-            case GardenDecorType.FLOWERBUCKET:
+            case GardenDecorType.FLOWERPOT:
                 return new GardenDecor(
-                    "Flower Bucket",
+                    "Flower Pot",
                     250,
                     500,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
-                    GardenDecorType.FLOWERBUCKET,
+                    "Augotchi/Image/UIDecor/DecorIcon_FlowerPot",
+                    GardenDecorType.FLOWERPOT,
                     ItemRarity.COMMON
                 );
             case GardenDecorType.SUNFLOWERS:
@@ -826,7 +827,7 @@ public class Inventory {
                     "Sunflowers",
                     500,
                     1000,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_Sunflowers",
                     GardenDecorType.SUNFLOWERS,
                     ItemRarity.RARE
                 );
@@ -835,9 +836,18 @@ public class Inventory {
                     "Prized Roses",
                     2500,
                     5000,
-                    "Augotchi/Image/UIProduce/ProduceIcon_Carrot",
+                    "Augotchi/Image/UIDecor/DecorIcon_PrizeRoses",
                     GardenDecorType.PRIZEROSES,
                     ItemRarity.EPIC
+                );
+            case GardenDecorType.FLOWERBUCKET:
+                return new GardenDecor(
+                    "Flower Bucket",
+                    250,
+                    500,
+                    "Augotchi/Image/UIDecor/DecorIcon_FlowerBucket",
+                    GardenDecorType.FLOWERBUCKET,
+                    ItemRarity.COMMON
                 );
         }
 

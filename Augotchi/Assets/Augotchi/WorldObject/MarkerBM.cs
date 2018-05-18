@@ -6,7 +6,7 @@ public class MarkerBM : Marker {
 
     protected override void executeEffect()
     {
-        int random = Random.Range(1, 3);
+        int random = Random.Range(2, 6);
         
         gc.queueRewardText("Building\nMaterials: +" + (random * 5), new Color(0.9f, 0.75f, 0.4f));
 

@@ -107,6 +107,13 @@ public class PlayerScript : NetworkBehaviour {
                 if (rangeHit)
                 {
                     GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().tryPlantSeed(hitPoint);
+                }
+
+                layerMask = 1 << LayerMask.NameToLayer("GardenDecorCircle");
+                rangeHit = Physics.Raycast(hitPoint + new Vector3(0, 5, 0), Vector3.down, 250, layerMask);
+
+                if (rangeHit)
+                {
                     GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().tryBuildgardenDecor(hitPoint);
                 }
             }

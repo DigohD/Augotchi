@@ -28,6 +28,9 @@ public class CameraTarget : MonoBehaviour {
             GameControl.rotation = transform.rotation;
         }
 
+        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().isTweakingGardenDecor)
+            return;
+
         targetPos = player.transform.position;
 
         if (!GameControl.isZooming)
@@ -55,9 +58,9 @@ public class CameraTarget : MonoBehaviour {
 
             zoomAmount += deltaMagnitudeDiff * Time.deltaTime / 5f;
 
-            if(zoomAmount > 4)
+            if(zoomAmount > 2)
             {
-                zoomAmount = 4;
+                zoomAmount = 2;
             }
             if(zoomAmount < 0.5f)
             {

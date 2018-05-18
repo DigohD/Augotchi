@@ -195,7 +195,7 @@
 			{
 				var changeFromPreviousPosition = _mousePositionPrevious - _mousePosition;
 
-                if(changeFromPreviousPosition.magnitude > 15)
+                if(changeFromPreviousPosition.magnitude > 25)
                 {
                     changeFromPreviousPosition = Vector3.zero;
                 }

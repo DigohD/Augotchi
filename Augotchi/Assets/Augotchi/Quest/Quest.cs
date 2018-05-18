@@ -288,7 +288,7 @@ public class Quest {
             case QuestRewardType.EXPERIENCE:
                 return "Augotchi/Image/Reward/Icon_XP";
             case QuestRewardType.GARDEN_DECOR:
-                return "Augotchi/Image/Reward/Icon_GardenDecor";
+                return "Augotchi/Image/Reward/Icon_Decor";
         }
 
         return "Augotchi/Image/Whiskers";

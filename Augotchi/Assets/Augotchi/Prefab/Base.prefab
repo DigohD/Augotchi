@@ -26,7 +26,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1440362418905894
 GameObject:
@@ -42,7 +42,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1503082376710932
 GameObject:
@@ -59,7 +59,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1537775500716370
 GameObject:
@@ -76,7 +76,7 @@ GameObject:
   m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1645031907965446
 GameObject:
@@ -93,7 +93,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1659831489728930
 GameObject:
@@ -104,12 +104,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4892804323476256}
   - component: {fileID: 135279761048536400}
-  m_Layer: 9
-  m_Name: RangeCircle
+  m_Layer: 15
+  m_Name: GardenDEcorCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1664998737043804
 GameObject:
@@ -124,7 +124,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1720031522854278
 GameObject:
@@ -140,7 +140,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1803768711166208
 GameObject:
@@ -157,7 +157,23 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1840441802407650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4161858673605748}
+  - component: {fileID: 135145461929124496}
+  m_Layer: 9
+  m_Name: RangeCircle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1926316657846850
 GameObject:
@@ -173,7 +189,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1998341954176340
 GameObject:
@@ -190,7 +206,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4035036044244400
 Transform:
@@ -204,7 +220,7 @@ Transform:
   m_Children:
   - {fileID: 4855198767900976}
   m_Father: {fileID: 4671194797666212}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4040805646165834
 Transform:
@@ -231,6 +247,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4681099644997776}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!4 &4161858673605748
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840441802407650}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.000056755, y: -5.7673, z: 0.000056701}
+  m_LocalScale: {x: 70.78325, y: 70.78355, z: 70.78355}
+  m_Children: []
+  m_Father: {fileID: 4671194797666212}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4487036329367126
 Transform:
@@ -269,6 +298,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4040805646165834}
+  - {fileID: 4161858673605748}
   - {fileID: 4892804323476256}
   - {fileID: 4681099644997776}
   - {fileID: 4035036044244400}
@@ -289,7 +319,7 @@ Transform:
   m_Children:
   - {fileID: 4058835406940042}
   m_Father: {fileID: 4671194797666212}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4704580962833506
 Transform:
@@ -304,7 +334,7 @@ Transform:
   - {fileID: 4537839959566372}
   - {fileID: 4487036329367126}
   m_Father: {fileID: 4671194797666212}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4808187094765080
 Transform:
@@ -317,7 +347,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4671194797666212}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4855198767900976
 Transform:
@@ -339,11 +369,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1659831489728930}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.000056755, y: -5.7673, z: 0.000056701}
-  m_LocalScale: {x: 70.78325, y: 70.78355, z: 70.78355}
+  m_LocalPosition: {x: 0.000056755, y: -10.8, z: 0}
+  m_LocalScale: {x: 106.137054, y: 106.13757, z: 106.13757}
   m_Children: []
   m_Father: {fileID: 4671194797666212}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &23467317932407950
 MeshRenderer:
@@ -576,6 +606,18 @@ MonoBehaviour:
   A_HouseLand: {fileID: 8300000, guid: fd0a130b39256684494aa6e88c4fb987, type: 3}
   G_House: {fileID: 1357139832489162}
   G_Garden: {fileID: 1664998737043804}
+--- !u!135 &135145461929124496
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840441802407650}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.29838058
+  m_Center: {x: 0, y: 0, z: 0.20000008}
 --- !u!135 &135279761048536400
 SphereCollider:
   m_ObjectHideFlags: 1

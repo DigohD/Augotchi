@@ -78,11 +78,11 @@ public class TweakDecorUI : MonoBehaviour {
 
         if (isUpOffsetDown)
         {
-            gc.tweakGardenDecorOffset(5f);
+            gc.tweakGardenDecorOffset(8f);
         }
         else if (isDownOffsetDown)
         {
-            gc.tweakGardenDecorOffset(-5f);
+            gc.tweakGardenDecorOffset(-8f);
         }
 
         GardenDecorWorld gdw = gc.tweakedGardenDecor.GetComponent<GardenDecorWorld>();

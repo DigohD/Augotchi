@@ -83,7 +83,7 @@ public class LootTable {
         }
     }
 
-    private static Inventory.GardenDecorType[] commonDecor = new Inventory.GardenDecorType[8]
+    private static Inventory.GardenDecorType[] commonDecor = new Inventory.GardenDecorType[9]
     {
         Inventory.GardenDecorType.BUSH,
         Inventory.GardenDecorType.FENCE,
@@ -92,7 +92,8 @@ public class LootTable {
         Inventory.GardenDecorType.MEDIUMSTONE,
         Inventory.GardenDecorType.SMALLSTONE,
         Inventory.GardenDecorType.FLOWERPATCH,
-        Inventory.GardenDecorType.FLOWERBUCKET
+        Inventory.GardenDecorType.FLOWERBUCKET,
+        Inventory.GardenDecorType.FLOWERPOT
     };
     private static Inventory.GardenDecorType[] rareDecor = new Inventory.GardenDecorType[12]
     {

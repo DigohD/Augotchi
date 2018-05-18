@@ -26,7 +26,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1031179668294452
 GameObject:
@@ -41,7 +41,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!1 &1308439643624508
 GameObject:
@@ -59,7 +59,7 @@ GameObject:
   m_TagString: Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1347889555277058
 GameObject:
@@ -77,7 +77,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!1 &1402953885516516
 GameObject:
@@ -95,7 +95,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!1 &1801694343574374
 GameObject:
@@ -112,7 +112,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1862154460274648
 GameObject:
@@ -130,7 +130,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!1 &1905862124054160
 GameObject:
@@ -147,7 +147,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1950059616949688
 GameObject:
@@ -164,7 +164,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!4 &4044583761718732
 Transform:
@@ -682,11 +682,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   A_MarkerAppear: {fileID: 8300000, guid: fa95f0dc55bccff4d970e51f2c34b25b, type: 3}
+  A_OnPicked: {fileID: 0}
   P_MarkerPoof: {fileID: 1594924380138546, guid: e6ec36cd72d6b3d4c9e3f35f9614a6e6,
     type: 2}
   G_Visuals: {fileID: 1031179668294452}
   gc: {fileID: 0}
   isIndividual: 1
+  isAnimated: 0
 --- !u!135 &135054526307491220
 SphereCollider:
   m_ObjectHideFlags: 1

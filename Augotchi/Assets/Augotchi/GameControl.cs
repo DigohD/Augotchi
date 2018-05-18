@@ -160,7 +160,7 @@ public class GameControl : MonoBehaviour {
                 Map.GetComponent<BasicMap>().WorldRelativeScale
             );
 
-            GameObject newPlot = (GameObject) Instantiate(P_FarmPlots[(int) crop.seedType], fromLongLat + (Vector3.up * 0.2f), Quaternion.identity);
+            GameObject newPlot = (GameObject) Instantiate(P_FarmPlots[(int) crop.seedType], fromLongLat + (Vector3.up * 0.4f), Quaternion.identity);
             newPlot.transform.SetParent(Map.transform, false);
             newPlot.transform.localScale = Vector3.one;
 
@@ -449,7 +449,7 @@ public class GameControl : MonoBehaviour {
 
         queueRewardText("Planted seed!", new Color(0.8f, 0.5f, 0.5f));
 
-        GameObject farmPlot = Instantiate(P_FarmPlots[(int) seedToPlant.seedType], plantPosLocal + (Vector3.up * 0.2f), Quaternion.identity);
+        GameObject farmPlot = Instantiate(P_FarmPlots[(int) seedToPlant.seedType], plantPosLocal + (Vector3.up * 0.4f), Quaternion.identity);
         farmPlot.transform.SetParent(Map.transform, false);
         farmPlot.transform.localScale = Vector3.one;
         
@@ -618,6 +618,8 @@ public class GameControl : MonoBehaviour {
         foreach (GameObject gd in GameObject.FindGameObjectsWithTag("GardenDecor"))
         {
             PetKeeper.pet.buildingMaterials += Inventory.getGardenDecorTypeInfo(gd.GetComponent<GardenDecorWorld>().representedDecor.gardenDecorType).bmCost;
+            PetKeeper.pet.inventory.gardenDecorCounts[(int) gd.GetComponent<GardenDecorWorld>().representedDecor.gardenDecorType] += 1;
+
             Destroy(gd);
         }
            

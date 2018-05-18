@@ -27,7 +27,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!1 &1709411162499946
 GameObject:
@@ -45,7 +45,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!1 &1736714720413552
 GameObject:
@@ -63,7 +63,7 @@ GameObject:
   m_TagString: Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1741618616604952
 GameObject:
@@ -80,7 +80,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!1 &1874767686451330
 GameObject:
@@ -98,7 +98,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!4 &4201305537186684
 Transform:
@@ -437,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   A_MarkerAppear: {fileID: 8300000, guid: fa95f0dc55bccff4d970e51f2c34b25b, type: 3}
+  A_OnPicked: {fileID: 0}
   P_MarkerPoof: {fileID: 1594924380138546, guid: e6ec36cd72d6b3d4c9e3f35f9614a6e6,
     type: 2}
   G_Visuals: {fileID: 1741618616604952}
