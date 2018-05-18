@@ -592,6 +592,15 @@ public class PetGlobal {
         Save(false);
     }
 
+    public void addGardenDecor(Inventory.GardenDecorType gardenDecorType, int amount)
+    {
+        inventory.gardenDecorCounts[(int) gardenDecorType] += amount;
+
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().queueRewardText("" + gardenDecorType.ToString().Replace("_", " "), GameControl.LevelUpColor);
+
+        Save(false);
+    }
+
     public void giveCurrency(int amount)
     {
         currency += amount;
@@ -894,6 +903,7 @@ public class PetGlobal {
                 this.inventory = new Inventory(
                     pg.inventory.seedCounts == null ? new int[0] : pg.inventory.seedCounts,
                     pg.inventory.produceCounts == null ? new int[0] : pg.inventory.produceCounts,
+                    pg.inventory.gardenDecorCounts == null ? new int[0] : pg.inventory.gardenDecorCounts,
                     pg.inventory.uniqueCounts == null ? new int[0] : pg.inventory.uniqueCounts
                 );
             else
@@ -905,6 +915,9 @@ public class PetGlobal {
                 q.initQuestListener();
 
             this.Base = pg.Base;
+
+            if (pg.Base.baseGardenDecors == null)
+                this.Base.baseGardenDecors = new List<BaseGardenDecor>();
 
             file.Close();
 

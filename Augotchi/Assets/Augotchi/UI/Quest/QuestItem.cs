@@ -51,6 +51,9 @@ public class QuestItem : MonoBehaviour {
             case Quest.QuestRewardType.EXPERIENCE:
                 PetKeeper.pet.grantXP(representedQuest.rewardAmount);
                 break;
+            case Quest.QuestRewardType.GARDEN_DECOR:
+                PetKeeper.pet.addGardenDecor(LootTable.GenerateRandomQuestDecorType(), 1);
+                break;
         }
 
         QuestUI.reRender = true;

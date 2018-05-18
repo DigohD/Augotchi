@@ -49,7 +49,8 @@ public class Quest {
     {
         COINS = 0,
         BUILDING_MATERIALS = 1,
-        EXPERIENCE = 2
+        EXPERIENCE = 2,
+        GARDEN_DECOR = 3
     }
 
     public QuestType questType;
@@ -149,7 +150,7 @@ public class Quest {
 
     public static Quest generateQuest()
     {
-        QuestRewardType rewardType = (QuestRewardType)UnityEngine.Random.Range(0, Enum.GetNames(typeof(QuestRewardType)).Length);
+        QuestRewardType rewardType = (QuestRewardType) UnityEngine.Random.Range(0, Enum.GetNames(typeof(QuestRewardType)).Length);
 
         QuestType questType = 0;
         bool questAlreadyInLog = false;
@@ -175,7 +176,7 @@ public class Quest {
                     QuestType.FEED_FOOD,
                     rnd * 5,
                     rewardType,
-                    rnd * 20 * getRewardTypeConversionRate(rewardType),
+                    rewardType == QuestRewardType.GARDEN_DECOR ? 1 : rnd * 20 * getRewardTypeConversionRate(rewardType),
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
@@ -186,7 +187,7 @@ public class Quest {
                     QuestType.FIND_SEEDS,
                     rnd * 4,
                     rewardType,
-                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    rewardType == QuestRewardType.GARDEN_DECOR ? 1 : rnd * 10 * getRewardTypeConversionRate(rewardType),
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
@@ -197,7 +198,7 @@ public class Quest {
                     QuestType.GAIN_EXPERIENCE,
                     rnd * 500,
                     rewardType,
-                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    rewardType == QuestRewardType.GARDEN_DECOR ? 1 : rnd * 10 * getRewardTypeConversionRate(rewardType),
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
@@ -208,7 +209,7 @@ public class Quest {
                     QuestType.GATHERING_BUILDING_MATERIALS,
                     rnd * 25,
                     rewardType,
-                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    rewardType == QuestRewardType.GARDEN_DECOR ? 1 : rnd * 10 * getRewardTypeConversionRate(rewardType),
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
@@ -219,7 +220,7 @@ public class Quest {
                     QuestType.GATHERING_COINS,
                     rnd * 50,
                     rewardType,
-                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    rewardType == QuestRewardType.GARDEN_DECOR ? 1 : rnd * 10 * getRewardTypeConversionRate(rewardType),
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
@@ -230,7 +231,7 @@ public class Quest {
                     QuestType.WALK,
                     rnd * 500,
                     rewardType,
-                    rnd * 10 * getRewardTypeConversionRate(rewardType),
+                    rewardType == QuestRewardType.GARDEN_DECOR ? 1 : rnd * 10 * getRewardTypeConversionRate(rewardType),
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
@@ -241,7 +242,7 @@ public class Quest {
                     QuestType.HARVEST,
                     rnd,
                     rewardType,
-                    rnd * 25 * getRewardTypeConversionRate(rewardType),
+                    rewardType == QuestRewardType.GARDEN_DECOR ? 1 : rnd * 25 * getRewardTypeConversionRate(rewardType),
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
@@ -252,7 +253,7 @@ public class Quest {
                     QuestType.MARKERS,
                     rnd * 5,
                     rewardType,
-                    rnd * 5 * getRewardTypeConversionRate(rewardType),
+                    rewardType == QuestRewardType.GARDEN_DECOR ? 1 : rnd * 5 * getRewardTypeConversionRate(rewardType),
                     getRewardTypeImagePath(rewardType)
                 );
                 break;
@@ -286,10 +287,14 @@ public class Quest {
                 return "Augotchi/Image/Reward/Icon_Coin";
             case QuestRewardType.EXPERIENCE:
                 return "Augotchi/Image/Reward/Icon_XP";
+            case QuestRewardType.GARDEN_DECOR:
+                return "Augotchi/Image/Reward/Icon_GardenDecor";
         }
 
         return "Augotchi/Image/Whiskers";
     }
+
+
 
 
 }

@@ -65,7 +65,24 @@ public class PlayerScript : NetworkBehaviour {
                 }
             }
 
-            int layerMask = 1 << LayerMask.NameToLayer("FarmPlotInteract");
+            int layerMask;
+            if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().isRemovingGardenDecor)
+            {
+                layerMask = 1 << LayerMask.NameToLayer("DecorRemove");
+
+                if (Physics.Raycast(ray, out hit, 1000f, layerMask))
+                {
+                    Transform objectHit = hit.transform;
+
+                    Debug.LogWarning(objectHit.name);
+
+                    objectHit.GetComponentInParent<GardenDecorWorld>().remove();
+                }
+
+                return;
+            }
+
+            layerMask = 1 << LayerMask.NameToLayer("FarmPlotInteract");
 
             if (Physics.Raycast(ray, out hit, 1000f, layerMask))
             {
@@ -90,6 +107,7 @@ public class PlayerScript : NetworkBehaviour {
                 if (rangeHit)
                 {
                     GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().tryPlantSeed(hitPoint);
+                    GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControl>().tryBuildgardenDecor(hitPoint);
                 }
             }
         }

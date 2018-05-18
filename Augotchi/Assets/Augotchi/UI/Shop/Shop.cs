@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shop {
 
-    public enum ItemType { SEED, PRODUCE, UNIQUE };
+    public enum ItemType { SEED, PRODUCE, UNIQUE, GARDEN_DECOR };
 
     public class ShopItem{
         public ItemType itemType;
@@ -49,6 +49,11 @@ public class Shop {
                     break;
                 case ItemType.UNIQUE:
                     continue;
+                case ItemType.GARDEN_DECOR:
+                    toAdd.itemType = ItemType.GARDEN_DECOR;
+                    toAdd.itemIndex = (int) LootTable.GenerateRandomQuestDecorType();
+                    toAdd.amount = 1;
+                    break;
             }
 
             bool alreadyExists = false;
@@ -72,6 +77,4 @@ public class Shop {
 
         buyList.Add(toAdd);
     }
-
-
 }
