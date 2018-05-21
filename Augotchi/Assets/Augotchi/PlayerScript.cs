@@ -17,6 +17,8 @@ public class PlayerScript : NetworkBehaviour {
     public Texture2D baseTex;
     public Texture2D overlay;
 
+    public GameObject G_QuitPopup;
+
     void Start () {
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTarget");
     }
@@ -26,6 +28,11 @@ public class PlayerScript : NetworkBehaviour {
         transform.position = Vector3.Lerp(transform.position, playerTarget.transform.position, 1f * Time.deltaTime);
         Vector3 diff = transform.position - prePos;
         float dist = diff.magnitude;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            G_QuitPopup.SetActive(true);
+        }
 
         if(dist > 0.3333f)
         {
