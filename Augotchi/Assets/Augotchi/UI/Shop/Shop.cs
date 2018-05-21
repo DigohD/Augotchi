@@ -53,6 +53,10 @@ public class Shop {
                     toAdd.itemType = ItemType.GARDEN_DECOR;
                     toAdd.itemIndex = (int) LootTable.GenerateRandomQuestDecorType();
                     toAdd.amount = 1;
+
+                    if (Inventory.getGardenDecorTypeInfo((Inventory.GardenDecorType) toAdd.itemIndex).coinCost == -1)
+                        continue;
+
                     break;
             }
 

@@ -19,9 +19,9 @@ public class PetGlobal {
     readonly float MIN_HAPPINESS = 0, MAX_HAPPINESS = 100;
     readonly float MIN_HEALTH = 0, MAX_HEALTH = 100;
 
-    readonly float DECAY_HUNGER = 0.004f;
-    readonly float DECAY_HAPPINESS = 0.003f;
-    readonly float DECAY_HEALTH = 0.003f;
+    public readonly float DECAY_HUNGER = 0.004f;
+    public readonly float DECAY_HAPPINESS = 0.003f;
+    public readonly float DECAY_HEALTH = 0.003f;
 
     readonly float DECAY_STAT = 0.0006f;
 
